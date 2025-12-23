@@ -1,0 +1,467 @@
+{
+  "logo": "محمود برجر",
+  "home": {
+    "hero": {
+      "title": "تذوق طعم السعادة",
+      "description": "هل تشتهي برجر حقيقي؟ نقدم لك أجود المكونات الطازجة، قطع لحم مشوية غنية بالعصارة، وتوصيل فائق السرعة. قضمتك المثالية على بعد نقرة واحدة!",
+      "orderNow": "اطلب الآن",
+      "learnMore": "اعرف المزيد",
+      "badge": "أفضل برجر فاخر في المدينة",
+      "stats": {
+        "happyCustomers": "عملاء سعداء",
+        "ordersDelivered": "طلبات تم توصيلها",
+        "averageRating": "متوسط التقييم",
+        "menuItems": "عناصر القائمة"
+      },
+      "features": {
+        "delivery": "توصيل خلال 30 دقيقة",
+        "payment": "دفع آمن",
+        "rating": "خدمة تقييم ممتازة"
+      }
+    },
+    "bestSeller": {
+      "checkOut": "استكشف القائمة",
+      "OurBestSellers": "الأكثر مبيعاً",
+      "freshlyPrepared": "نحضرها طازجة، من أجلك فقط، في كل مرة."
+    },
+    "about": {
+      "ourStory": "قصتنا",
+      "aboutUs": "معلومات عنا",
+      "chefQuote": "نحن نؤمن بأن كل برجم يحكي قصة من الجودة والشغف.",
+      "highlights": {
+        "freshBeef": "لحم طازج",
+        "fastSupport": "دعم سريع"
+      },
+      "descriptions": {
+        "one": "مرحبًا بكم في عالم البرجر الخاص بنا، حيث نجعل من الجودة عنوانًا. كل ساندوتش هو لوحة فنية، تُعد بعناية فائقة لتمنحك التوازن المثالي للنكهات. من الأصناف الكلاسيكية إلى ابتكاراتنا الفريدة، لدينا ما يرضي كل عاشق للبرجر!",
+        "two": "شغفنا بالبرجر يتجاوز مجرد الطعام. نحن نختار بعناية أفضل المكونات المحلية ونشويها بدقة متناهية، لنضمن لك تجربة غنية ولذيذة في كل قضمة. سواء كنت تبحث عن وجبة سريعة أو عشاء هادئ، فنحن وجهتك المثالية.",
+        "three": "انضم إلينا في رحلة تأخذك إلى آفاق جديدة من الطعم. نفخر بتقديم جودة لا تضاهى وخدمة استثنائية تجعل من كل وجبة ذكرى لا تُنسى. تفضل بزيارتنا واكتشف الفرق بنفسك!"
+      }
+    },
+    "contact": {
+      "dont_hesitate": "لا تتردد",
+      "contactUs": "اتصل بنا"
+    },
+    "cta": {
+      "limitedOffer": "عرض لفترة محدودة",
+      "title": "احصل على خصم 20٪",
+      "subtitle": "على طلبك الأول",
+      "description": "استمتع بأفضل تجربة تذوق مع البرجر الفاخر لدينا. مشوي طازج، متبل بإتقان، ويصل ساخنًا إلى عتبة داركم في دقائق.",
+      "orderNow": "اطلب الآن",
+      "contactUs": "اتصل بنا",
+      "delivery": {
+        "title": "توصيل خلال 30 دقيقة",
+        "subtitle": "مضمون في الوقت المحدد"
+      },
+      "fresh": {
+        "title": "مكونات طازجة",
+        "subtitle": "100٪ عضوي محلي المصدر"
+      }
+    },
+    "features": {
+      "title": "لماذا تختار",
+      "us": "خدماتنا",
+      "subtitle": "نحن لسنا مجرد مكان آخر للبرجر. نحن وجهتك للجودة والسرعة والرضا.",
+      "items": {
+        "fastDelivery": {
+          "title": "توصيل سريع",
+          "description": "احصل على طلبك في 30 دقيقة أو أقل"
+        },
+        "freshIngredients": {
+          "title": "مكونات طازجة",
+          "description": "نحن نستخدم فقط المكونات المحلية الطازجة"
+        },
+        "service": {
+          "title": "خدمة 24/7",
+          "description": "اطلب في أي وقت وفي أي مكان. نحن دائما هنا من أجلك"
+        },
+        "award": {
+          "title": "حائز على جوائز",
+          "description": "معترف به كأفضل مكان للبرجر في المدينة"
+        }
+      }
+    }
+  },
+  "menu": {
+    "hero": {
+      "explore": "استكشف قائمتنا",
+      "delicious": "اللذيذة",
+      "menu": "قائمة الطعام",
+      "description": "صنعت بشغف باستخدام أزهى المكونات لتقدم لك تجربة البرجر المثالية."
+    },
+    "category": {
+      "premium": "اختيار متميز • جودة طازجة"
+    },
+    "emptyState": {
+      "description": "نقوم حالياً بتحديث مطبخنا. يرجى العودة لاحقاً!"
+    },
+    "item": {
+      "topRated": "الأعلى تقييماً"
+    },
+    "product": {
+      "freeDelivery": "توصيل مجاني",
+      "ordersOver": "للطلبات فوق 50 دولار",
+      "fastPrep": "تحضير سريع",
+      "prepTime": "15 - 20 دقيقة",
+      "reviewsSub": "استمع لما يقوله عشاق البرجر لدينا.",
+      "loginReview": "استمتعت بوجبتك؟ شارك تجربتك مع المجتمع!",
+      "loginBtn": "سجل الدخول للتقييم",
+      "freshChoice": "خيار طازج"
+    }
+  },
+  "navbar": {
+    "home": "الصفحة الرئيسية",
+    "about": "معلومات عنا",
+    "menu": "القائمة",
+    "contact": "تواصل معنا",
+    "login": "تسجيل الدخول",
+    "cart": "العربة",
+    "register": "انشاء حساب",
+    "signOut": "تسجيل الخروج",
+    "profile": "الملف الشخصي",
+    "admin": "المسؤول",
+    "followJourney": "تابع رحلتنا",
+    "checkout": "الدفع",
+    "tagline": "© 2025 سوبريم برجر. طهي بشغف."
+  },
+  "auth": {
+    "login": {
+      "title": "مرحبًا بعودتك",
+      "name": {
+        "label": "الاسم",
+        "placeholder": "أدخل اسمك"
+      },
+      "email": {
+        "label": "البريد الإلكتروني",
+        "placeholder": "أدخل بريدك الإلكتروني"
+      },
+      "password": {
+        "label": "كلمة المرور",
+        "placeholder": "أدخل كلمة المرور"
+      },
+      "submit": "تسجيل الدخول",
+      "authPrompt": {
+        "message": "ليس لديك حساب؟ ",
+        "signUpLinkText": "سجل الآن"
+      }
+    },
+    "register": {
+      "title": "إنشاء حساب",
+      "name": {
+        "label": "الاسم",
+        "placeholder": "أدخل اسمك"
+      },
+      "email": {
+        "label": "البريد الإلكتروني",
+        "placeholder": "أدخل بريدك الإلكتروني"
+      },
+      "password": {
+        "label": "كلمة المرور",
+        "placeholder": "أدخل كلمة المرور"
+      },
+      "confirmPassword": {
+        "label": "تأكيد كلمة المرور",
+        "placeholder": "أعد إدخال كلمة المرور"
+      },
+      "submit": "إنشاء حساب",
+      "authPrompt": {
+        "message": "هل لديك حساب؟ ",
+        "loginLinkText": "تسجيل الدخول"
+      }
+    }
+  },
+  "validation": {
+    "nameRequired": "الاسم مطلوب",
+    "validEmail": "يجب أن يكون بريد إلكتروني صالح",
+    "passwordMinLength": "يجب أن تكون كلمة المرور على الأقل 6 أحرف",
+    "passwordMaxLength": "يجب أن تكون كلمة المرور على الأكثر 40 حرفًا",
+    "confirmPasswordRequired": "تأكيد كلمة المرور مطلوب",
+    "passwordMismatch": "كلمة المرور غير متطابقة"
+  },
+  "messages": {
+    "userNotFound": "المستخدم غير موجود",
+    "incorrectPassword": "كلمة المرور غير صحيحة",
+    "loginSuccessful": "تم تسجيل الدخول بنجاح",
+    "unexpectedError": "حدث خطأ غير متوقع",
+    "userAlreadyExists": "المستخدم موجود بالفعل",
+    "accountCreated": "تم إنشاء الحساب بنجاح",
+    "updateProfileSucess": "تم تحديث الملف الشخصي بنجاح",
+    "categoryAdded": "تم اضافة الفئة بنجاح",
+    "updatecategorySucess": "تم تحديث الفئة بنجاح",
+    "deleteCategorySucess": "تم حذف الفئة بنجاح",
+    "productAdded": "تم اضافة المنتج بنجاح",
+    "updateProductSucess": "تم تحديث المنتج بنجاح",
+    "deleteProductSucess": "تم حذف المنتج بنجاح",
+    "productDeleteConfirm": "هل أنت متأكد من حذف هذا المنتج؟",
+    "productDeleteDescription": "لا يمكن التراجع عن هذا الإجراء. سيتم حذف هذا المنتج نهائيًا.",
+    "updateUserSucess": "تم تحديث المستخدم بنجاح",
+    "deleteUserSucess": "تم حذف المستخدم بنجاح",
+    "userDeleteConfirm": "هل أنت متأكد من حذف هذا المستخدم؟",
+    "userDeleteDescription": "لا يمكن التراجع عن هذا الإجراء. سيتم حذف حساب المستخدم نهائيًا.",
+    "categoryDeleteConfirm": "هل أنت متأكد من حذف هذه الفئة؟"
+  },
+  "menuItem": {
+    "addToCart": "أضف الي العربة"
+  },
+  "reviews": {
+    "title": "آراء العملاء",
+    "writeReview": "أكتب تقييم",
+    "rating": "التقييم",
+    "comment": "تعليق",
+    "placeholder": "شاركنا برأيك...",
+    "submit": "إرسال التقييم",
+    "submitting": "جاري الإرسال...",
+    "noReviews": "لا توجد تقييمات بعد. كن أول من يقيم!"
+  },
+  "profile": {
+    "title": "الملف الشخصي",
+    "form": {
+      "name": {
+        "label": "الاسم",
+        "placeholder": "أدخل اسمك"
+      },
+      "email": {
+        "label": "البريد الإلكتروني",
+        "placeholder": "أدخل بريدك الإلكتروني"
+      },
+      "phone": {
+        "label": "الهاتف",
+        "placeholder": "أدخل رقم هاتفك",
+        "validation": {
+          "required": "رقم الهاتف مطلوب",
+          "invalid": "يرجى إدخال رقم هاتف صالح"
+        }
+      },
+      "address": {
+        "label": "العنوان",
+        "placeholder": "أدخل عنوانك",
+        "validation": {
+          "required": "العنوان مطلوب"
+        }
+      },
+      "postalCode": {
+        "label": "الرمز البريدي",
+        "placeholder": "أدخل الرمز البريدي",
+        "validation": {
+          "required": "الرمز البريدي مطلوب",
+          "invalid": "يرجى إدخال رمز بريدي صالح"
+        }
+      },
+      "city": {
+        "label": "المدينة",
+        "placeholder": "أدخل مدينتك",
+        "validation": {
+          "required": "المدينة مطلوبة"
+        }
+      },
+      "country": {
+        "label": "الدولة",
+        "placeholder": "أدخل دولتك",
+        "validation": {
+          "required": "الدولة مطلوبة"
+        }
+      }
+    },
+    "info": {
+      "title": "معلومات الملف الشخصي",
+      "fullName": "الاسم الكامل",
+      "email": "البريد الإلكتروني",
+      "memberSince": "عضو منذ"
+    },
+    "recentOrders": "الطلبات الأخيرة",
+    "orderNumber": "طلب",
+    "totalAmount": "المبلغ الإجمالي",
+    "noOrdersYet": "لم تقم بتقديم أي طلبات بعد."
+  },
+  "loading": "جار التحميل...",
+  "admin": {
+    "admin": "لوحة التحكم",
+    "subtitle": "قم بإدارة محتوى متجرك وطلباتك ومستخدميك بكل سهولة.",
+    "tabs": {
+      "profile": "الملف الشخصي",
+      "categories": "الفئات",
+      "menuItems": "عناصر القائمة",
+      "users": "المستخدمون",
+      "orders": "الطلبات",
+      "reviews": "التقييمات"
+    },
+    "dashboard": {
+      "totalUsers": "إجمالي المستخدمين",
+      "totalProducts": "إجمالي المنتجات",
+      "totalOrders": "إجمالي الطلبات",
+      "totalRevenue": "إجمالي الإيرادات",
+      "quickActions": "إجراءات سريعة",
+      "manageUsers": "إدارة المستخدمين",
+      "manageUsersDesc": "عرض وإدارة جميع المستخدمين",
+      "manageProducts": "إدارة المنتجات",
+      "manageProductsDesc": "إضافة أو تعديل أو حذف المنتجات",
+      "viewOrders": "عرض الطلبات",
+      "viewOrdersDesc": "تتبع وإدارة الطلبات"
+    },
+    "reviews": {
+      "title": "إدارة التقييمات",
+      "deleteTitle": "حذف التقييم",
+      "deleteConfirm": "هل أنت متأكد أنك تريد حذف هذا التقييم؟ لا يمكن التراجع عن هذا الإجراء.",
+      "cancel": "إلغاء",
+      "delete": "حذف",
+      "deleting": "جاري الحذف...",
+      "user": "المستخدم",
+      "product": "المنتج",
+      "rating": "التقييم",
+      "comment": "التعليق",
+      "date": "التاريخ",
+      "noReviewsFound": "لا توجد تقييمات",
+      "deleteSuccess": "تم حذف التقييم بنجاح",
+      "actions": "الإجراءات",
+      "anonymous": "مجهول"
+    },
+    "users": {
+      "searchPlaceholder": "البحث عن مستخدمين...",
+      "role": "الدور",
+      "editUser": "تعديل المستخدم"
+    },
+    "menu-items": {
+      "createNewMenuItem": "إنشاء عنصر قائمة جديد",
+      "addItemSize": "إضافة حجم العنصر",
+      "addExtraItem": "إضافة عنصر إضافي",
+      "menuOption": {
+        "name": "الاسم",
+        "extraPrice": "السعر الاضافي"
+      },
+      "form": {
+        "name": {
+          "label": "اسم العنصر",
+          "placeholder": "أدخل اسم العنصر",
+          "validation": {
+            "required": "اسم العنصر مطلوب"
+          }
+        },
+        "description": {
+          "label": "الوصف",
+          "placeholder": "أدخل الوصف",
+          "validation": {
+            "required": "الوصف مطلوب"
+          }
+        },
+        "basePrice": {
+          "label": "السعر الأساسي",
+          "placeholder": "أدخل السعر الأساسي",
+          "validation": {
+            "required": "السعر الأساسي مطلوب"
+          }
+        },
+        "category": {
+          "label": "الفئة",
+          "placeholder": "اختر الفئة",
+          "validation": {
+            "required": "اختيار الفئة مطلوب"
+          }
+        },
+        "image": {
+          "label": "رابط الصورة",
+          "placeholder": "أدخل رابط الصورة",
+          "validation": {
+            "required": "صورة المنتج مطلوبة"
+          }
+        }
+      }
+    },
+    "orders": {
+      "orderId": "رقم الطلب",
+      "user": "المستخدم",
+      "date": "التاريخ",
+      "total": "الإجمالي",
+      "paid": "مدفوع",
+      "status": "الحالة",
+      "noOrdersFound": "لم يتم العثور على طلبات",
+      "orderDetails": "تفاصيل الطلب",
+      "customer": "العميل",
+      "address": "العنوان",
+      "items": "العناصر",
+      "updatedStatus": "تم تحديث حالة الطلب",
+      "updatedPayment": "تم تحديث حالة الدفع",
+      "failedUpdate": "فشل تحديث الحالة"
+    },
+    "categories": {
+      "productsCount": "{count} منتجات",
+      "createCategory": "إنشاء فئة",
+      "editCategory": "تعديل الفئة",
+      "form": {
+        "editName": "تعديل اسم الفئة",
+        "name": {
+          "label": "اسم الفئة",
+          "placeholder": "أدخل اسم الفئة",
+          "validation": {
+            "required": "اسم الفئة مطلوب"
+          }
+        }
+      }
+    }
+  },
+  "category": "الفئة",
+  "actions": "الاجراءات",
+  "add": "إضافة",
+  "save": "حفظ",
+  "edit": "تعديل",
+  "delete": "حذف",
+  "create": "انشاء",
+  "sizes": "الأحجام",
+  "extrasIngredients": "عناصر اضافية",
+  "cancel": "الغاء",
+  "cart": {
+    "title": "عربة التسوق",
+    "checkoutProcess": "عملية الدفع",
+    "reviewSelection": "راجع اختيارك وأكمل تجربتك الرائعة.",
+    "items": "عناصر",
+    "yourItems": "عناصرك",
+    "emptyCartDescription": "دعنا نجد شيئاً لذيذاً لتملأ به عربتك!",
+    "noItemsInCart": "لا توجد عناصر في سلة التسوق الخاصة بك. أضف بعضًا",
+    "browseMenu": "تصفح القائمة",
+    "subtotal": "المجموع الفرعي",
+    "delivery": "التوصيل",
+    "total": "المجموع",
+    "size": "الحجم",
+    "extras": "الإضافات",
+    "inCart": "في العربة"
+  },
+  "checkout": {
+    "title": "تفاصيل الدفع",
+    "securePayment": "دفع آمن",
+    "phone": "رقم الهاتف",
+    "streetAddress": "عنوان الشارع",
+    "postalCode": "الرمز البريدي",
+    "city": "المدينة",
+    "country": "الدولة",
+    "pay": "دفع",
+    "mustBeLoggedIn": "يجب تسجيل الدخول لإتمام الطلب",
+    "emptyCartError": "عربة التسوق فارغة",
+    "orderSuccess": "تم وضع الطلب بنجاح!",
+    "signInPrompt": "يرجى تسجيل الدخول لإكمال طلبك."
+  },
+  "copyRight": "© 2025 جميع الحقوق محفوظة",
+  "noProductsFound": "لم يتم العثور على منتجات",
+  "noCategoriesFound": "لم يتم العثور على الفئات",
+  "statuses": {
+    "PENDING": "قيد الانتظار",
+    "PREPARING": "جاري التحضير",
+    "ON_WAY": "في الطريق",
+    "DELIVERED": "تم التوصيل",
+    "CANCELLED": "ملغى"
+  },
+  "paymentStatuses": {
+    "PAID": "مدفوع",
+    "UNPAID": "غير مدفوع"
+  },
+  "SMALL": "صغير",
+  "MEDIUM": "وسط",
+  "LARGE": "كبير",
+  "ONION": "بصل",
+  "TOMATO": "طماطم",
+  "CHEESE": "جبنة",
+  "POTATO": "بطاطس",
+  "CURROTS": "جزر",
+  "metadata": {
+    "title": "سوبريم برجر | تذوق طعم السعادة",
+    "description": "استمتع بأفضل تجربة برجر مع سوبريم برجر. مكونات طازجة، لحم مشوي غني بالعصارة، وتوصيل سريع."
+  }
+}

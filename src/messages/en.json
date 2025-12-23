@@ -1,0 +1,467 @@
+{
+  "logo": "Mahmoud Burger",
+  "home": {
+    "hero": {
+      "title": "Bite into Happiness",
+      "description": "Craving a real burger? We serve the finest fresh ingredients, juicy flame-grilled patties, and lightning-fast delivery. Your perfect bite is just one click away!",
+      "orderNow": "Order Now",
+      "learnMore": "Learn More",
+      "badge": "Best Gourmet Burgers in Town",
+      "stats": {
+        "happyCustomers": "Happy Customers",
+        "ordersDelivered": "Orders Delivered",
+        "averageRating": "Average Rating",
+        "menuItems": "Menu Items"
+      },
+      "features": {
+        "delivery": "30 Min Delivery",
+        "payment": "Secure Payment",
+        "rating": "Top Rated Service"
+      }
+    },
+    "bestSeller": {
+      "checkOut": "Taste the Best",
+      "OurBestSellers": "Most Popular Burgers",
+      "freshlyPrepared": "Freshly prepared, just for you, every single time."
+    },
+    "about": {
+      "ourStory": "Our Story",
+      "aboutUs": "About Us",
+      "chefQuote": "We believe every burger tells a story of quality and passion.",
+      "highlights": {
+        "freshBeef": "Fresh Beef",
+        "fastSupport": "Fast Support"
+      },
+      "descriptions": {
+        "one": "At Supreme Burger, we're dedicated to the art of the perfect burger. Every sandwich we create is a blend of premium quality and passion, ensuring a symphony of flavors in every bite.",
+        "two": "From locally sourced ingredients to our signature house sauces, we don't compromise on quality. Our mission is to provide you with a dining experience that is both gourmet and satisfying.",
+        "three": "Join our community of burger enthusiasts and taste the difference that craftsmanship makes. We're not just a burger joint; we're your destination for culinary delight."
+      }
+    },
+    "contact": {
+      "dont_hesitate": "Don't Hesitate",
+      "contactUs": "Contact Us"
+    },
+    "cta": {
+      "limitedOffer": "Limited Time Offer",
+      "title": "Unlock 20% Off",
+      "subtitle": "Your First Order",
+      "description": "Experience the ultimate taste sensation with our gourmet burgers. Freshly grilled, perfectly seasoned, and delivered hot to your doorstep in minutes.",
+      "orderNow": "Order Now",
+      "contactUs": "Contact Us",
+      "delivery": {
+        "title": "30 Min Delivery",
+        "subtitle": "Guaranteed on time"
+      },
+      "fresh": {
+        "title": "Fresh Ingredients",
+        "subtitle": "100% Organic locally sourced"
+      }
+    },
+    "features": {
+      "title": "Why Choose",
+      "us": "Us",
+      "subtitle": "We're not just another burger place. We're your destination for quality, speed, and satisfaction.",
+      "items": {
+        "fastDelivery": {
+          "title": "Fast Delivery",
+          "description": "Get your order delivered in 30 minutes or less"
+        },
+        "freshIngredients": {
+          "title": "Fresh Ingredients",
+          "description": "We use only the freshest, locally-sourced ingredients"
+        },
+        "service": {
+          "title": "24/7 Service",
+          "description": "Order anytime, anywhere. We're always open for you"
+        },
+        "award": {
+          "title": "Award Winning",
+          "description": "Recognized as the best burger joint in the city"
+        }
+      }
+    }
+  },
+  "menu": {
+    "hero": {
+      "explore": "Explore Our",
+      "delicious": "Delicious",
+      "menu": "Menu",
+      "description": "Handcrafted with passion using the freshest ingredients to bring you the ultimate burger experience."
+    },
+    "category": {
+      "premium": "Premium Selection • Fresh Quality"
+    },
+    "emptyState": {
+      "description": "We are currently updating our kitchen. Please check back later!"
+    },
+    "item": {
+      "topRated": "Top Rated"
+    },
+    "product": {
+      "freeDelivery": "Free Delivery",
+      "ordersOver": "Orders over $50",
+      "fastPrep": "Fast Prep",
+      "prepTime": "15 - 20 Mins",
+      "reviewsSub": "Hear what our burger lovers have to say.",
+      "loginReview": "Enjoyed your meal? Share your experience with the community!",
+      "loginBtn": "Login to Review",
+      "freshChoice": "Fresh Choice"
+    }
+  },
+  "navbar": {
+    "home": "Home",
+    "about": "About",
+    "menu": "Menu",
+    "contact": "Contact",
+    "login": "Login",
+    "cart": "Cart",
+    "register": "Register",
+    "signOut": "Sign Out",
+    "profile": "Profile",
+    "admin": "Admin",
+    "followJourney": "Follow Our Journey",
+    "checkout": "Checkout",
+    "tagline": "© 2025 SUPREME BURGER. COOKED WITH PASSION."
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome Back",
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter your name"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter your email"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Enter your password"
+      },
+      "submit": "Login",
+      "authPrompt": {
+        "message": "Don't have an account? ",
+        "signUpLinkText": "Sign Up"
+      }
+    },
+    "register": {
+      "title": "Register",
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter your name"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter your email"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Enter your password"
+      },
+      "confirmPassword": {
+        "label": "Confirm Password",
+        "placeholder": "Re-enter your password"
+      },
+      "submit": "Register",
+      "authPrompt": {
+        "message": "Already have an account? ",
+        "loginLinkText": "Login"
+      }
+    }
+  },
+  "validation": {
+    "nameRequired": "Name is required",
+    "validEmail": "Must be a valid email",
+    "passwordMinLength": "Password must be at least 6 characters",
+    "passwordMaxLength": "Password must be at most 40 characters",
+    "confirmPasswordRequired": "Confirm Password is required",
+    "passwordMismatch": "Password do not match"
+  },
+  "messages": {
+    "userNotFound": "User not found",
+    "incorrectPassword": "Incorrect password",
+    "loginSuccessful": "Login successful",
+    "unexpectedError": "An unexpected error occurred",
+    "userAlreadyExists": "User already exists.",
+    "accountCreated": "Account created successfully",
+    "updateProfileSucess": "Profile updated successfully",
+    "categoryAdded": "Category added successfully",
+    "updatecategorySucess": "Category updated successfully",
+    "deleteCategorySucess": "Category deleted successfully",
+    "productAdded": "Product added successfully",
+    "updateProductSucess": "Product updated successfully",
+    "deleteProductSucess": "Product deleted successfully",
+    "productDeleteConfirm": "Are you sure you want to delete this product?",
+    "productDeleteDescription": "This action cannot be undone. This will permanently delete the product.",
+    "updateUserSucess": "User updated successfully",
+    "deleteUserSucess": "User deleted successfully",
+    "userDeleteConfirm": "Are you sure you want to delete this user?",
+    "userDeleteDescription": "This action cannot be undone. This will permanently delete the user account.",
+    "categoryDeleteConfirm": "Are you sure you want to delete this category?"
+  },
+  "menuItem": {
+    "addToCart": "Add to cart"
+  },
+  "reviews": {
+    "title": "Customer Reviews",
+    "writeReview": "Write a Review",
+    "rating": "Rating",
+    "comment": "Comment",
+    "placeholder": "Share your thoughts...",
+    "submit": "Submit Review",
+    "submitting": "Submitting...",
+    "noReviews": "No reviews yet. Be the first to review!"
+  },
+  "profile": {
+    "title": "Profile",
+    "form": {
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter your name"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter your email"
+      },
+      "phone": {
+        "label": "Phone",
+        "placeholder": "Enter your phone number",
+        "validation": {
+          "required": "Phone number is required",
+          "invalid": "Please enter a valid phone number"
+        }
+      },
+      "address": {
+        "label": "Street Address",
+        "placeholder": "Enter your address",
+        "validation": {
+          "required": "Address is required"
+        }
+      },
+      "postalCode": {
+        "label": "Postal Code",
+        "placeholder": "Enter your postal code",
+        "validation": {
+          "required": "Postal code is required",
+          "invalid": "Please enter a valid postal code"
+        }
+      },
+      "city": {
+        "label": "City",
+        "placeholder": "Enter your city",
+        "validation": {
+          "required": "City is required"
+        }
+      },
+      "country": {
+        "label": "Country",
+        "placeholder": "Enter your country",
+        "validation": {
+          "required": "Country is required"
+        }
+      }
+    },
+    "info": {
+      "title": "Profile Information",
+      "fullName": "Full Name",
+      "email": "Email Address",
+      "memberSince": "Member Since"
+    },
+    "recentOrders": "Recent Orders",
+    "orderNumber": "Order",
+    "totalAmount": "Total Amount",
+    "noOrdersYet": "You haven't placed any orders yet."
+  },
+  "admin": {
+    "admin": "Admin Dashboard",
+    "subtitle": "Manage your store content, orders and users with ease.",
+    "tabs": {
+      "profile": "Profile",
+      "categories": "Categories",
+      "menuItems": "Menu Items",
+      "users": "Users",
+      "orders": "Orders",
+      "reviews": "Reviews"
+    },
+    "dashboard": {
+      "totalUsers": "Total Users",
+      "totalProducts": "Total Products",
+      "totalOrders": "Total Orders",
+      "totalRevenue": "Total Revenue",
+      "quickActions": "Quick Actions",
+      "manageUsers": "Manage Users",
+      "manageUsersDesc": "View and manage all users",
+      "manageProducts": "Manage Products",
+      "manageProductsDesc": "Add, edit, or remove products",
+      "viewOrders": "View Orders",
+      "viewOrdersDesc": "Track and manage orders"
+    },
+    "reviews": {
+      "title": "Manage Reviews",
+      "deleteTitle": "Delete Review",
+      "deleteConfirm": "Are you sure you want to delete this review? This action cannot be undone.",
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "deleting": "Deleting...",
+      "user": "User",
+      "product": "Product",
+      "rating": "Rating",
+      "comment": "Comment",
+      "date": "Date",
+      "noReviewsFound": "No reviews found",
+      "deleteSuccess": "Review deleted successfully",
+      "actions": "Actions",
+      "anonymous": "Anonymous"
+    },
+    "users": {
+      "searchPlaceholder": "Search users...",
+      "role": "Role",
+      "editUser": "Edit User"
+    },
+    "menu-items": {
+      "createNewMenuItem": "Create new menu item",
+      "addItemSize": "Add item size",
+      "addExtraItem": "Add extra item",
+      "menuOption": {
+        "name": "Name",
+        "extraPrice": "Extra Price"
+      },
+      "form": {
+        "name": {
+          "label": "Item Name",
+          "placeholder": "Enter item name",
+          "validation": {
+            "required": "Item Name is required"
+          }
+        },
+        "description": {
+          "label": "Description",
+          "placeholder": "Enter description",
+          "validation": {
+            "required": "description Name is required"
+          }
+        },
+        "basePrice": {
+          "label": "Base Price",
+          "placeholder": "Enter base price",
+          "validation": {
+            "required": "Base Price is required"
+          }
+        },
+        "category": {
+          "label": "Category",
+          "placeholder": "Select Category",
+          "validation": {
+            "required": "Category is required"
+          }
+        },
+        "image": {
+          "label": "Image URL",
+          "placeholder": "Enter image URL",
+          "validation": {
+            "required": "Product image is required"
+          }
+        }
+      }
+    },
+    "orders": {
+      "orderId": "Order ID",
+      "user": "User",
+      "date": "Date",
+      "total": "Total",
+      "paid": "Paid",
+      "status": "Status",
+      "noOrdersFound": "No orders found",
+      "orderDetails": "Order Details",
+      "customer": "Customer",
+      "address": "Address",
+      "items": "Items",
+      "updatedStatus": "Order status updated",
+      "updatedPayment": "Payment status updated",
+      "failedUpdate": "Failed to update status"
+    },
+    "categories": {
+      "productsCount": "{count} Products",
+      "createCategory": "Create Category",
+      "editCategory": "Edit Category",
+      "form": {
+        "editName": "Change Category Name",
+        "name": {
+          "label": "Category Name",
+          "placeholder": "Enter category name",
+          "validation": {
+            "required": "Category Name is required"
+          }
+        }
+      }
+    }
+  },
+  "category": "Category",
+  "actions": "Actions",
+  "add": "Add",
+  "save": "Save",
+  "edit": "Edit",
+  "delete": "Delete",
+  "cancel": "Cancel",
+  "sizes": "Sizes",
+  "extrasIngredients": "Extras Ingredients",
+  "create": "Create",
+  "cart": {
+    "title": "Shopping Cart",
+    "checkoutProcess": "Checkout Process",
+    "reviewSelection": "Review your selection and complete your gourmet experience.",
+    "items": "Items",
+    "yourItems": "Your Items",
+    "emptyCartDescription": "Let's find something delicious to fill your cart!",
+    "noItemsInCart": "There are no items in your cart. Add some",
+    "browseMenu": "Browse Menu",
+    "subtotal": "Subtotal",
+    "delivery": "Delivery",
+    "total": "Total",
+    "size": "Size",
+    "extras": "Extras",
+    "inCart": "in cart"
+  },
+  "checkout": {
+    "title": "Checkout Details",
+    "securePayment": "Secure Payment",
+    "phone": "Phone Number",
+    "streetAddress": "Street Address",
+    "postalCode": "Postal Code",
+    "city": "City",
+    "country": "Country",
+    "pay": "Pay",
+    "mustBeLoggedIn": "You must be logged in to checkout",
+    "emptyCartError": "Your cart is empty",
+    "orderSuccess": "Order placed successfully!",
+    "signInPrompt": "Please sign in to complete your order."
+  },
+  "copyRight": "© 2025 Supreme Burger. All rights reserved.",
+  "noProductsFound": "No products found",
+  "noCategoriesFound": "No categories found",
+  "loading": "Loading...",
+  "statuses": {
+    "PENDING": "Pending",
+    "PREPARING": "Preparing",
+    "ON_WAY": "On the way",
+    "DELIVERED": "Delivered",
+    "CANCELLED": "Cancelled"
+  },
+  "paymentStatuses": {
+    "PAID": "Paid",
+    "UNPAID": "Unpaid"
+  },
+  "SMALL": "Small",
+  "MEDIUM": "Medium",
+  "LARGE": "Large",
+  "ONION": "Onion",
+  "TOMATO": "Tomato",
+  "CHEESE": "Cheese",
+  "POTATO": "Potato",
+  "CURROTS": "Carrots",
+  "metadata": {
+    "title": "Supreme Burger | Bite into Happiness",
+    "description": "Experience the ultimate burger journey with Supreme Burger. Fresh ingredients, juicy patties, and fast delivery."
+  }
+}
