@@ -20,8 +20,8 @@ const Testimonials = async ({ locale }: { locale: string }) => {
     })
 
     return (
-        <section className="section-gap bg-secondary/10">
-            <div className="container">
+        <section className="py-20 md:py-28 bg-secondary/10">
+            <div className="container px-4">
                 <div className="text-center mb-12 md:mb-16">
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
                         {t('reviews.title')}

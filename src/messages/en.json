@@ -40,7 +40,24 @@
     },
     "contact": {
       "dont_hesitate": "Don't Hesitate",
-      "contactUs": "Contact Us"
+      "contactUs": "Contact Us",
+      "getInTouch": "Get in Touch",
+      "subtitle": "Have a question or just want to say hi? We'd love to hear from you.",
+      "info": {
+        "address": "Address",
+        "phone": "Phone",
+        "email": "Email",
+        "hours": "Opening Hours"
+      },
+      "form": {
+        "name": "Your Name",
+        "email": "Your Email",
+        "message": "Message",
+        "send": "Send Message",
+        "sending": "Sending...",
+        "success": "Message sent successfully!",
+        "error": "Something went wrong."
+      }
     },
     "cta": {
       "limitedOffer": "Limited Time Offer",
@@ -80,6 +97,40 @@
           "description": "Recognized as the best burger joint in the city"
         }
       }
+    },
+    "howItWorks": {
+      "title": "How it",
+      "works": "Works?",
+      "subtitle": "Get your gourmet burger delivered to your doorstep in 4 simple steps.",
+      "steps": {
+        "choose": {
+          "title": "Choose Your Meal",
+          "description": "Browse our extensive menu and select your favorite burger."
+        },
+        "place": {
+          "title": "Place Your Order",
+          "description": "Add your items to the cart and proceed to our secure checkout."
+        },
+        "delivery": {
+          "title": "Fast Delivery",
+          "description": "Our delivery team ensures your meal arrives fresh and hot."
+        },
+        "enjoy": {
+          "title": "Enjoy Your Meal",
+          "description": "The best part! Sit back and enjoy your delicious gourmet meal."
+        }
+      }
+    },
+    "newsletter": {
+      "title": "Join Our",
+      "newsletter": "Newsletter",
+      "subtitle": "Get exclusive offers, new burger alerts, and 10% off your next order.",
+      "placeholder": "Enter your email address",
+      "subscribe": "Subscribe",
+      "success": "Welcome to the Club!",
+      "successSubtitle": "Check your inbox for your discount code.",
+      "joining": "Joining...",
+      "noSpam": "We respect your privacy. No spam, ever."
     }
   },
   "menu": {
@@ -107,7 +158,10 @@
       "loginReview": "Enjoyed your meal? Share your experience with the community!",
       "loginBtn": "Login to Review",
       "freshChoice": "Fresh Choice"
-    }
+    },
+    "searchPlaceholder": "Search for burgers...",
+    "filterAll": "All Items",
+    "filter": "Filter"
   },
   "navbar": {
     "home": "Home",
@@ -120,6 +174,8 @@
     "signOut": "Sign Out",
     "profile": "Profile",
     "admin": "Admin",
+    "orders": "Orders",
+    "settings": "Settings",
     "followJourney": "Follow Our Journey",
     "checkout": "Checkout",
     "tagline": "© 2025 SUPREME BURGER. COOKED WITH PASSION."
@@ -179,6 +235,8 @@
     "passwordMismatch": "Password do not match"
   },
   "messages": {
+    "error": "Error",
+    "success": "Success",
     "userNotFound": "User not found",
     "incorrectPassword": "Incorrect password",
     "loginSuccessful": "Login successful",
@@ -186,6 +244,7 @@
     "userAlreadyExists": "User already exists.",
     "accountCreated": "Account created successfully",
     "updateProfileSucess": "Profile updated successfully",
+    "imageUploaded": "Image uploaded successfully",
     "categoryAdded": "Category added successfully",
     "updatecategorySucess": "Category updated successfully",
     "deleteCategorySucess": "Category deleted successfully",
@@ -271,7 +330,22 @@
     "recentOrders": "Recent Orders",
     "orderNumber": "Order",
     "totalAmount": "Total Amount",
-    "noOrdersYet": "You haven't placed any orders yet."
+    "noOrdersYet": "You haven't placed any orders yet.",
+    "settings": "Settings",
+    "security": "Security",
+    "changePassword": "Change Password",
+    "currentPassword": "Current Password",
+    "newPassword": "New Password",
+    "confirmNewPassword": "Confirm New Password",
+    "updatePassword": "Update Password",
+    "updating": "Updating...",
+    "passwordMismatch": "Passwords do not match",
+    "allFieldsRequired": "All fields are required",
+    "passwordUpdated": "Password updated successfully",
+    "signOutConfirm": "Are you sure you want to leave? We'll miss you! 🍔",
+    "changeImage": "Change Photo",
+    "uploadImage": "Add Image",
+    "uploadingImage": "Uploading..."
   },
   "admin": {
     "admin": "Admin Dashboard",
@@ -295,7 +369,16 @@
       "manageProducts": "Manage Products",
       "manageProductsDesc": "Add, edit, or remove products",
       "viewOrders": "View Orders",
-      "viewOrdersDesc": "Track and manage orders"
+      "viewOrdersDesc": "Track and manage orders",
+      "goodMorning": "Good Morning",
+      "goodAfternoon": "Good Afternoon",
+      "goodEvening": "Good Evening",
+      "statusOnline": "System Status: Online",
+      "serverLoad": "Server Load",
+      "activeNow": "Active Now",
+      "pendingAttention": "Everything is looking great today. You have {count} pending orders that require your attention.",
+      "proceedNow": "Proceed Now",
+      "analyzingMetrics": "Analyzing metrics..."
     },
     "reviews": {
       "title": "Manage Reviews",
@@ -460,6 +543,23 @@
   "CHEESE": "Cheese",
   "POTATO": "Potato",
   "CURROTS": "Carrots",
+  "footer": {
+    "description": "Crafting the ultimate burger experience since 2025. Quality, passion, and flavor in every bite.",
+    "quickLinks": "Quick Links",
+    "contact": "Contact Info",
+    "rights": "© 2025 Supreme Burger. All rights reserved.",
+    "madeWith": "Made with Passion for Food Lovers.",
+    "status": "Status",
+    "hours": "Hours",
+    "phoneLabel": "Phone",
+    "emailLabel": "Email",
+    "locationLabel": "Address",
+    "openTime": "11:00 AM — 11:00 PM",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "addressVal": "123 Al-Salam St, Gaza",
+    "phoneVal": "+20 121 212 1212"
+  },
   "metadata": {
     "title": "Supreme Burger | Bite into Happiness",
     "description": "Experience the ultimate burger journey with Supreme Burger. Fresh ingredients, juicy patties, and fast delivery."

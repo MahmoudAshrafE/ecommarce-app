@@ -11,6 +11,7 @@ import ReviewItem from './ReviewItem'
 
 const ReviewList = async ({ reviews }: { reviews: ReviewWithUser[] }) => {
     const t = await getTranslations('reviews')
+    console.log(`ReviewList rendering with ${reviews.length} reviews`);
 
     if (reviews.length === 0) {
         return (

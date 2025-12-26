@@ -1,35 +1,37 @@
 import { cache } from "@/lib/cache";
 import { prisma } from "@/lib/prisma";
+import { unstable_cache as nextCache } from 'next/cache';
+import { cache as reactCache } from 'react';
 
-export const getBestSellers = cache(async (limit: number | undefined) => {
-    const bestSallers = await prisma.product.findMany({
-        where: {
-            // orders:{
-            //     some:{}
-            // }
-        },
-        orderBy: {
-            orders: {
-                _count: 'desc'
-            },
-        },
-        include: {
-            sizes: true,
-            extras: true,
-            reviews: {
-                include: {
-                    user: true
+export const getBestSellers = (limit: number | undefined) => nextCache(
+    reactCache(async () => {
+        const bestSallers = await prisma.product.findMany({
+            where: {},
+            orderBy: {
+                orders: {
+                    _count: 'desc'
                 },
-                take: 4,
-                orderBy: {
-                    createdAt: 'desc'
+            },
+            include: {
+                sizes: true,
+                extras: true,
+                reviews: {
+                    include: {
+                        user: true
+                    },
+                    take: 4,
+                    orderBy: {
+                        createdAt: 'desc'
+                    }
                 }
-            }
-        },
-        take: limit,
-    });
-    return bestSallers;
-}, ['best-sellers'], { revalidate: 3600 })
+            },
+            take: limit,
+        });
+        return bestSallers;
+    }),
+    ['best-sellers', limit?.toString() || 'all'],
+    { revalidate: 3600, tags: ['products'] }
+)();
 
 
 export const getProductsByCategory = cache(async () => {
@@ -53,24 +55,29 @@ export const getProductsByCategory = cache(async () => {
         }
     });
     return products;
-}, ['products-by-category'], { revalidate: 3600 })
+}, ['products-by-category'], { revalidate: 3600, tags: ['categories', 'products'] })
 
-export const getProductById = cache(async (id: string) => {
-    const product = await prisma.product.findUnique({
-        where: { id },
-        include: {
-            sizes: true,
-            extras: true,
-            reviews: {
-                include: {
-                    user: true
-                },
-                orderBy: {
-                    createdAt: 'desc'
+export const getProductById = (id: string) => nextCache(
+    reactCache(async () => {
+        console.log(`getProductById: Fetching product ${id} from DB`);
+        const product = await prisma.product.findUnique({
+            where: { id },
+            include: {
+                sizes: true,
+                extras: true,
+                reviews: {
+                    include: {
+                        user: true
+                    },
+                    orderBy: {
+                        createdAt: 'desc'
+                    }
                 }
             }
-        }
-    });
-    return product;
-}, ['product-by-id'], { revalidate: 3600, tags: ['products'] });
-
+        });
+        console.log(`getProductById: Found ${product?.reviews.length || 0} reviews`);
+        return product;
+    }),
+    ['product-by-id', id],
+    { revalidate: 3600, tags: ['products'] }
+)();

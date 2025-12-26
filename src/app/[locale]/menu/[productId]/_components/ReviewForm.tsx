@@ -7,6 +7,7 @@ import { Star } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useTranslations } from 'next-intl'
+import { toast } from '@/components/ui/use-toast'
 
 const ReviewForm = ({ productId }: { productId: string }) => {
     const [rating, setRating] = useState(5)
@@ -37,51 +38,56 @@ const ReviewForm = ({ productId }: { productId: string }) => {
                 setRating(5)
                 router.refresh()
             } else {
-                // error handling
-                alert('Failed to submit review')
+                toast({
+                    variant: 'destructive',
+                    title: t('messages.error') || 'Error',
+                    description: 'Failed to submit review'
+                })
             }
         } catch (error) {
             console.error(error)
-            alert('Failed to submit review')
+            toast({
+                variant: 'destructive',
+                title: t('messages.error') || 'Error',
+                description: 'Failed to submit review'
+            })
         } finally {
             setIsSubmitting(false)
         }
     }
 
     return (
-        <form onSubmit={handleSubmit} className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-            <h3 className="text-xl font-bold mb-4">{t('reviews.writeReview')}</h3>
-
-            <div className="mb-4">
-                <label className="block text-sm font-medium mb-2 text-gray-700">{t('reviews.rating')}</label>
-                <div className="flex gap-1">
+        <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="space-y-2">
+                <label className="block text-sm font-medium text-foreground">{t('reviews.rating')}</label>
+                <div className="flex gap-2">
                     {[1, 2, 3, 4, 5].map((star) => (
                         <button
                             key={star}
                             type="button"
                             onClick={() => setRating(star)}
-                            className="focus:outline-none transition-transform hover:scale-110"
+                            className="focus:outline-none transition-transform hover:scale-110 active:scale-95"
                         >
                             <Star
-                                className={`w-8 h-8 ${star <= rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}`}
+                                className={`w-8 h-8 sm:w-10 sm:h-10 transition-colors ${star <= rating ? 'fill-primary text-primary' : 'text-muted-foreground/20'}`}
                             />
                         </button>
                     ))}
                 </div>
             </div>
 
-            <div className="mb-4">
-                <label className="block text-sm font-medium mb-2 text-gray-700">{t('reviews.comment')}</label>
-                <textarea
-                    className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none min-h-[100px]"
+            <div className="space-y-2">
+                <label className="block text-sm font-medium text-foreground">{t('reviews.comment')}</label>
+                <Textarea
                     value={comment}
                     onChange={(e) => setComment(e.target.value)}
                     placeholder={t('reviews.placeholder')}
                     required
+                    className="min-h-[120px] bg-background resize-none"
                 />
             </div>
 
-            <Button disabled={isSubmitting} type="submit" className="w-full md:w-auto">
+            <Button disabled={isSubmitting} type="submit" size="lg" className="w-full md:w-auto font-bold">
                 {isSubmitting ? t('reviews.submitting') : t('reviews.submit')}
             </Button>
         </form>

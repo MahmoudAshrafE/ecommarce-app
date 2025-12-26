@@ -2,12 +2,13 @@ import { formatCurrency } from "@/lib/formaters"
 import Image from "next/image"
 import AddToCartButton from "./AddToCartButton"
 import { ProductWithRelations } from "@/types/product"
-import { getLocale, getTranslations } from "next-intl/server"
+import { useTranslations } from "next-intl"
 import Link from "next/link"
 import { Star } from "lucide-react"
+import UserAvatar from "../ui/user-avatar"
 
-const MenuItem = async ({ item, locale }: { item: ProductWithRelations, locale: string }) => {
-    const t = await getTranslations({ locale });
+const MenuItem = ({ item, locale }: { item: ProductWithRelations, locale: string }) => {
+    const t = useTranslations();
     const isRtl = locale === 'ar';
 
     return (
@@ -29,7 +30,7 @@ const MenuItem = async ({ item, locale }: { item: ProductWithRelations, locale: 
                     />
 
                     {/* Quality Badge */}
-                    <div className={`absolute top-4 ${isRtl ? 'left-4' : 'right-4'} bg-white/90 backdrop-blur-md px-3 py-1 rounded-full shadow-sm flex items-center gap-1 border border-border/50 scale-90 group-hover:scale-100 transition-transform duration-500`}>
+                    <div className={`absolute top-4 ${isRtl ? 'left-4' : 'right-4'} bg-background/90 backdrop-blur-md px-3 py-1 rounded-full shadow-sm flex items-center gap-1 border border-border/50 scale-90 group-hover:scale-100 transition-transform duration-500`}>
                         <Star className="w-3 h-3 fill-primary text-primary" />
                         <span className="text-[10px] font-black uppercase text-foreground">{t('menu.item.topRated')}</span>
                     </div>
@@ -58,9 +59,13 @@ const MenuItem = async ({ item, locale }: { item: ProductWithRelations, locale: 
                     {item.reviews && item.reviews.length > 0 ? (
                         <>
                             {item.reviews.slice(0, 3).map((review) => (
-                                <div key={review.id} className="w-8 h-8 rounded-full border-2 border-background bg-primary/10 flex items-center justify-center text-[10px] font-black text-primary relative">
-                                    {review.user.name.charAt(0).toUpperCase()}
-                                </div>
+                                <UserAvatar
+                                    key={review.id}
+                                    image={review.user.image}
+                                    name={review.user.name}
+                                    size="sm"
+                                    className="border-2 border-background"
+                                />
                             ))}
                             {item.reviews.length > 3 && (
                                 <div className="w-8 h-8 rounded-full border-2 border-background bg-secondary flex items-center justify-center text-[10px] font-bold text-muted-foreground relative z-10">

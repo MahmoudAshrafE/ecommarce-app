@@ -5,10 +5,10 @@ import Image from 'next/image';
 async function About({ locale }: { locale: string }) {
 
   const t = await getTranslations({ locale, namespace: 'home.about' });
-  
+
   return (
-    <section className='section-gap' id={Routes.ABOUT}>
-      <div className='container'>
+    <section id={Routes.ABOUT}>
+      <div className='container px-4'>
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-12 items-center'>
           <div className='relative h-[400px] lg:h-[500px] rounded-[2rem] overflow-hidden shadow-2xl group'>
             <Image

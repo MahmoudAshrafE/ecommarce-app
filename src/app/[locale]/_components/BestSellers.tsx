@@ -2,14 +2,14 @@ import Menu from "@/components/menu"
 import { getBestSellers } from "@/server/db/product"
 import { getTranslations, getLocale } from "next-intl/server"
 
-const BestSallers = async ({ locale }: { locale: string }) => {
-    const bestSallers = await getBestSellers(3)
+const BestSellers = async ({ locale }: { locale: string }) => {
+    const bestSellers = await getBestSellers(3)
     const t = await getTranslations({ locale, namespace: 'home.bestSeller' })
     const isRtl = locale === 'ar'
 
     return (
-        <section className="section-gap bg-background">
-            <div className="container">
+        <section className="py-20 md:py-28 bg-background">
+            <div className="container px-4">
                 <div className={`flex flex-col md:flex-row justify-between items-end mb-12 gap-6 ${isRtl ? 'md:flex-row-reverse' : ''}`}>
                     <div className={`max-w-2xl ${isRtl ? 'text-right' : 'text-left'}`}>
                         <span className="text-primary font-bold tracking-widest uppercase text-sm mb-3 block">
@@ -25,10 +25,10 @@ const BestSallers = async ({ locale }: { locale: string }) => {
                         </p>
                     </div>
                 </div>
-                <Menu items={bestSallers} locale={locale} />
+                <Menu items={bestSellers} locale={locale} />
             </div>
         </section>
     )
 }
 
-export default BestSallers
+export default BestSellers

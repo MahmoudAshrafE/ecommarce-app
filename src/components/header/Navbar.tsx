@@ -4,179 +4,212 @@ import { Pages, Routes } from '@/constants/enums'
 import Link from '../link'
 import { Button } from '../ui/button'
 import { useState, useEffect } from 'react'
-import { Menu, XIcon, Home, ShoppingBag, Info, Phone, LogIn, ShoppingCart, Instagram, Facebook, Twitter } from 'lucide-react'
+import { createPortal } from 'react-dom'
+import { Menu, XIcon, Home, ShoppingBag, Info, Phone, LogIn, ShoppingCart, Instagram, Facebook, Twitter, ChevronDown } from 'lucide-react'
 import { useParams, usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 
 interface NavbarProps {
-  isScrolled: boolean;
-  isHome: boolean;
-  isMobileOnly?: boolean;
+    isScrolled: boolean;
+    isHome: boolean;
+    isMobileOnly?: boolean;
 }
 
 const Navbar = ({ isScrolled, isHome, isMobileOnly = false }: NavbarProps) => {
-  const t = useTranslations('navbar')
-  const [open, setOpen] = useState(false)
-  const { locale } = useParams();
-  const pathname = usePathname();
-  const [mounted, setMounted] = useState(false);
+    const t = useTranslations('navbar')
+    const [open, setOpen] = useState(false)
+    const { locale } = useParams();
+    const pathname = usePathname();
+    const [mounted, setMounted] = useState(false);
 
-  const { data: session } = useSession();
+    const { data: session } = useSession();
 
-  const Links = [
-    { id: 'home', title: t('home'), href: `${locale}`, icon: Home },
-    { id: 'menu', title: t('menu'), href: `${locale}/${Routes.MENU}`, icon: ShoppingBag },
-    { id: 'about', title: t('about'), href: `${locale}/${Routes.ABOUT}`, icon: Info },
-    { id: 'contact', title: t('contact'), href: `${locale}/${Routes.CONTACT}`, icon: Phone },
-    { id: 'login', title: t('login'), href: `${locale}/${Routes.AUTH}/${Pages.LOGIN}`, auth: false, icon: LogIn },
-  ];
+    const Links = [
+        { id: 'home', title: t('home'), href: `${locale}`, icon: Home },
+        { id: 'menu', title: t('menu'), href: `${locale}/${Routes.MENU}`, icon: ShoppingBag },
+        { id: 'about', title: t('about'), href: `${locale}/${Routes.ABOUT}`, icon: Info },
+        { id: 'contact', title: t('contact'), href: `${locale}/${Routes.CONTACT}`, icon: Phone },
+        { id: 'login', title: t('login'), href: `${locale}/${Routes.AUTH}/${Pages.LOGIN}`, auth: false, icon: LogIn },
+    ];
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
-  if (!mounted) return null;
+    useEffect(() => {
+        if (open) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        }
+    }, [open]);
 
-  const isActive = (href: string) => {
-    const fullPath = `/${href}`;
-    if (href === locale) {
-      return pathname === `/${locale}` || pathname === `/${locale}/`;
-    }
-    return pathname.startsWith(fullPath);
-  };
+    if (!mounted) return null;
 
-  const textColor = !isScrolled && isHome ? "text-white/80 hover:text-white" : "text-foreground/70 hover:text-primary";
+    const isActive = (href: string) => {
+        const fullPath = `/${href}`;
+        if (href === locale) {
+            return pathname === `/${locale}` || pathname === `/${locale}/`;
+        }
+        return pathname.startsWith(fullPath);
+    };
 
-  if (isMobileOnly) {
-    return (
-      <>
-        <Button
-          variant='ghost'
-          size='icon'
-          className={`rounded-2xl w-12 h-12 transition-all duration-300 ${!isScrolled && isHome ? "text-white bg-white/10 hover:bg-white/20" : "text-foreground bg-secondary/50 hover:bg-secondary"}`}
-          onClick={() => setOpen(true)}
-        >
-          <Menu className='w-6 h-6' />
-        </Button>
+    const textColor = "text-foreground/80 hover:text-primary";
 
-        {open && (
-          <div className="fixed inset-0 z-[60] lg:hidden">
-            <div
-              className="absolute inset-0 bg-[#0a0a0b]/90 backdrop-blur-md animate-in fade-in duration-500"
-              onClick={() => setOpen(false)}
-            />
-            <div className={`absolute top-0 bottom-0 ${locale === 'ar' ? 'left-0 border-r' : 'right-0 border-l'} w-[320px] bg-background border-border/10 p-4 md:p-8 flex flex-col shadow-2xl animate-in ${locale === 'ar' ? 'slide-in-from-left' : 'slide-in-from-right'} duration-500 ease-out`}>
-              {/* Drawer Header */}
-              <div className="flex items-center justify-between mb-10 pt-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20">
-                    <span className="text-xl">🍔</span>
-                  </div>
-                  <span className="font-black text-xl tracking-tighter uppercase italic">{t('menu')}</span>
-                </div>
+    if (isMobileOnly) {
+        return (
+            <>
                 <Button
-                  variant='ghost'
-                  size='icon'
-                  className='rounded-full h-12 w-12 hover:bg-destructive/10 hover:text-destructive transition-colors'
-                  onClick={() => setOpen(false)}
+                    variant='ghost'
+                    size='icon'
+                    className={`absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-[100] rounded-full w-10 h-10 sm:w-12 sm:h-12 transition-all duration-300 shadow-xl ${!isScrolled && isHome
+                        ? "text-foreground bg-background/20 hover:bg-background/40 border border-white/10 backdrop-blur-md"
+                        : "text-foreground bg-background/80 backdrop-blur-xl hover:bg-background border border-border/50"
+                        }`}
+                    onClick={() => setOpen(true)}
                 >
-                  <XIcon className='w-6 h-6' />
+                    <ChevronDown className='w-6 h-6 animate-bounce' />
                 </Button>
-              </div>
 
-              {/* Links Content */}
-              <ul className="flex flex-col gap-3">
-                {Links.filter(link => link.auth === false ? !session : true).map((link, index) => {
-                  const active = isActive(link.href);
-                  const isLogin = link.id === 'login';
+                {open && createPortal(
+                    <div className="fixed inset-0 z-[999] lg:hidden">
+                        {/* Backdrop with blur */}
+                        <div
+                            className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-in fade-in duration-500"
+                            onClick={() => setOpen(false)}
+                        />
 
-                  return (
-                    <li
-                      key={link.id}
-                      className="animate-in fade-in slide-in-from-bottom-4 duration-500"
-                      style={{ animationDelay: `${index * 100}ms` }}
-                    >
-                      <Link
-                        href={`/${link.href}`}
-                        onClick={() => setOpen(false)}
-                        className={`flex items-center gap-4 px-5 py-4 rounded-[1.5rem] font-black transition-all group ${isLogin
-                          ? "bg-primary text-white shadow-xl shadow-primary/20 mt-6 active:scale-95"
-                          : active
-                            ? 'bg-primary/10 text-primary border border-primary/10'
-                            : 'hover:bg-secondary/50 text-foreground/70 active:scale-95'
-                          }`}
-                      >
-                        <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${active ? 'bg-primary/20' : 'bg-secondary group-hover:bg-primary/10'}`}>
-                          {link.icon && <link.icon className={`w-4 h-4 ${active ? 'text-primary' : 'group-hover:text-primary'} transition-colors`} />}
+                        {/* Drawer Content */}
+                        <div className="absolute top-0 left-0 right-0 max-h-[85vh] bg-background/95 backdrop-blur-xl rounded-b-[2rem] border-b border-white/10 p-5 flex flex-col shadow-2xl animate-in slide-in-from-top duration-500 ease-out overflow-y-auto ring-1 ring-white/5">
+
+                            {/* Drawer Handle/Indicator */}
+                            <div className="mx-auto w-12 h-1 bg-muted-foreground/20 rounded-full mb-4" />
+
+                            {/* Header */}
+                            <div className="flex items-center justify-between mb-6 px-1">
+                                <span className="text-xl font-black tracking-tight bg-gradient-to-r from-foreground to-foreground/60 bg-clip-text text-transparent">
+                                    {t('menu')}
+                                </span>
+                                <Button
+                                    variant='ghost'
+                                    size='icon'
+                                    className='rounded-full h-10 w-10 bg-secondary/50 hover:bg-destructive/10 hover:text-destructive transition-colors'
+                                    onClick={() => setOpen(false)}
+                                >
+                                    <XIcon className='w-5 h-5' />
+                                </Button>
+                            </div>
+
+                            {/* Links List */}
+                            <nav className="flex flex-col gap-1.5 pb-6">
+                                {Links.filter(link => link.auth === false ? !session : true).map((link, index) => {
+                                    const active = isActive(link.href);
+                                    const isLogin = link.id === 'login';
+
+                                    return (
+                                        <Link
+                                            key={link.id}
+                                            href={`/${link.href}`}
+                                            onClick={() => setOpen(false)}
+                                            className={`group flex items-center justify-between p-3 rounded-xl transition-all duration-300 ${isLogin
+                                                ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20 mt-2 active:scale-95"
+                                                : active
+                                                    ? "bg-secondary text-primary scheme-light"
+                                                    : "hover:bg-secondary/50 text-foreground/80 hover:text-foreground active:bg-secondary/80"
+                                                }`}
+                                            style={{
+                                                animation: `slideDown 0.5s ease-out forwards ${index * 0.08}s`,
+                                                opacity: 0,
+                                                transform: 'translateY(-20px)'
+                                            }}
+                                        >
+                                            <div className="flex items-center gap-4">
+                                                <div className={`p-2 rounded-lg transition-colors ${isLogin
+                                                    ? "bg-white/20"
+                                                    : active
+                                                        ? "bg-background shadow-sm"
+                                                        : "bg-secondary group-hover:bg-background"
+                                                    }`}>
+                                                    {link.icon && <link.icon className={`w-5 h-5 ${isLogin ? "text-white" : active ? "text-primary" : "text-muted-foreground group-hover:text-foreground"}`} />}
+                                                </div>
+                                                <span className="text-base font-bold tracking-wide">{link.title}</span>
+                                            </div>
+
+                                            {/* Interactive Arrow */}
+                                            <div className={`transition-transform duration-300 ${isLogin || active ? "translate-x-0 opacity-100" : "-translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100"}`}>
+                                                {isLogin ? <LogIn className="w-5 h-5" /> : <div className="w-1.5 h-1.5 rounded-full bg-current" />}
+                                            </div>
+                                        </Link>
+                                    );
+                                })}
+                            </nav>
+
+                            {/* Drawer Footer */}
+                            <div className="mt-auto pt-4 border-t border-border/50">
+                                <div className="flex items-center justify-between">
+                                    {/* Specialized Cart Button in Footer */}
+                                    <Link
+                                        href={`/${locale}/${Routes.CART}`}
+                                        onClick={() => setOpen(false)}
+                                        className="flex-1 me-3 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 p-3 rounded-xl flex items-center justify-center gap-2.5 transition-colors group"
+                                    >
+                                        <ShoppingCart className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                                        <span className="font-bold text-sm">{t('cart')}</span>
+                                    </Link>
+
+                                    {/* Socials */}
+                                    <div className="flex gap-2">
+                                        {[Instagram, Facebook, Twitter].map((Icon, i) => (
+                                            <Link key={i} href="#" className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all">
+                                                <Icon className="w-4 h-4" />
+                                            </Link>
+                                        ))}
+                                    </div>
+                                </div>
+                                <p className="text-[10px] text-center text-muted-foreground mt-4 font-medium tracking-widest uppercase opacity-60">
+                                    Gourmet Experience
+                                </p>
+                            </div>
                         </div>
-                        <span className="flex-1">{link.title}</span>
-                      </Link>
-                    </li>
-                  );
+
+                        <style jsx global>{`
+              @keyframes slideDown {
+                from { opacity: 0; transform: translateY(-20px); }
+                to { opacity: 1; transform: translateY(0); }
+              }
+            `}</style>
+                    </div>,
+                    document.body
+                )}
+            </>
+        )
+    }
+
+    return (
+        <nav className='relative'>
+            <ul className='flex items-center gap-2'>
+                {Links.filter(link => link.auth === false ? !session : true).filter(l => l.id !== 'login').map((link) => {
+                    const active = isActive(link.href);
+
+                    return (
+                        <li key={link.id}>
+                            <Link
+                                href={`/${link.href}`}
+                                className={`relative px-2 lg:px-4 py-1 text-xs lg:text-sm font-bold whitespace-nowrap transition-all duration-300 ${textColor} ${active ? "text-primary!" : ""
+                                    } group`}
+                            >
+                                {link.title}
+                                <span className={`absolute bottom-0 left-4 right-4 h-0.5 bg-primary transition-all duration-300 rounded-full ${active ? "opacity-100" : "opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0"}`} />
+                            </Link>
+                        </li>
+                    );
                 })}
-
-                {/* Specialized Mobile Cart Link */}
-                <li
-                  className="animate-in fade-in slide-in-from-bottom-4 duration-500"
-                  style={{ animationDelay: `${Links.length * 100}ms` }}
-                >
-                  <Link
-                    href={`/${locale}/${Routes.CART}`}
-                    onClick={() => setOpen(false)}
-                    className={`flex items-center justify-between px-5 py-5 rounded-[1.5rem] font-black transition-all border border-emerald-500/20 bg-emerald-500/5 text-emerald-600 active:scale-95 mt-4 group`}
-                  >
-                    <div className="flex items-center gap-4">
-                      <div className="w-8 h-8 rounded-lg bg-emerald-500/20 flex items-center justify-center group-hover:bg-emerald-500/30 transition-colors">
-                        <ShoppingCart className="w-4 h-4" />
-                      </div>
-                      <span>{t('cart')}</span>
-                    </div>
-                    <div className="bg-emerald-500 text-white text-[10px] font-black px-2 py-1 rounded-lg tracking-widest uppercase">
-                      {t('checkout')}
-                    </div>
-                  </Link>
-                </li>
-              </ul>
-
-              {/* Drawer Footer */}
-              <div className="mt-auto pt-10 pb-6 border-t border-border/50">
-                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground mb-6 text-center">{t('followJourney')}</p>
-                <div className="flex items-center justify-center gap-6">
-                  <Link href="#" className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center hover:bg-primary/10 hover:text-primary transition-all"><Instagram className="w-5 h-5" /></Link>
-                  <Link href="#" className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center hover:bg-primary/10 hover:text-primary transition-all"><Facebook className="w-5 h-5" /></Link>
-                  <Link href="#" className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center hover:bg-primary/10 hover:text-primary transition-all"><Twitter className="w-5 h-5" /></Link>
-                </div>
-                <p className="text-[10px] text-center text-muted-foreground mt-8 font-medium">{t('tagline')}</p>
-              </div>
-            </div>
-          </div>
-        )}
-      </>
+            </ul>
+        </nav>
     )
-  }
-
-  return (
-    <nav className='relative'>
-      <ul className='flex items-center gap-2'>
-        {Links.filter(link => link.auth === false ? !session : true).filter(l => l.id !== 'login').map((link) => {
-          const active = isActive(link.href);
-
-          return (
-            <li key={link.id}>
-              <Link
-                href={`/${link.href}`}
-                className={`relative px-4 py-2 text-sm font-bold transition-all duration-300 ${textColor} ${active ? "text-primary!" : ""
-                  } group`}
-              >
-                {link.title}
-                <span className={`absolute bottom-0 left-4 right-4 h-0.5 bg-primary transition-all duration-300 rounded-full ${active ? "opacity-100" : "opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0"}`} />
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
-    </nav>
-  )
 }
 
 export default Navbar

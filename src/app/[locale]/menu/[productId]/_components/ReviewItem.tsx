@@ -19,6 +19,8 @@ import {
     AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
 
+import UserAvatar from '@/components/ui/user-avatar'
+
 type ReviewWithUser = Review & {
     user: User
 }
@@ -66,7 +68,7 @@ const ReviewItem = ({ review }: { review: ReviewWithUser }) => {
     const canDelete = session?.user?.role === 'ADMIN' || session?.user?.id === review.userId
 
     return (
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 transition-all hover:shadow-md group">
+        <div className="bg-card dark:bg-secondary/10 p-4 sm:p-6 rounded-xl shadow-sm border border-border/50 transition-all hover:shadow-md group">
             <AlertDialog open={showDeleteModal} onOpenChange={setShowDeleteModal}>
                 <AlertDialogContent>
                     <AlertDialogHeader>
@@ -98,28 +100,25 @@ const ReviewItem = ({ review }: { review: ReviewWithUser }) => {
                 </AlertDialogContent>
             </AlertDialog>
 
-            <div className="flex items-center justify-between mb-3">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-0 mb-3">
                 <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary overflow-hidden">
-                        {review.user.image ? (
-                            <img src={review.user.image} alt={review.user.name || ''} className="w-full h-full object-cover" />
-                        ) : (
-                            <UserIcon className="w-5 h-5" />
-                        )}
-                    </div>
+                    <UserAvatar
+                        image={review.user.image}
+                        name={review.user.name}
+                    />
                     <div>
-                        <h4 className="font-semibold text-gray-900">{review.user.name}</h4>
-                        <div className="text-xs text-gray-500">
+                        <h4 className="font-semibold text-foreground">{review.user.name}</h4>
+                        <div className="text-xs text-muted-foreground">
                             {new Date(review.createdAt).toLocaleDateString('en-US')}
                         </div>
                     </div>
                 </div>
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-4 pl-[52px] sm:pl-0">
                     <div className="flex gap-0.5">
                         {[...Array(5)].map((_, i) => (
                             <Star
                                 key={i}
-                                className={`w-4 h-4 ${i < review.rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-200'}`}
+                                className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${i < review.rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-200'}`}
                             />
                         ))}
                     </div>
@@ -127,7 +126,7 @@ const ReviewItem = ({ review }: { review: ReviewWithUser }) => {
                         <button
                             onClick={() => setShowDeleteModal(true)}
                             disabled={isDeleting}
-                            className="opacity-0 group-hover:opacity-100 transition-opacity p-2 text-red-500 hover:bg-red-50 rounded-full"
+                            className="opacity-100 sm:opacity-0 group-hover:opacity-100 transition-opacity p-2 text-destructive hover:bg-destructive/10 rounded-full"
                             title="Delete Review"
                         >
                             <Trash2 className="w-4 h-4" />
@@ -135,7 +134,7 @@ const ReviewItem = ({ review }: { review: ReviewWithUser }) => {
                     )}
                 </div>
             </div>
-            <p className="text-gray-700 leading-relaxed pl-[52px]">
+            <p className="text-foreground/80 leading-relaxed pl-0 sm:pl-[52px] text-sm sm:text-base">
                 {review.comment}
             </p>
         </div>

@@ -89,6 +89,8 @@ html[dir="rtl"] .container {
       transform: translateY(-10px);
     }
   }
+
+  --breakpoint-xs: 425px;
 }
 
 :root {
@@ -146,9 +148,6 @@ html[dir="rtl"] .container {
   --chart-5: #ff5fa0;
 }
 
-
-
-
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -168,5 +167,14 @@ html[dir="rtl"] .container {
 
   .section-gap {
     @apply my-8 md:my-16;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }

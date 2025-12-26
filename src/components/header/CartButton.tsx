@@ -27,13 +27,13 @@ const CartButton = ({ onClose }: CartButtonProps) => {
   return (
     <Link
       href={`/${locale}/${Routes.CART}`}
-      className="flex items-center justify-center w-12 h-12 rounded-2xl bg-secondary/50 hover:bg-primary transition-all duration-300 group relative shadow-inner"
+      className="flex items-center justify-center w-12 h-12 rounded-2xl bg-secondary/50 dark:bg-white/5 border border-transparent dark:border-white/10 hover:bg-gradient-to-br hover:from-primary hover:to-orange-500 transition-all duration-300 group relative shadow-inner dark:shadow-none"
       onClick={onClose}
     >
       <ShoppingBag className="w-5 h-5 text-foreground group-hover:text-white transition-colors" />
 
       {quantity > 0 && (
-        <span className="absolute -top-1.5 -right-1.5 min-w-[22px] h-[22px] px-1 bg-primary text-white text-[10px] font-black rounded-full flex items-center justify-center border-2 border-background group-hover:scale-110 transition-transform shadow-lg">
+        <span className="absolute -top-1.5 -right-1.5 min-w-[22px] h-[22px] px-1 bg-primary text-black text-[10px] font-black rounded-full flex items-center justify-center border-2 border-background group-hover:scale-110 transition-transform shadow-lg">
           {quantity}
         </span>
       )}

@@ -1,18 +1,18 @@
 'use client'
-
 import { useState, useEffect } from 'react'
-import { useSession, signOut } from 'next-auth/react'
-import { User, LogOut } from 'lucide-react'
-import { useParams, useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react'
+import { User, LogOut, ShoppingBag, Settings } from 'lucide-react'
+import { useParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { Routes } from '@/constants/enums'
 import Link from '@/components/link'
+import SignOutModal from '@/components/auth/SignOutModal'
+import BaseAvatar from '../ui/user-avatar'
 
 const UserAvatar = () => {
     const t = useTranslations('navbar')
     const { data: session } = useSession()
     const { locale } = useParams()
-    const router = useRouter()
     const [mounted, setMounted] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
 
@@ -41,77 +41,79 @@ const UserAvatar = () => {
         return null
     }
 
-    const handleSignOut = async () => {
-        await signOut({ redirect: false })
-        router.push(`/${locale}`)
-        router.refresh()
-        setIsOpen(false)
-    }
-
-    const getInitials = (name: string) => {
-        return name
-            .split(' ')
-            .map(n => n[0])
-            .join('')
-            .toUpperCase()
-            .slice(0, 2)
-    }
-
     return (
         <div className="relative avatar-dropdown-container">
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="flex items-center gap-2 p-2 rounded-full hover:bg-secondary transition-colors"
+                className={`flex items-center gap-2 p-1.5 rounded-full border-2 transition-all duration-300 ${isOpen ? "border-primary shadow-lg shadow-primary/20 scale-105" : "border-transparent hover:bg-secondary/50 dark:hover:bg-WHITE/5"}`}
             >
-                <div className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold text-sm">
-                    {session.user.image ? (
-                        <img
-                            src={session.user.image}
-                            alt={session.user.name}
-                            className="w-full h-full rounded-full object-cover"
-                        />
-                    ) : (
-                        getInitials(session.user.name)
-                    )}
-                </div>
+                <BaseAvatar
+                    image={session.user.image}
+                    name={session.user.name}
+                />
             </button>
 
             {/* Dropdown Menu */}
             <div
                 dir={locale === 'ar' ? 'rtl' : 'ltr'}
-                className={`absolute end-0 mt-2 w-48 bg-card border border-border rounded-xl shadow-lg transition-all duration-200 z-50 overflow-hidden ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
-                    }`}
+                className={`absolute end-0 mt-3 w-56 bg-gradient-to-br from-card to-background border border-border/50 rounded-2xl shadow-2xl transition-all duration-300 z-50 overflow-hidden backdrop-blur-3xl 
+                origin-top-right ${isOpen ? 'opacity-100 visible translate-y-0 scale-100' : 'opacity-0 invisible -translate-y-2 scale-95'}
+                `}
             >
-                <div className="p-3 border-b border-border">
-                    <p className="font-semibold text-sm">{session.user.name}</p>
-                    <p className="text-xs text-muted-foreground truncate">{session.user.email}</p>
+                <div className="p-4 border-b border-border/50 bg-secondary/10">
+                    <p className="font-black text-sm text-foreground">{session.user.name}</p>
+                    <p className="text-xs text-muted-foreground truncate font-medium">{session.user.email}</p>
                 </div>
-                <div className="p-2">
+                <div className="p-2 space-y-1">
                     <Link
                         href={`/${locale}/${Routes.PROFILE}`}
                         onClick={() => setIsOpen(false)}
-                        className="flex items-center gap-2 px-3 py-2 text-sm hover:bg-secondary rounded-lg transition-colors"
+                        className="flex items-center gap-3 px-3 py-2.5 text-sm font-medium hover:bg-primary/10 hover:text-primary rounded-xl transition-all duration-200 group"
                     >
-                        <User className="w-4 h-4" />
+                        <User className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
                         {t('profile')}
                     </Link>
-                    {session.user.role === 'ADMIN' && (
-                        <Link
-                            href={`/${locale}/${Routes.ADMIN}`}
-                            onClick={() => setIsOpen(false)}
-                            className="flex items-center gap-2 px-3 py-2 text-sm hover:bg-secondary rounded-lg transition-colors"
-                        >
-                            <User className="w-4 h-4" />
-                            {t('admin')}
-                        </Link>
-                    )}
-                    <button
-                        onClick={handleSignOut}
-                        className="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-secondary rounded-lg transition-colors text-destructive"
+                    <Link
+                        href={`/${locale}/${Routes.PROFILE}`}
+                        onClick={() => setIsOpen(false)}
+                        className="flex items-center gap-3 px-3 py-2.5 text-sm font-medium hover:bg-primary/10 hover:text-primary rounded-xl transition-all duration-200 group"
                     >
-                        <LogOut className="w-4 h-4" />
-                        {t('signOut')}
-                    </button>
+                        <ShoppingBag className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
+                        {t('orders') || "Orders"}
+                    </Link>
+                    <Link
+                        href={`/${locale}/${Routes.PROFILE}`}
+                        onClick={() => setIsOpen(false)}
+                        className="flex items-center gap-3 px-3 py-2.5 text-sm font-medium hover:bg-primary/10 hover:text-primary rounded-xl transition-all duration-200 group"
+                    >
+                        <Settings className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
+                        {t('settings') || "Settings"}
+                    </Link>
+
+                    {session.user.role === 'ADMIN' && (
+                        <>
+                            <div className="h-px bg-border/50 my-1 mx-2" />
+                            <Link
+                                href={`/${locale}/${Routes.ADMIN}`}
+                                onClick={() => setIsOpen(false)}
+                                className="flex items-center gap-3 px-3 py-2.5 text-sm font-black hover:bg-primary/10 hover:text-primary rounded-xl transition-all duration-200 group"
+                            >
+                                <User className="w-4 h-4 group-hover:text-primary transition-colors" />
+                                {t('admin')}
+                            </Link>
+                        </>
+                    )}
+
+                    <div className="h-px bg-border/50 my-1 mx-2" />
+
+                    <SignOutModal>
+                        <button
+                            className="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-bold bg-destructive/5 hover:bg-destructive hover:text-white rounded-xl transition-all duration-200 text-destructive group"
+                        >
+                            <LogOut className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                            {t('signOut')}
+                        </button>
+                    </SignOutModal>
                 </div>
             </div>
         </div>

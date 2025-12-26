@@ -1,0 +1,118 @@
+{
+  "logo": "Mahmoud Burger",
+  "home": {
+    "hero": {
+      "title": "Bite into Happiness",
+      "description": "Craving a real burger? We serve the finest fresh ingredients, juicy flame-grilled patties, and lightning-fast delivery. Your perfect bite is just one click away!",
+      "orderNow": "Order Now",
+      "learnMore": "Learn More",
+      "badge": "Best Gourmet Burgers in Town",
+      "stats": {
+        "happyCustomers": "Happy Customers",
+        "ordersDelivered": "Orders Delivered",
+        "averageRating": "Average Rating",
+        "menuItems": "Menu Items"
+      },
+      "features": {
+        "delivery": "30 Min Delivery",
+        "payment": "Secure Payment",
+        "rating": "Top Rated Service"
+      }
+    },
+    "bestSeller": {
+      "checkOut": "Taste the Best",
+      "OurBestSellers": "Most Popular Burgers",
+      "freshlyPrepared": "Freshly prepared, just for you, every single time."
+    },
+    "about": {
+      "ourStory": "Our Story",
+      "aboutUs": "About Us",
+      "chefQuote": "We believe every burger tells a story of quality and passion.",
+      "highlights": {
+        "freshBeef": "Fresh Beef",
+        "fastSupport": "Fast Support"
+      },
+      "descriptions": {
+        "one": "At Supreme Burger, we're dedicated to the art of the perfect burger. Every sandwich we create is a blend of premium quality and passion, ensuring a symphony of flavors in every bite.",
+        "two": "From locally sourced ingredients to our signature house sauces, we don't compromise on quality. Our mission is to provide you with a dining experience that is both gourmet and satisfying.",
+        "three": "Join our community of burger enthusiasts and taste the difference that craftsmanship makes. We're not just a burger joint; we're your destination for culinary delight."
+      }
+    },
+    "contact": {
+      "dont_hesitate": "Don't Hesitate",
+      "contactUs": "Contact Us",
+      "getInTouch": "Get in Touch",
+      "subtitle": "Have a question or just want to say hi? We'd love to hear from you.",
+      "info": {
+        "address": "Address",
+        "phone": "Phone",
+        "email": "Email",
+        "hours": "Opening Hours"
+      },
+      "form": {
+        "name": "Your Name",
+        "email": "Your Email",
+        "message": "Message",
+        "send": "Send Message",
+        "sending": "Sending...",
+        "success": "Message sent successfully!",
+        "error": "Something went wrong."
+      }
+    },
+    "cta": {
+      "limitedOffer": "Limited Time Offer",
+      "title": "Unlock 20% Off",
+      "subtitle": "Your First Order",
+      "description": "Experience the ultimate taste sensation with our gourmet burgers. Freshly grilled, perfectly seasoned, and delivered hot to your doorstep in minutes.",
+      "orderNow": "Order Now",
+      "contactUs": "Contact Us",
+      "delivery": {
+        "title": "30 Min Delivery",
+        "subtitle": "Guaranteed on time"
+      },
+      "fresh": {
+        "title": "Fresh Ingredients",
+        "subtitle": "100% Organic locally sourced"
+      }
+    },
+    "features": {
+      "title": "Why Choose",
+      "us": "Us",
+      "subtitle": "We're not just another burger place. We're your destination for quality, speed, and satisfaction.",
+      "items": {
+        "fastDelivery": {
+          "title": "Fast Delivery",
+          "description": "Get your order delivered in 30 minutes or less"
+        },
+        "freshIngredients": {
+          "title": "Fresh Ingredients",
+          "description": "We use only the freshest, locally-sourced ingredients"
+        },
+        "service": {
+          "title": "24/7 Service",
+          "description": "Order anytime, anywhere. We're always open for you"
+        },
+        "award": {
+          "title": "Award Winning",
+          "description": "Recognized as the best burger joint in the city"
+        }
+      }
+    },
+    "howItWorks": {
+      "title": "How it",
+      "works": "Works?",
+      "subtitle": "Get your gourmet burger delivered to your doorstep in 4 simple steps."
+    },
+    "newsletter": {
+      "title": "Join Our",
+      "newsletter": "Newsletter",
+      "subtitle": "Get exclusive offers, new burger alerts, and 10% off your next order.",
+      "placeholder": "Enter your email address",
+      "subscribe": "Subscribe",
+      "success": "Welcome to the Club!",
+      "successSubtitle": "Check your inbox for your discount code.",
+      "joining": "Joining...",
+      "noSpam": "We respect your privacy. No spam, ever."
+    }
+  },
+  "menu": {

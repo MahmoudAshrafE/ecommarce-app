@@ -8,6 +8,8 @@ import { useState } from 'react'
 import DeleteModal from '@/components/ui/delete-modal'
 import { toast } from '@/components/ui/use-toast'
 
+import UserAvatar from '@/components/ui/user-avatar'
+
 interface Review {
     id: string
     comment: string
@@ -103,20 +105,11 @@ const ReviewsTable = ({ reviews }: ReviewsTableProps) => {
                             <tr key={review.id} className="hover:bg-secondary/20 transition-colors">
                                 <td className={`px-6 py-4 font-medium ${isRtl ? 'text-right' : 'text-left'}`}>
                                     <div className={`flex items-center gap-3 ${isRtl ? 'flex-row-reverse' : ''}`}>
-                                        {review.user.image ? (
-                                            <div className="relative w-8 h-8 rounded-full overflow-hidden">
-                                                <Image
-                                                    src={review.user.image}
-                                                    alt={review.user.name || t('anonymous')}
-                                                    fill
-                                                    className="object-cover"
-                                                />
-                                            </div>
-                                        ) : (
-                                            <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-xs">
-                                                {(review.user.name || t('anonymous')).charAt(0)}
-                                            </div>
-                                        )}
+                                        <UserAvatar
+                                            image={review.user.image}
+                                            name={review.user.name}
+                                            size="sm"
+                                        />
                                         <span>{review.user.name || t('anonymous')}</span>
                                     </div>
                                 </td>

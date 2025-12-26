@@ -26,11 +26,15 @@ export async function POST(req: Request) {
                 productId,
                 rating: parseInt(rating),
                 comment,
+            },
+            include: {
+                user: true
             }
         })
+        console.log("Review created successfully:", review.id);
 
         revalidateTag("products")
-        revalidatePath("/", "page")
+        revalidatePath("/", "layout")
 
         return NextResponse.json(review)
     } catch (error) {

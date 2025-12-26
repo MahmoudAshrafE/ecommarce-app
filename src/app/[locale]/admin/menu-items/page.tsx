@@ -3,7 +3,8 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
-import { Plus, Pencil, Trash2, Loader2, Image as ImageIcon, ExternalLink } from 'lucide-react'
+import Image from 'next/image'
+import { Plus, Pencil, Trash2, Loader2, Image as ImageIcon, ExternalLink, Camera } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -64,6 +65,7 @@ const MenuItemsPage = () => {
     const [editingProduct, setEditingProduct] = useState<Product | null>(null)
     const [deletingProductId, setDeletingProductId] = useState<string | null>(null)
     const [submitting, setSubmitting] = useState(false)
+    const [uploading, setUploading] = useState(false)
 
     // Form State
     const [formData, setFormData] = useState({
@@ -100,6 +102,16 @@ const MenuItemsPage = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
+
+        if (!formData.image) {
+            toast({
+                variant: 'destructive',
+                title: t('messages.error'),
+                description: t('admin.menu-items.form.image.validation.required')
+            })
+            return
+        }
+
         setSubmitting(true)
 
         try {
@@ -157,6 +169,43 @@ const MenuItemsPage = () => {
     const openDeleteDialog = (id: string) => {
         setDeletingProductId(id)
         setIsDeleteDialogOpen(true)
+    }
+
+    const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0]
+        if (!file) return
+
+        setUploading(true)
+        const formDataUpload = new FormData()
+        formDataUpload.append('file', file)
+
+        try {
+            const res = await fetch('/api/upload', {
+                method: 'POST',
+                body: formDataUpload,
+            })
+
+            if (res.ok) {
+                const { url } = await res.json()
+                setFormData(prev => ({ ...prev, image: url }))
+                toast({
+                    title: t('messages.success'),
+                    description: t('messages.imageUploaded')
+                })
+            } else {
+                const errorData = await res.json()
+                throw new Error(errorData.error || 'Upload failed')
+            }
+        } catch (error) {
+            console.error('Error uploading image:', error)
+            toast({
+                variant: 'destructive',
+                title: t('messages.error'),
+                description: error instanceof Error ? error.message : t('messages.unexpectedError')
+            })
+        } finally {
+            setUploading(false)
+        }
     }
 
     const resetForm = () => {
@@ -218,11 +267,14 @@ const MenuItemsPage = () => {
                                     className="h-full w-full flex items-center justify-center transition-transform duration-300 group-hover/image:scale-105"
                                 >
                                     {product.image ? (
-                                        <img
-                                            src={product.image}
-                                            alt={product.name}
-                                            className="h-full object-contain"
-                                        />
+                                        <div className="relative h-full w-full">
+                                            <Image
+                                                src={product.image}
+                                                alt={product.name}
+                                                fill
+                                                className="object-contain"
+                                            />
+                                        </div>
                                     ) : (
                                         <ImageIcon className="w-10 h-10 sm:w-12 sm:h-12 text-muted-foreground" />
                                     )}
@@ -331,13 +383,55 @@ const MenuItemsPage = () => {
                             <label className="text-sm font-medium">
                                 {t('admin.menu-items.form.image.label')}
                             </label>
-                            <Input
-                                value={formData.image}
-                                onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                                placeholder={t('admin.menu-items.form.image.placeholder')}
-                                required
-                                className="h-10"
-                            />
+                            <div className="flex flex-col gap-4">
+                                {formData.image && (
+                                    <div className="relative w-full h-40 bg-secondary/20 rounded-xl overflow-hidden group">
+                                        <Image
+                                            src={formData.image}
+                                            alt="Preview"
+                                            fill
+                                            className="object-contain"
+                                        />
+                                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                            <label htmlFor="item-image-upload" className="cursor-pointer bg-white/20 backdrop-blur-md p-2 rounded-full hover:bg-white/30 transition-colors">
+                                                <Camera className="w-6 h-6 text-white" />
+                                            </label>
+                                        </div>
+                                    </div>
+                                )}
+                                <div className="flex gap-2">
+                                    <Input
+                                        value={formData.image}
+                                        onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+                                        placeholder={t('admin.menu-items.form.image.placeholder')}
+                                        required
+                                        className="h-10 flex-1"
+                                    />
+                                    <div className="relative">
+                                        <input
+                                            id="item-image-upload"
+                                            type="file"
+                                            className="hidden"
+                                            accept="image/*"
+                                            onChange={handleImageUpload}
+                                            disabled={uploading}
+                                        />
+                                        <Button
+                                            type="button"
+                                            variant="outline"
+                                            className="h-10 gap-2"
+                                            disabled={uploading}
+                                            onClick={() => document.getElementById('item-image-upload')?.click()}
+                                        >
+                                            {uploading
+                                                ? t('profile.uploadingImage')
+                                                : formData.image
+                                                    ? t('profile.changeImage')
+                                                    : t('profile.uploadImage')}
+                                        </Button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <div className="space-y-2">

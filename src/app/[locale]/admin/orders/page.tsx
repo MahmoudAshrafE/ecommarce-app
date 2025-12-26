@@ -112,7 +112,6 @@ const OrdersPage = () => {
                 toast({ variant: 'destructive', description: t('admin.orders.failedUpdate') })
             }
         } catch (error) {
-            console.error('Error updating status:', error)
             fetchOrders() // Rollback
         }
     }
@@ -134,7 +133,6 @@ const OrdersPage = () => {
                 fetchOrders() // Rollback
             }
         } catch (error) {
-            console.error('Error updating payment:', error)
             fetchOrders() // Rollback
         }
     }

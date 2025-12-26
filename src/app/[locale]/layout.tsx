@@ -12,6 +12,8 @@ import { NextIntlClientProvider } from "next-intl";
 
 import { Toaster } from "@/components/ui/toaster";
 import Hydration from "@/components/Hydration";
+import FloatingCartButton from "@/components/header/FloatingCartButton";
+import { ThemeProvider } from "@/providers/ThemeProvider";
 
 export async function generateStaticParams() {
   return [{ locale: Languages.ARABIC }, { locale: Languages.ENGLISH }];
@@ -29,8 +31,8 @@ const cairo = Cairo({
   preload: true,
 });
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }): Promise<Metadata> {
-  const locale = (await params).locale;
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const locale = (await params).locale as Locale;
   const t = await getTrans(locale);
   return {
     title: t.metadata.title,
@@ -43,15 +45,16 @@ export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-  params: Promise<{ locale: Locale }>;
+  params: Promise<{ locale: string }>;
 }>) {
-  const locale = (await params).locale;
+  const locale = (await params).locale as Locale;
   const messages = await getTrans(locale);
 
   return (
     <html
       lang={locale}
       dir={locale === Languages.ARABIC ? Directions.RTL : Directions.LTR}
+      suppressHydrationWarning
     >
       <body
         className={
@@ -60,13 +63,21 @@ export default async function RootLayout({
       >
         <AuthProvider>
           <NextIntlClientProvider locale={locale} messages={messages}>
-            <ReduxProvider>
-              <Hydration />
-              <Header />
-              {children}
-              <Footer />
-              <Toaster />
-            </ReduxProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <ReduxProvider>
+                <Hydration />
+                <Header />
+                {children}
+                <Footer locale={locale} />
+                <FloatingCartButton />
+                <Toaster />
+              </ReduxProvider>
+            </ThemeProvider>
           </NextIntlClientProvider>
         </AuthProvider>
       </body>

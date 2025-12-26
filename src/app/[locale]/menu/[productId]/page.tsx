@@ -11,6 +11,7 @@ import { authOptions } from "@/lib/auth"
 import { Star, Clock, Truck, Utensils } from "lucide-react"
 import Link from "@/components/link"
 import { Routes, Pages } from "@/constants/enums"
+import Breadcrumbs from "@/components/Breadcrumbs"
 
 export async function generateMetadata({ params }: { params: Promise<{ productId: string }> }) {
     const { productId } = await params
@@ -40,25 +41,26 @@ export default async function ProductPage({ params }: { params: Promise<{ produc
         : '0.0'
 
     return (
-        <main className="min-h-screen pt-32 pb-20 overflow-hidden">
-            <div className="container">
+        <main className="min-h-screen pt-20 pb-20 overflow-hidden bg-[#f8fafc] dark:bg-background">
+            <div className="container py-8">
+                <Breadcrumbs labels={{ [productId]: product.name }} />
                 <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 mb-24 ${isRtl ? 'rtl' : ''}`}>
                     {/* Product Image Section */}
                     <div className="relative group">
                         <div className="absolute inset-0 bg-primary/5 rounded-[3rem] -rotate-3 scale-95 transition-transform group-hover:rotate-0 group-hover:scale-100 duration-700" />
-                        <div className="relative aspect-square rounded-[3rem] bg-white border border-border/50 shadow-2xl flex items-center justify-center p-8 overflow-hidden">
+                        <div className="relative aspect-square rounded-[2rem] md:rounded-[3rem] bg-white dark:bg-card border border-border/50 shadow-2xl flex items-center justify-center p-4 md:p-8 overflow-hidden">
                             <Image
                                 src={product.image}
                                 alt={product.name}
                                 fill
-                                className="object-contain p-12 transition-all duration-700 group-hover:scale-110 group-hover:rotate-3"
+                                className="object-contain p-8 md:p-12 transition-all duration-700 group-hover:scale-110 group-hover:rotate-3"
                                 priority
                                 sizes="(max-width: 768px) 100vw, 50vw"
                             />
                         </div>
 
                         {/* Floating Price Tag */}
-                        <div className={`absolute top-8 ${isRtl ? 'left-8' : 'right-8'} bg-primary text-white font-black px-6 py-2 rounded-full shadow-xl shadow-primary/30 text-sm rotate-3 group-hover:rotate-0 transition-transform duration-500`}>
+                        <div className={`absolute top-4 ${isRtl ? 'left-4' : 'right-4'} md:top-8 md:${isRtl ? 'left-8' : 'right-8'} bg-primary text-white dark:text-black font-black px-4 md:px-6 py-1.5 md:py-2 rounded-full shadow-xl shadow-primary/30 text-xs md:text-sm rotate-3 group-hover:rotate-0 transition-transform duration-500`}>
                             {formatCurrency(product.basePrice, locale)}
                         </div>
                     </div>
@@ -76,7 +78,7 @@ export default async function ProductPage({ params }: { params: Promise<{ produc
                                 </span>
                             </div>
 
-                            <h1 className="text-5xl md:text-7xl font-black tracking-tighter leading-[0.9] text-foreground">
+                            <h1 className="text-3xl sm:text-5xl md:text-7xl font-black tracking-tighter leading-[0.9] text-foreground">
                                 {product.name}
                             </h1>
 
@@ -84,7 +86,7 @@ export default async function ProductPage({ params }: { params: Promise<{ produc
                                 {product.description}
                             </p>
 
-                            <div className="pt-8 grid grid-cols-2 gap-6 pb-10">
+                            <div className="pt-8 grid sm:grid-cols-1 md:grid-cols-2 gap-6 pb-10">
                                 <div className={`flex items-center gap-4 ${isRtl ? 'flex-row-reverse' : ''}`}>
                                     <div className="w-12 h-12 bg-secondary rounded-2xl flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
                                         <Truck className="w-6 h-6" />
@@ -105,7 +107,7 @@ export default async function ProductPage({ params }: { params: Promise<{ produc
                                 </div>
                             </div>
 
-                            <div className="bg-secondary/30 p-8 rounded-[2rem] border border-border/50 backdrop-blur-sm relative overflow-hidden group">
+                            <div className="bg-secondary/30 p-4 sm:p-8 rounded-[1.5rem] md:rounded-[2rem] border border-border/50 backdrop-blur-sm relative overflow-hidden group">
                                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl -mr-16 -mt-16 group-hover:bg-primary/10 transition-colors" />
                                 <AddToCartButton item={product} />
                             </div>
@@ -129,16 +131,16 @@ export default async function ProductPage({ params }: { params: Promise<{ produc
                     <div className="space-y-16">
                         {/* Write Review Form */}
                         {session?.user ? (
-                            <div className="bg-card p-10 rounded-[3rem] border border-border/50 shadow-xl relative overflow-hidden">
+                            <div className="bg-card p-4 sm:p-10 rounded-[2rem] md:rounded-[3rem] border border-border/50 shadow-xl relative overflow-hidden">
                                 <div className="absolute top-0 left-0 w-2 h-full bg-primary" />
-                                <h3 className="text-2xl font-black mb-8 uppercase tracking-tight">{t('reviews.writeReview')}</h3>
+                                <h3 className="text-xl sm:text-2xl font-black mb-4 sm:mb-8 uppercase tracking-tight">{t('reviews.writeReview')}</h3>
                                 <ReviewForm productId={product.id} />
                             </div>
                         ) : (
-                            <div className="bg-secondary/50 p-12 rounded-[3rem] text-center border-2 border-dashed border-border/50">
-                                <Utensils className="w-12 h-12 mx-auto mb-6 text-muted-foreground opacity-30" />
-                                <p className="text-muted-foreground text-lg mb-6">{t('menu.product.loginReview')}</p>
-                                <Link href={`/${locale}/${Routes.AUTH}/${Pages.LOGIN}`} className="inline-flex h-14 items-center justify-center rounded-full bg-primary px-10 text-sm font-black text-primary-foreground shadow-lg shadow-primary/20 hover:scale-105 transition-transform">
+                            <div className="bg-secondary/50 p-6 sm:p-12 rounded-[2rem] md:rounded-[3rem] text-center border-2 border-dashed border-border/50">
+                                <Utensils className="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-4 sm:mb-6 text-muted-foreground opacity-30" />
+                                <p className="text-muted-foreground text-base sm:text-lg mb-4 sm:mb-6">{t('menu.product.loginReview')}</p>
+                                <Link href={`/${locale}/${Routes.AUTH}/${Pages.LOGIN}`} className="inline-flex h-12 sm:h-14 items-center justify-center rounded-full bg-primary px-6 sm:px-10 text-sm font-black text-primary-foreground shadow-lg shadow-primary/20 hover:scale-105 transition-transform">
                                     {t('menu.product.loginBtn')}
                                 </Link>
                             </div>
