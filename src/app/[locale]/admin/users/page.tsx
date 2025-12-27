@@ -164,7 +164,7 @@ const UsersPage = () => {
             </div>
 
             {/* Desktop Table View */}
-            <div className="hidden md:block rounded-md border overflow-hidden">
+            <div className="hidden md:block rounded-md border overflow-hidden" dir={isRtl ? 'rtl' : 'ltr'}>
                 <table className="w-full text-sm">
                     <thead className="bg-muted/50">
                         <tr className={isRtl ? 'flex-row-reverse' : ''}>
@@ -213,7 +213,7 @@ const UsersPage = () => {
             {/* Mobile Card View */}
             <div className="md:hidden space-y-3">
                 {filteredUsers.map((user) => (
-                    <div key={user.id} className="bg-secondary/30 rounded-lg p-4 border border-border">
+                    <div key={user.id} className="bg-secondary/30 rounded-lg p-4 border border-border" dir={isRtl ? 'rtl' : 'ltr'}>
                         <div className={`flex items-start justify-between mb-3 ${isRtl ? 'flex-row-reverse' : ''}`}>
                             <div className={`flex-1 ${isRtl ? 'text-right' : 'text-left'}`}>
                                 <h3 className="font-semibold text-base mb-1">{user.name}</h3>
@@ -254,9 +254,9 @@ const UsersPage = () => {
             </div>
 
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                <DialogContent className="sm:max-w-md">
-                    <DialogHeader>
-                        <DialogTitle>{t('admin.users.editUser')}</DialogTitle>
+                <DialogContent className="sm:max-w-md" dir={isRtl ? 'rtl' : 'ltr'}>
+                    <DialogHeader className={isRtl ? 'text-right sm:text-right' : 'text-left'}>
+                        <DialogTitle className={isRtl ? 'text-right' : ''}>{t('admin.users.editUser')}</DialogTitle>
                     </DialogHeader>
                     <form onSubmit={handleSubmit} className="space-y-4">
                         <div className="space-y-2">
@@ -305,10 +305,10 @@ const UsersPage = () => {
 
             {/* Delete Confirmation Dialog */}
             <AlertDialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
-                <AlertDialogContent>
-                    <AlertDialogHeader>
+                <AlertDialogContent dir={isRtl ? 'rtl' : 'ltr'}>
+                    <AlertDialogHeader className={isRtl ? 'text-right' : 'text-left'}>
                         <AlertDialogTitle>{t('messages.userDeleteConfirm')}</AlertDialogTitle>
-                        <AlertDialogDescription>
+                        <AlertDialogDescription className={isRtl ? 'text-right' : 'text-left'}>
                             {t('messages.userDeleteDescription')}
                         </AlertDialogDescription>
                     </AlertDialogHeader>

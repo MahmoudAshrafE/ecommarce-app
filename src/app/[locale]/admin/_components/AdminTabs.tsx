@@ -3,7 +3,7 @@
 import { Pages, Routes } from '@/constants/enums'
 import Link from '@/components/link'
 import { useTranslations } from 'next-intl'
-import { useSelectedLayoutSegment } from 'next/navigation'
+import { useSelectedLayoutSegment, useParams } from 'next/navigation'
 
 import { useState } from 'react'
 import { ChevronDown, Menu, X, LayoutDashboard, LayoutGrid, UtensilsCrossed, Users, ShoppingBag, Star } from 'lucide-react'
@@ -11,6 +11,8 @@ import { cn } from '@/lib/utils'
 
 const AdminTabs = () => {
     const t = useTranslations('admin.tabs')
+    const { locale } = useParams()
+    const isRtl = locale === 'ar'
     const segment = useSelectedLayoutSegment()
     const [isOpen, setIsOpen] = useState(false)
 
@@ -60,9 +62,10 @@ const AdminTabs = () => {
                                         onClick={() => setIsOpen(false)}
                                         className={cn(
                                             "flex items-center gap-4 px-5 py-4 rounded-2xl font-bold transition-all duration-300 mb-1 last:mb-0 group",
+                                            locale === 'ar' && "flex-row-reverse text-right",
                                             tab.active
                                                 ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20 scale-[1.02]"
-                                                : "text-muted-foreground hover:bg-secondary/80 hover:text-foreground hover:translate-x-1"
+                                                : cn("text-muted-foreground hover:bg-secondary/80 hover:text-foreground", locale === 'ar' ? "hover:-translate-x-1" : "hover:translate-x-1")
                                         )}
                                     >
                                         <Icon className={cn("w-5 h-5 transition-transform", tab.active ? "scale-110" : "group-hover:scale-110")} />
@@ -76,7 +79,7 @@ const AdminTabs = () => {
             </div>
 
             {/* Desktop Tabs */}
-            <div className="hidden lg:flex items-center gap-2 bg-secondary/30 backdrop-blur-sm p-2 rounded-[1.5rem] border border-border/40 w-fit mx-auto lg:mx-0 shadow-inner">
+            <div className={cn("hidden lg:flex items-center gap-2 bg-secondary/30 backdrop-blur-sm p-2 rounded-[1.5rem] border border-border/40 w-fit mx-auto lg:mx-0 shadow-inner", isRtl && "lg:mr-0 flex-row-reverse")}>
                 {tabs.map((tab) => {
                     const Icon = tab.icon;
                     return (
@@ -85,6 +88,7 @@ const AdminTabs = () => {
                             href={tab.href}
                             className={cn(
                                 "relative flex items-center gap-2.5 px-6 py-3 rounded-xl font-black transition-all duration-500 whitespace-nowrap text-[13px] uppercase tracking-wider group/item",
+                                isRtl && "flex-row-reverse",
                                 tab.active
                                     ? "bg-card text-primary shadow-[0_8px_30px_rgb(0,0,0,0.04)] ring-1 ring-border/50 translate-y-[-2px]"
                                     : "text-muted-foreground hover:text-foreground hover:bg-card/40 hover:translate-y-[-1px]"

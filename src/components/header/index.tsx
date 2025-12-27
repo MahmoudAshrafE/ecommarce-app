@@ -57,7 +57,7 @@ const Header = () => {
             </div>
           </Link>
 
-          <div className="hidden xl:block">
+          <div className="hidden md:block">
             <Navbar isScrolled={isScrolled} isHome={isHome} />
           </div>
         </div>
@@ -70,21 +70,21 @@ const Header = () => {
             <LanguageSwitcher />
           </div>
 
-          <div className="h-6 w-px bg-border/50 hidden xl:block" />
+          <div className="h-6 w-px bg-border/50 hidden md:block" />
 
-          <div className="relative hidden xl:block">
+          <div className="relative hidden md:block">
             <CartButton />
           </div>
 
-          <div className="h-6 w-px bg-border/50 hidden xl:block" />
+          <div className="h-6 w-px bg-border/50 hidden md:block" />
 
-          <div className="hidden xl:block">
+          <div>
             <LoginButton isScrolled={isScrolled} isHome={isHome} />
           </div>
           <UserAvatar />
 
           {/* Mobile Menu Toggle - Hamburger Icon */}
-          <div className="xl:hidden">
+          <div className="md:hidden">
             <Navbar isScrolled={isScrolled} isHome={isHome} isMobileOnly />
           </div>
         </div>

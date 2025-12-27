@@ -4,6 +4,9 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export type CartItem = {
   name: string;
+  nameAr?: string | null;
+  description?: string | null;
+  descriptionAr?: string | null;
   id: string; // product id
   image: string;
   basePrice: number;
@@ -16,7 +19,7 @@ const isSameVariant = (a: CartItem, b: CartItem) =>
   a.id === b.id &&
   a.size?.id === b.size?.id &&
   JSON.stringify(a.extras?.map(e => e.id).sort()) ===
-    JSON.stringify(b.extras?.map(e => e.id).sort());
+  JSON.stringify(b.extras?.map(e => e.id).sort());
 
 interface cartState {
   items: CartItem[];
@@ -52,20 +55,20 @@ export const cartSlice = createSlice({
       }
     },
 
-removeCartItem: (state, action: PayloadAction<CartItem>) => {
-  const existing = state.items.find(i => isSameVariant(i, action.payload));
-  if (!existing) return;
+    removeCartItem: (state, action: PayloadAction<CartItem>) => {
+      const existing = state.items.find(i => isSameVariant(i, action.payload));
+      if (!existing) return;
 
-  if ((existing.quantity || 0) > 1) {
-    existing.quantity!--;
-  } else {
-    state.items = state.items.filter(i => !isSameVariant(i, action.payload));
-  }
-},
+      if ((existing.quantity || 0) > 1) {
+        existing.quantity!--;
+      } else {
+        state.items = state.items.filter(i => !isSameVariant(i, action.payload));
+      }
+    },
 
-removeItemFromCart: (state, action: PayloadAction<CartItem>) => {
-  state.items = state.items.filter(i => !isSameVariant(i, action.payload));
-},
+    removeItemFromCart: (state, action: PayloadAction<CartItem>) => {
+      state.items = state.items.filter(i => !isSameVariant(i, action.payload));
+    },
 
 
     clearCart: (state) => {

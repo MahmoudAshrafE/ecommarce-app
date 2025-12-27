@@ -19,15 +19,21 @@ const MenuItem = ({ item, locale }: { item: ProductWithRelations, locale: string
             <Link href={`/${locale}/menu/${item.id}`} className="relative flex-1">
                 {/* Image Container */}
                 <div className="relative w-full aspect-square mb-6 overflow-hidden rounded-[2rem] bg-secondary/30">
-                    <Image
-                        alt={item.name}
-                        src={item.image}
-                        className='object-contain p-4 group-hover:scale-110 transition-transform duration-700 ease-out'
-                        fill
-                        sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-                        loading='eager'
-                        priority
-                    />
+                    {item.image && (item.image.startsWith('/') || item.image.startsWith('http')) ? (
+                        <Image
+                            alt={isRtl ? item.nameAr || item.name : item.name}
+                            src={item.image}
+                            className='object-contain p-4 group-hover:scale-110 transition-transform duration-700 ease-out'
+                            fill
+                            sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+                            loading='eager'
+                            priority
+                        />
+                    ) : (
+                        <div className="flex items-center justify-center h-full w-full bg-secondary/10">
+                            <div className="text-4xl opacity-20">🍔</div>
+                        </div>
+                    )}
 
                     {/* Quality Badge */}
                     <div className={`absolute top-4 ${isRtl ? 'left-4' : 'right-4'} bg-background/90 backdrop-blur-md px-3 py-1 rounded-full shadow-sm flex items-center gap-1 border border-border/50 scale-90 group-hover:scale-100 transition-transform duration-500`}>
@@ -40,7 +46,7 @@ const MenuItem = ({ item, locale }: { item: ProductWithRelations, locale: string
                 <div className={`space-y-3 ${isRtl ? 'text-right' : 'text-left'}`}>
                     <div className="flex items-start justify-between gap-4">
                         <h4 className="font-black text-xl md:text-2xl tracking-tight leading-tight group-hover:text-primary transition-colors duration-300">
-                            {item.name}
+                            {isRtl ? item.nameAr || item.name : item.name}
                         </h4>
                         <div className="bg-primary/10 text-primary px-3 py-1 rounded-xl text-sm font-black whitespace-nowrap border border-primary/10">
                             {formatCurrency(item.basePrice, locale)}
@@ -48,7 +54,7 @@ const MenuItem = ({ item, locale }: { item: ProductWithRelations, locale: string
                     </div>
 
                     <p className="text-muted-foreground text-sm leading-relaxed line-clamp-2 min-h-[2.5rem]">
-                        {item.description}
+                        {isRtl ? item.descriptionAr || item.description : item.description}
                     </p>
                 </div>
             </Link>

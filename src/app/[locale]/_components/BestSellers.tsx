@@ -3,7 +3,7 @@ import { getBestSellers } from "@/server/db/product"
 import { getTranslations, getLocale } from "next-intl/server"
 
 const BestSellers = async ({ locale }: { locale: string }) => {
-    const bestSellers = await getBestSellers(3)
+    const bestSellers = await getBestSellers(3, ['Cold Drinks', 'Fresh Juices', 'Milkshakes'])
     const t = await getTranslations({ locale, namespace: 'home.bestSeller' })
     const isRtl = locale === 'ar'
 

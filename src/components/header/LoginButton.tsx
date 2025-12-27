@@ -30,7 +30,7 @@ const LoginButton = ({ isScrolled, isHome }: LoginButtonProps) => {
                 asChild
                 variant={buttonVariant}
                 size="sm"
-                className="hidden md:flex items-center gap-2 rounded-full font-bold px-6 shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all hover:-translate-y-0.5"
+                className="hidden lg:flex items-center gap-2 rounded-full font-bold px-6 shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all hover:-translate-y-0.5"
             >
                 <Link href={`/${locale}/${Routes.AUTH}/${Pages.LOGIN}`}>
                     <LogIn className="w-4 h-4" />
@@ -41,7 +41,7 @@ const LoginButton = ({ isScrolled, isHome }: LoginButtonProps) => {
                 asChild
                 variant={!isScrolled && isHome ? "secondary" : "secondary"}
                 size="icon"
-                className={`flex md:hidden rounded-full w-10 h-10 shadow-lg ${!isScrolled && isHome ? "bg-white/20 text-white hover:bg-white/30" : "bg-secondary text-foreground"}`}
+                className={`flex lg:hidden rounded-full w-10 h-10 shadow-lg !text-black ${!isScrolled && isHome ? "bg-white/20 hover:bg-white/30" : "bg-secondary"}`}
             >
                 <Link href={`/${locale}/${Routes.AUTH}/${Pages.LOGIN}`}>
                     <LogIn className="w-5 h-5" />

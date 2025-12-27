@@ -14,10 +14,6 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       {/* 1. Hero Section - Catchy & Data Driven */}
       <Hero locale={locale} />
 
-      {/* 2. Stats Section - Trust & Impact */}
-      <div className="bg-gradient-to-b from-background to-secondary/20">
-        <Stats locale={locale} />
-      </div>
 
       {/* 3. Features Section - Our Value Props */}
       <Features locale={locale} />

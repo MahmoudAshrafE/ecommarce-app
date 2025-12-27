@@ -43,19 +43,25 @@ const CartItems = () => {
             >
               {/* Product Image - Responsive: Full width on mobile/stacked, fixed on sm+ */}
               <div className="relative w-full sm:w-32 h-44 sm:h-32 flex-shrink-0 bg-secondary/30 rounded-xl md:rounded-[2rem] p-3 md:p-4 group-hover:bg-primary/5 transition-colors duration-500 overflow-hidden">
-                <Image
-                  src={item.image}
-                  className="object-contain group-hover:scale-110 transition-transform duration-500"
-                  alt={item.name}
-                  fill
-                  sizes="(max-width: 640px) 100vw, 128px"
-                />
+                {item.image && (item.image.startsWith('/') || item.image.startsWith('http')) ? (
+                  <Image
+                    src={item.image}
+                    className="object-contain group-hover:scale-110 transition-transform duration-500"
+                    alt={locale === 'ar' ? item.nameAr || item.name : item.name}
+                    fill
+                    sizes="(max-width: 640px) 100vw, 128px"
+                  />
+                ) : (
+                  <div className="flex items-center justify-center h-full w-full">
+                    <ShoppingBasket className="w-10 h-10 text-muted-foreground/30" />
+                  </div>
+                )}
               </div>
 
               {/* Product Info */}
               <div className={`flex-grow space-y-2 md:space-y-3 w-full`}>
                 <div className={`flex items-start justify-between gap-2 md:gap-4`}>
-                  <h4 className="font-black text-lg sm:text-xl md:text-2xl tracking-tighter group-hover:text-primary transition-colors line-clamp-2">{item.name}</h4>
+                  <h4 className="font-black text-lg sm:text-xl md:text-2xl tracking-tighter group-hover:text-primary transition-colors line-clamp-2">{locale === 'ar' ? item.nameAr || item.name : item.name}</h4>
                   <Button
                     onClick={() => dispatch(removeItemFromCart(item))}
                     variant="ghost"

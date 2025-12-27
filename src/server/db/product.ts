@@ -3,10 +3,18 @@ import { prisma } from "@/lib/prisma";
 import { unstable_cache as nextCache } from 'next/cache';
 import { cache as reactCache } from 'react';
 
-export const getBestSellers = (limit: number | undefined) => nextCache(
+export const getBestSellers = (limit: number | undefined, excludeCategories?: string[]) => nextCache(
     reactCache(async () => {
+        const where = excludeCategories ? {
+            category: {
+                name: {
+                    notIn: excludeCategories
+                }
+            }
+        } : {};
+
         const bestSallers = await prisma.product.findMany({
-            where: {},
+            where,
             orderBy: {
                 orders: {
                     _count: 'desc'
@@ -29,7 +37,7 @@ export const getBestSellers = (limit: number | undefined) => nextCache(
         });
         return bestSallers;
     }),
-    ['best-sellers', limit?.toString() || 'all'],
+    ['best-sellers', limit?.toString() || 'all', excludeCategories?.join(',') || 'none'],
     { revalidate: 3600, tags: ['products'] }
 )();
 

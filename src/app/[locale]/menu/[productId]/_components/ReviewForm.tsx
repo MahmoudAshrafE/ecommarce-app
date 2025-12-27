@@ -69,7 +69,7 @@ const ReviewForm = ({ productId }: { productId: string }) => {
                             className="focus:outline-none transition-transform hover:scale-110 active:scale-95"
                         >
                             <Star
-                                className={`w-8 h-8 sm:w-10 sm:h-10 transition-colors ${star <= rating ? 'fill-primary text-primary' : 'text-muted-foreground/20'}`}
+                                className={`w-8 h-8 sm:w-10 sm:h-10 transition-colors ${star <= rating ? 'fill-primary text-primary' : 'text-gray-200 dark:text-gray-700'}`}
                             />
                         </button>
                     ))}

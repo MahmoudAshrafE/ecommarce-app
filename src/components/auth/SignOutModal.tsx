@@ -52,7 +52,10 @@ const SignOutModal = ({ children, className }: SignOutButtonProps) => {
                     </Button>
                 )}
             </DialogTrigger>
-            <DialogContent className="sm:max-w-md border-border/50 bg-card/95 backdrop-blur-xl rounded-3xl shadow-2xl">
+            <DialogContent
+                className="sm:max-w-md border-border/50 bg-card/95 backdrop-blur-xl rounded-3xl shadow-2xl"
+                dir={locale === 'ar' ? 'rtl' : 'ltr'}
+            >
                 <DialogHeader className="space-y-4 items-center text-center pb-2">
                     <div className="w-20 h-20 rounded-full bg-destructive/10 flex items-center justify-center mb-2 animate-in zoom-in duration-300">
                         <LogOut className="w-10 h-10 text-destructive" />

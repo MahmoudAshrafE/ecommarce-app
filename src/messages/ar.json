@@ -20,8 +20,8 @@
       }
     },
     "bestSeller": {
-      "checkOut": "استكشف القائمة",
-      "OurBestSellers": "الأكثر مبيعاً",
+      "checkOut": "تذوق الأفضل",
+      "OurBestSellers": "أشهر أنواع البرجر",
       "freshlyPrepared": "نحضرها طازجة، من أجلك فقط، في كل مرة."
     },
     "about": {
@@ -257,6 +257,8 @@
     "deleteUserSucess": "تم حذف المستخدم بنجاح",
     "userDeleteConfirm": "هل أنت متأكد من حذف هذا المستخدم؟",
     "userDeleteDescription": "لا يمكن التراجع عن هذا الإجراء. سيتم حذف حساب المستخدم نهائيًا.",
+    "orderDeleteConfirm": "هل أنت متأكد من حذف هذا الطلب؟",
+    "orderDeleteDescription": "لا يمكن التراجع عن هذا الإجراء. سيتم حذف سجلات الطلب نهائيًا.",
     "categoryDeleteConfirm": "هل أنت متأكد من حذف هذه الفئة؟"
   },
   "menuItem": {
@@ -297,6 +299,10 @@
         "validation": {
           "required": "العنوان مطلوب"
         }
+      },
+      "streetAddress": {
+        "label": "عنوان الشارع",
+        "placeholder": "أدخل عنوان الشارع"
       },
       "postalCode": {
         "label": "الرمز البريدي",
@@ -401,7 +407,8 @@
     "users": {
       "searchPlaceholder": "البحث عن مستخدمين...",
       "role": "الدور",
-      "editUser": "تعديل المستخدم"
+      "editUser": "تعديل المستخدم",
+      "anonymous": "مجهول"
     },
     "menu-items": {
       "createNewMenuItem": "إنشاء عنصر قائمة جديد",
@@ -413,18 +420,26 @@
       },
       "form": {
         "name": {
-          "label": "اسم العنصر",
-          "placeholder": "أدخل اسم العنصر",
+          "label": "اسم العنصر (EN)",
+          "placeholder": "أدخل اسم العنصر بالإنجليزية",
           "validation": {
             "required": "اسم العنصر مطلوب"
           }
         },
+        "nameAr": {
+          "label": "اسم العنصر (AR)",
+          "placeholder": "أدخل اسم العنصر بالعربية"
+        },
         "description": {
-          "label": "الوصف",
-          "placeholder": "أدخل الوصف",
+          "label": "الوصف (EN)",
+          "placeholder": "أدخل الوصف بالإنجليزية",
           "validation": {
             "required": "الوصف مطلوب"
           }
+        },
+        "descriptionAr": {
+          "label": "الوصف (AR)",
+          "placeholder": "أدخل الوصف بالعربية"
         },
         "basePrice": {
           "label": "السعر الأساسي",
@@ -461,9 +476,12 @@
       "customer": "العميل",
       "address": "العنوان",
       "items": "العناصر",
+      "notes": "ملاحظات الطلب",
       "updatedStatus": "تم تحديث حالة الطلب",
       "updatedPayment": "تم تحديث حالة الدفع",
-      "failedUpdate": "فشل تحديث الحالة"
+      "failedUpdate": "فشل تحديث الحالة",
+      "deleteSuccess": "تم حذف الطلب بنجاح",
+      "searchPlaceholder": "البحث بالبريد أو رقم الطلب..."
     },
     "categories": {
       "productsCount": "{count} منتجات",
@@ -472,11 +490,15 @@
       "form": {
         "editName": "تعديل اسم الفئة",
         "name": {
-          "label": "اسم الفئة",
-          "placeholder": "أدخل اسم الفئة",
+          "label": "اسم الفئة (EN)",
+          "placeholder": "أدخل اسم الفئة بالإنجليزية",
           "validation": {
             "required": "اسم الفئة مطلوب"
           }
+        },
+        "nameAr": {
+          "label": "اسم الفئة (AR)",
+          "placeholder": "أدخل اسم الفئة بالعربية"
         }
       }
     }
@@ -489,7 +511,10 @@
   "delete": "حذف",
   "create": "انشاء",
   "sizes": "الأحجام",
+  "size": "الحجم",
   "extrasIngredients": "عناصر اضافية",
+  "extras": "الإضافات",
+  "extra": "إضافة",
   "cancel": "الغاء",
   "cart": {
     "title": "عربة التسوق",
@@ -515,11 +540,20 @@
     "postalCode": "الرمز البريدي",
     "city": "المدينة",
     "country": "الدولة",
+    "notes": "تعليمات خاصة",
+    "notesPlaceholder": "أي طلبات خاصة؟ (مثل رقم البوابة، حساسية من طعام...)",
     "pay": "دفع",
     "mustBeLoggedIn": "يجب تسجيل الدخول لإتمام الطلب",
     "emptyCartError": "عربة التسوق فارغة",
     "orderSuccess": "تم وضع الطلب بنجاح!",
-    "signInPrompt": "يرجى تسجيل الدخول لإكمال طلبك."
+    "signInPrompt": "يرجى تسجيل الدخول لإكمال طلبك.",
+    "validation": {
+      "phone": "يرجى إدخال رقم هاتف صحيح",
+      "streetAddress": "عنوان الشارع مطلوب",
+      "postalCode": "الرمز البريدي يجب أن يكون 3 أحرف على الأقل",
+      "city": "المدينة مطلوبة",
+      "country": "الدولة مطلوبة"
+    }
   },
   "copyRight": "© 2025 جميع الحقوق محفوظة",
   "noProductsFound": "لم يتم العثور على منتجات",
@@ -563,5 +597,68 @@
   "metadata": {
     "title": "سوبريم برجر | تذوق طعم السعادة",
     "description": "استمتع بأفضل تجربة برجر مع سوبريم برجر. مكونات طازجة، لحم مشوي غني بالعصارة، وتوصيل سريع."
+  },
+  "auth": {
+    "login": {
+      "title": "مرحبًا بعودتك",
+      "authPrompt": {
+        "message": "ليس لديك حساب؟ ",
+        "signUpLinkText": "انشاء حساب"
+      },
+      "email": {
+        "label": "البريد الإلكتروني",
+        "placeholder": "أدخل بريدك الإلكتروني"
+      },
+      "password": {
+        "label": "كلمة المرور",
+        "placeholder": "أدخل كلمة المرور"
+      },
+      "submit": "تسجيل الدخول",
+      "forgotPassword": "نسيت كلمة المرور؟"
+    },
+    "register": {
+      "title": "إنشاء حساب",
+      "authPrompt": {
+        "message": "لديك حساب بالفعل؟ ",
+        "signInLinkText": "تسجيل الدخول"
+      },
+      "name": {
+        "label": "الاسم الكامل",
+        "placeholder": "أدخل اسمك الكامل"
+      },
+      "email": {
+        "label": "البريد الإلكتروني",
+        "placeholder": "أدخل بريدك الإلكتروني"
+      },
+      "password": {
+        "label": "كلمة المرور",
+        "placeholder": "أنشئ كلمة مرور"
+      },
+      "confirmPassword": {
+        "label": "تأكيد كلمة المرور",
+        "placeholder": "أعد إدخال كلمة المرور"
+      },
+      "submit": "إنشاء حساب"
+    },
+    "forgotPassword": {
+      "title": "نسيت كلمة المرور",
+      "description": "أدخل عنوان بريدك الإلكتروني وسنرسل لك رابطًا لإعادة تعيين كلمة المرور.",
+      "emailLabel": "عنوان البريد الإلكتروني",
+      "submit": "إرسال رابط إعادة التعيين",
+      "successMessage": "إذا كان هناك حساب بهذا البريد الإلكتروني، ستتلقى رابط إعادة التعيين قريبًا.",
+      "errorMessage": "فشل إرسال بريد إعادة التعيين.",
+      "checkEmail": "تحقق من بريدك الإلكتروني",
+      "sentMessage": "لقد أرسلنا رابط إعادة تعيين كلمة المرور إلى:",
+      "backToLogin": "العودة لتسجيل الدخول"
+    },
+    "resetPassword": {
+      "title": "إعادة تعيين كلمة المرور",
+      "description": "أدخل كلمة المرور الجديدة أدناه.",
+      "newPassword": "كلمة المرور الجديدة",
+      "confirmNewPassword": "تأكيد كلمة المرور الجديدة",
+      "submit": "إعادة تعيين كلمة المرور",
+      "passwordsDoNotMatch": "كلمتا المرور غير متطابقتين.",
+      "successMessage": "تم إعادة تعيين كلمة المرور بنجاح. يمكنك الآن تسجيل الدخول."
+    }
   }
 }

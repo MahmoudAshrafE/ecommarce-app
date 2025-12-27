@@ -23,7 +23,7 @@ const AdminLayout = async ({ children, params }: { children: React.ReactNode, pa
         <main className='min-h-screen bg-[#f8fafc] dark:bg-background/95 pt-20'>
             <div className="container mx-auto pt-8 pb-8 px-4">
                 <Breadcrumbs />
-                <div className="mt-4 mb-8">
+                <div className={cn("mt-4 mb-8", locale === 'ar' && "text-right")}>
                     <h1 className="text-3xl md:text-4xl font-bold mb-2">{t('admin')}</h1>
                     <p className="text-muted-foreground">{t('subtitle')}</p>
                 </div>

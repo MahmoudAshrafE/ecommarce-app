@@ -9,6 +9,7 @@ import { Button } from '../ui/button'
 type CategoryWithProducts = {
     id: string
     name: string
+    nameAr: string | null
     products: ProductWithRelations[]
 }
 
@@ -50,7 +51,9 @@ const MenuInterface = ({ categories, locale, labels }: MenuInterfaceProps) => {
         if (!query) return true
         return (
             product.name.toLowerCase().includes(query) ||
-            product.description.toLowerCase().includes(query)
+            (product.nameAr && product.nameAr.toLowerCase().includes(query)) ||
+            product.description.toLowerCase().includes(query) ||
+            (product.descriptionAr && product.descriptionAr.toLowerCase().includes(query))
         )
     }
 
@@ -109,7 +112,7 @@ const MenuInterface = ({ categories, locale, labels }: MenuInterfaceProps) => {
                                 onClick={() => setActiveCategory(cat.id)}
                                 className={`rounded-xl font-bold whitespace-nowrap transition-all ${activeCategory === cat.id ? 'shadow-lg shadow-primary/25 scale-105' : 'hover:bg-primary/10 hover:text-primary'}`}
                             >
-                                {cat.name}
+                                {locale === 'ar' ? cat.nameAr || cat.name : cat.name}
                             </Button>
                         ))}
                     </div>
@@ -128,7 +131,7 @@ const MenuInterface = ({ categories, locale, labels }: MenuInterfaceProps) => {
                                         <span className="text-xs font-black uppercase tracking-[0.2em] text-primary/80">Category</span>
                                     </div>
                                     <h2 className="text-3xl md:text-4xl font-black tracking-tighter uppercase italic">
-                                        {category.name}
+                                        {locale === 'ar' ? category.nameAr || category.name : category.name}
                                     </h2>
                                 </div>
                             </div>

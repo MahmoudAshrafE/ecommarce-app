@@ -20,8 +20,8 @@ export async function generateMetadata({ params }: { params: Promise<{ productId
     if (!product) return { title: 'Product Not Found' }
 
     return {
-        title: product.name,
-        description: product.description
+        title: (await getLocale()) === 'ar' ? product.nameAr || product.name : product.name,
+        description: (await getLocale()) === 'ar' ? product.descriptionAr || product.description : product.description
     }
 }
 
@@ -43,7 +43,7 @@ export default async function ProductPage({ params }: { params: Promise<{ produc
     return (
         <main className="min-h-screen pt-20 pb-20 overflow-hidden bg-[#f8fafc] dark:bg-background">
             <div className="container py-8">
-                <Breadcrumbs labels={{ [productId]: product.name }} />
+                <Breadcrumbs labels={{ [productId]: isRtl ? product.nameAr || product.name : product.name }} />
                 <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 mb-24 ${isRtl ? 'rtl' : ''}`}>
                     {/* Product Image Section */}
                     <div className="relative group">
@@ -51,7 +51,7 @@ export default async function ProductPage({ params }: { params: Promise<{ produc
                         <div className="relative aspect-square rounded-[2rem] md:rounded-[3rem] bg-white dark:bg-card border border-border/50 shadow-2xl flex items-center justify-center p-4 md:p-8 overflow-hidden">
                             <Image
                                 src={product.image}
-                                alt={product.name}
+                                alt={isRtl ? product.nameAr || product.name : product.name}
                                 fill
                                 className="object-contain p-8 md:p-12 transition-all duration-700 group-hover:scale-110 group-hover:rotate-3"
                                 priority
@@ -79,11 +79,11 @@ export default async function ProductPage({ params }: { params: Promise<{ produc
                             </div>
 
                             <h1 className="text-3xl sm:text-5xl md:text-7xl font-black tracking-tighter leading-[0.9] text-foreground">
-                                {product.name}
+                                {isRtl ? product.nameAr || product.name : product.name}
                             </h1>
 
                             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl">
-                                {product.description}
+                                {isRtl ? product.descriptionAr || product.description : product.description}
                             </p>
 
                             <div className="pt-8 grid sm:grid-cols-1 md:grid-cols-2 gap-6 pb-10">

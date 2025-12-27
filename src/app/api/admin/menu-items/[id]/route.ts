@@ -17,16 +17,32 @@ export async function PUT(
 
         const { id } = await params;
         const body = await req.json();
-        const { name, description, image, basePrice, categoryId, sizes, extras } = body;
+        const { name, nameAr, description, descriptionAr, image, basePrice, categoryId, sizes, extras } = body;
 
         const product = await prisma.product.update({
             where: { id },
             data: {
                 name,
+                nameAr,
                 description,
+                descriptionAr,
                 image,
                 basePrice: parseFloat(basePrice),
                 categoryId,
+                sizes: {
+                    deleteMany: {},
+                    create: sizes?.map((s: any) => ({
+                        name: s.name,
+                        price: parseFloat(s.price)
+                    })) || []
+                },
+                extras: {
+                    deleteMany: {},
+                    create: extras?.map((e: any) => ({
+                        name: e.name,
+                        price: parseFloat(e.price)
+                    })) || []
+                }
             }
         });
 

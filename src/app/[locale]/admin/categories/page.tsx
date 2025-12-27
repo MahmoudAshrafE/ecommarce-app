@@ -30,6 +30,7 @@ import { useParams } from 'next/navigation'
 interface Category {
     id: string
     name: string
+    nameAr: string | null
     _count?: {
         products: number
     }
@@ -45,7 +46,7 @@ const CategoriesPage = () => {
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
     const [editingCategory, setEditingCategory] = useState<Category | null>(null)
     const [deletingCategoryId, setDeletingCategoryId] = useState<string | null>(null)
-    const [formData, setFormData] = useState({ name: '' })
+    const [formData, setFormData] = useState({ name: '', nameAr: '' })
     const [submitting, setSubmitting] = useState(false)
 
     const fetchCategories = async () => {
@@ -87,7 +88,7 @@ const CategoriesPage = () => {
                 await fetchCategories()
                 setIsDialogOpen(false)
                 setEditingCategory(null)
-                setFormData({ name: '' })
+                setFormData({ name: '', nameAr: '' })
                 toast({
                     description: editingCategory
                         ? t('messages.updatecategorySucess')
@@ -130,13 +131,13 @@ const CategoriesPage = () => {
 
     const openEditDialog = (category: Category) => {
         setEditingCategory(category)
-        setFormData({ name: category.name })
+        setFormData({ name: category.name, nameAr: category.nameAr || '' })
         setIsDialogOpen(true)
     }
 
     const openAddDialog = () => {
         setEditingCategory(null)
-        setFormData({ name: '' })
+        setFormData({ name: '', nameAr: '' })
         setIsDialogOpen(true)
     }
 
@@ -161,10 +162,13 @@ const CategoriesPage = () => {
                     categories.map((category) => (
                         <div
                             key={category.id}
+                            dir={isRtl ? 'rtl' : 'ltr'}
                             className={`flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 sm:p-4 bg-secondary/20 rounded-lg sm:rounded-xl border border-border gap-3 sm:gap-0 ${isRtl ? 'sm:flex-row-reverse' : ''}`}
                         >
                             <div className={`flex-1 w-full sm:w-auto ${isRtl ? 'text-right' : 'text-left'}`}>
-                                <h3 className="font-semibold text-base sm:text-lg">{category.name}</h3>
+                                <h3 className="font-semibold text-base sm:text-lg">
+                                    {isRtl ? category.nameAr || category.name : category.name}
+                                </h3>
                                 <p className="text-xs sm:text-sm text-muted-foreground">
                                     {t('admin.categories.productsCount', { count: category._count?.products || 0 })}
                                 </p>
@@ -196,15 +200,15 @@ const CategoriesPage = () => {
 
             {/* Edit/Create Dialog */}
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                <DialogContent className="sm:max-w-md">
-                    <DialogHeader>
-                        <DialogTitle className="text-base sm:text-lg">
+                <DialogContent className="sm:max-w-md" dir={isRtl ? 'rtl' : 'ltr'}>
+                    <DialogHeader className={isRtl ? 'text-right sm:text-right' : 'text-left'}>
+                        <DialogTitle className={`text-base sm:text-lg ${isRtl ? 'text-right' : ''}`}>
                             {editingCategory ? t('admin.categories.editCategory') : t('admin.categories.createCategory')}
                         </DialogTitle>
                     </DialogHeader>
                     <form onSubmit={handleSubmit} className="space-y-4">
                         <div className="space-y-2">
-                            <label className="text-sm font-medium">
+                            <label className={`text-sm font-medium block ${isRtl ? 'text-right' : ''}`}>
                                 {t('admin.categories.form.name.label')}
                             </label>
                             <Input
@@ -212,7 +216,20 @@ const CategoriesPage = () => {
                                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                 placeholder={t('admin.categories.form.name.placeholder')}
                                 required
-                                className="h-10"
+                                className={`h-10 ${isRtl ? 'text-right' : ''}`}
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <label className={`text-sm font-medium block ${isRtl ? 'text-right' : ''}`}>
+                                {t('admin.categories.form.name.label')}
+                            </label>
+                            <Input
+                                value={formData.nameAr}
+                                onChange={(e) => setFormData({ ...formData, nameAr: e.target.value })}
+                                placeholder="الفئة..."
+                                required
+                                dir="rtl"
+                                className="h-10 text-right"
                             />
                         </div>
                         <DialogFooter className="flex-col sm:flex-row gap-2">
@@ -229,8 +246,8 @@ const CategoriesPage = () => {
 
             {/* Delete Confirmation Dialog */}
             <AlertDialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
-                <AlertDialogContent>
-                    <AlertDialogHeader>
+                <AlertDialogContent dir={isRtl ? 'rtl' : 'ltr'}>
+                    <AlertDialogHeader className={isRtl ? 'text-right' : 'text-left'}>
                         <AlertDialogTitle>{t('messages.categoryDeleteConfirm')}</AlertDialogTitle>
                         <AlertDialogDescription className={isRtl ? 'text-right' : 'text-left'}>
                             {isRtl ? 'لا يمكن التراجع عن هذا الإجراء. سيتم حذف هذه الفئة نهائيًا.' : 'This action cannot be undone. This will permanently delete the category.'}

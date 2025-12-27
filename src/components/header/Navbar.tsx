@@ -75,7 +75,7 @@ const Navbar = ({ isScrolled, isHome, isMobileOnly = false }: NavbarProps) => {
                 </Button>
 
                 {open && createPortal(
-                    <div className="fixed inset-0 z-[999] lg:hidden">
+                    <div className="fixed inset-0 z-[999] xl:hidden">
                         {/* Backdrop with blur */}
                         <div
                             className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-in fade-in duration-500"

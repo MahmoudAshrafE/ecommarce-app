@@ -131,7 +131,7 @@ const Hero = async ({ locale }: { locale: string }) => {
             </div>
 
             {/* Floating Badges */}
-            <div className="absolute top-1/4 right-[-5%] bg-card/80 backdrop-blur-xl p-4 rounded-2xl border border-border/50 shadow-2xl animate-bounce-slow hidden md:block z-30">
+            <div className={`absolute top-1/4 ${locale === 'ar' ? 'left-[-2%]' : 'right-[-2%]'} bg-card/80 backdrop-blur-xl p-4 rounded-2xl border border-border/50 shadow-2xl animate-bounce-slow hidden md:block z-30`}>
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary">
                   <Star className="w-5 h-5 fill-current" />
@@ -143,7 +143,7 @@ const Hero = async ({ locale }: { locale: string }) => {
               </div>
             </div>
 
-            <div className="absolute bottom-1/3 left-[-5%] bg-card/80 backdrop-blur-xl p-4 rounded-2xl border border-border/50 shadow-2xl animate-float-delayed hidden md:block z-30">
+            <div className={`absolute bottom-1/3 ${locale === 'ar' ? 'right-[-2%]' : 'left-[-2%]'} bg-card/80 backdrop-blur-xl p-4 rounded-2xl border border-border/50 shadow-2xl animate-float-delayed hidden md:block z-30`}>
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center text-green-500">
                   <Users className="w-5 h-5" />

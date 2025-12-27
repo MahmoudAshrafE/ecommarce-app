@@ -83,9 +83,17 @@ const SigninForm = () => {
                         />
                     </div>
                     <div className="grid gap-2">
-                        <Label htmlFor="password" className="text-sm font-semibold px-1">
-                            {t('password.label')}
-                        </Label>
+                        <div className="flex items-center justify-between">
+                            <Label htmlFor="password" className="text-sm font-semibold px-1">
+                                {t('password.label')}
+                            </Label>
+                            <Link
+                                href={`/${locale}/auth/forgot-password`}
+                                className="text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+                            >
+                                {t('forgotPassword')}
+                            </Link>
+                        </div>
                         <Input
                             id="password"
                             name="password"

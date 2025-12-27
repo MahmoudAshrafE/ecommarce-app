@@ -118,7 +118,7 @@ const ReviewItem = ({ review }: { review: ReviewWithUser }) => {
                         {[...Array(5)].map((_, i) => (
                             <Star
                                 key={i}
-                                className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${i < review.rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-200'}`}
+                                className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${i < review.rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-200 dark:text-gray-600'}`}
                             />
                         ))}
                     </div>

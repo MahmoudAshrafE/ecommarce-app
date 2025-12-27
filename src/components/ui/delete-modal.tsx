@@ -12,6 +12,7 @@ import {
     AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
 import { useTranslations } from 'next-intl';
+import { useParams } from 'next/navigation';
 import { Loader2 } from 'lucide-react';
 
 interface DeleteModalProps {
@@ -23,15 +24,17 @@ interface DeleteModalProps {
 
 const DeleteModal = ({ open, onClose, onConfirm, loading }: DeleteModalProps) => {
     const t = useTranslations('admin.reviews');
+    const { locale } = useParams();
+    const isRtl = locale === 'ar';
 
     return (
         <AlertDialog open={open} onOpenChange={(isOpen) => {
             if (!isOpen) onClose();
         }}>
-            <AlertDialogContent>
-                <AlertDialogHeader>
+            <AlertDialogContent dir={isRtl ? 'rtl' : 'ltr'}>
+                <AlertDialogHeader className={isRtl ? 'text-right' : 'text-left'}>
                     <AlertDialogTitle>{t('deleteTitle') || 'Delete Review'}</AlertDialogTitle>
-                    <AlertDialogDescription>
+                    <AlertDialogDescription className={isRtl ? 'text-right' : 'text-left'}>
                         {t('deleteConfirm') || 'Are you sure you want to delete this review?'}
                     </AlertDialogDescription>
                 </AlertDialogHeader>

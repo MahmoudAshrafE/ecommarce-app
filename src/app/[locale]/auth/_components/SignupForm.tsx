@@ -29,6 +29,11 @@ const SignupForm = () => {
         e.preventDefault()
         setError('')
 
+        if (password.length < 6) {
+            setError(vt('passwordMinLength'))
+            return
+        }
+
         if (password !== confirmPassword) {
             setError(vt('passwordMismatch'))
             return
@@ -82,7 +87,7 @@ const SignupForm = () => {
                         href={`/${locale}/${Routes.AUTH}/${Pages.LOGIN}`}
                         className="font-medium text-primary hover:text-primary/80 transition-colors"
                     >
-                        {t('authPrompt.loginLinkText')}
+                        {t('authPrompt.signInLinkText')}
                     </Link>
                 </p>
             </div>

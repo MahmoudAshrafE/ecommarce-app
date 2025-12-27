@@ -123,21 +123,23 @@ const AddToCartButton = ({ item }: { item: ProductWithRelations }) => {
 
           <div className="space-y-8">
             {/* Sizes Section */}
-            <div className="space-y-4 animate-in slide-in-from-bottom duration-500 delay-100">
-              <div className="flex items-center gap-2">
-                <div className="w-1 h-6 bg-gradient-to-b from-primary to-orange-500 rounded-full" />
-                <Label className="text-lg font-black uppercase tracking-widest text-foreground">{t('sizes')}</Label>
+            {item.sizes.length > 0 && (
+              <div className="space-y-4 animate-in slide-in-from-bottom duration-500 delay-100">
+                <div className="flex items-center gap-2">
+                  <div className="w-1 h-6 bg-gradient-to-b from-primary to-orange-500 rounded-full" />
+                  <Label className="text-lg font-black uppercase tracking-widest text-foreground">{t('sizes')}</Label>
+                </div>
+                <div className="grid grid-cols-2 xs:grid-cols-3 gap-3">
+                  <PickSize
+                    sizes={item.sizes}
+                    item={item}
+                    selectedSize={selectedSize}
+                    setSelectedSize={setSelectedSize}
+                    t={t}
+                  />
+                </div>
               </div>
-              <div className="grid grid-cols-2 xs:grid-cols-3 gap-3">
-                <PickSize
-                  sizes={item.sizes}
-                  item={item}
-                  selectedSize={selectedSize}
-                  setSelectedSize={setSelectedSize}
-                  t={t}
-                />
-              </div>
-            </div>
+            )}
 
             {/* Extras Section */}
             {item.extras.length > 0 && (

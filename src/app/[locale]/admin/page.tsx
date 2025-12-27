@@ -138,16 +138,16 @@ const AdminDashboard = () => {
                     </div>
 
                     <div className={cn("space-y-2 text-center md:text-left", isRtl && "md:text-right")}>
-                        <div className="flex items-center justify-center md:justify-start gap-2 text-primary font-black uppercase tracking-widest text-xs">
+                        <div className={cn("flex items-center justify-center gap-2 text-primary font-black uppercase tracking-widest text-xs", isRtl ? "md:justify-start flex-row-reverse" : "md:justify-start")}>
                             <Sparkles className="w-4 h-4" />
                             <span>{t('statusOnline')}</span>
                         </div>
-                        <h1 className="text-3xl md:text-4xl font-black tracking-tight flex flex-wrap items-center justify-center md:justify-start gap-3">
+                        <h1 className={cn("text-3xl md:text-4xl font-black tracking-tight flex flex-wrap items-center justify-center gap-3", isRtl ? "md:justify-start flex-row-reverse" : "md:justify-start")}>
                             {greeting},
                             <span className="bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
                                 {session.user.name?.split(' ')[0]}
                             </span>
-                            <span className="animate-bounce">👋</span>
+                            <span className={isRtl ? "-scale-x-100 animate-bounce" : "animate-bounce"}>👋</span>
                         </h1>
                         <p className="text-muted-foreground font-medium max-w-md">
                             {t('pendingAttention', { count: stats.pendingOrders })}
@@ -260,9 +260,10 @@ const AdminDashboard = () => {
                                     </div>
                                     <div className={cn(
                                         "p-3 rounded-xl w-fit mb-6 transition-all duration-500",
-                                        `bg-${action.color}-500/10 text-${action.color}-600 dark:text-${action.color}-400 group-hover:bg-${action.color}-500 group-hover:text-white`
+                                        `bg-${action.color}-500/10 text-${action.color}-600 dark:text-${action.color}-400 group-hover:bg-${action.color}-500 group-hover:text-white`,
+                                        isRtl && "mr-0 ml-auto"
                                     )}>
-                                        <action.icon className={cn("w-6 h-6", isRtl && action.icon === ArrowRight && "rotate-180")} />
+                                        <action.icon className={cn("w-6 h-6", isRtl && (action.icon === ArrowRight) && "rotate-180")} />
                                     </div>
                                     <h3 className="font-black text-xl tracking-tight mb-2 uppercase">{action.label}</h3>
                                     <p className="text-muted-foreground font-medium text-sm leading-relaxed">

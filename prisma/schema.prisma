@@ -35,28 +35,33 @@ model User {
   orderProducts OrderProduct[]
   orders        Order[]
   reviews       Review[]
+  resetToken       String?
+  resetTokenExpiry DateTime?
 }
 
 model Product {
-  id          String         @id @default(cuid())
-  name        String
-  description String
-  image       String
-  order       Int
-  basePrice   Float
-  createdAt   DateTime       @default(now())
-  updatedAt   DateTime       @updatedAt
-  sizes       Size[]
-  extras      Extra[]
-  category    Category?      @relation(fields: [categoryId], references: [id])
-  categoryId  String?
-  orders      OrderProduct[]
-  reviews     Review[]
+  id            String         @id @default(cuid())
+  name          String
+  nameAr        String?
+  description   String
+  descriptionAr String?
+  image         String
+  order         Int
+  basePrice     Float
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  sizes         Size[]
+  extras        Extra[]
+  category      Category?      @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  categoryId    String?
+  orders        OrderProduct[]
+  reviews       Review[]
 }
 
 model Category {
   id       String    @id @default(uuid())
   name     String
+  nameAr   String?
   order    Int       @default(autoincrement())
   products Product[]
 }
@@ -73,6 +78,7 @@ model Order {
   postalCode    String
   city          String
   country       String
+  notes         String?
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
   status        OrderStatus    @default(PENDING)
@@ -110,7 +116,7 @@ model Size {
   id        String       @id @default(cuid())
   name      ProductSizes
   price     Float
-  product   Product?     @relation(fields: [productId], references: [id])
+  product   Product?     @relation(fields: [productId], references: [id], onDelete: Cascade)
   productId String?
 
   orderProducts OrderProduct[]
@@ -120,7 +126,7 @@ model Extra {
   id        String       @id @default(cuid())
   name      ProductExtra
   price     Float
-  product   Product?     @relation(fields: [productId], references: [id])
+  product   Product?     @relation(fields: [productId], references: [id], onDelete: Cascade)
   productId String?
 
   orderProducts OrderProduct[]

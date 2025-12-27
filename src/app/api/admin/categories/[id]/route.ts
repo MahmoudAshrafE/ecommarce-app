@@ -17,11 +17,11 @@ export async function PUT(
 
         const { id } = await params;
         const body = await req.json();
-        const { name } = body;
+        const { name, nameAr } = body;
 
         const category = await prisma.category.update({
             where: { id },
-            data: { name }
+            data: { name, nameAr }
         });
 
         return NextResponse.json(category);
@@ -45,6 +45,33 @@ export async function DELETE(
         }
 
         const { id } = await params;
+
+        // Manually handle cascade delete for products in this category
+        // In case the DB schema migration hasn't been run yet
+        const products = await prisma.product.findMany({
+            where: { categoryId: id },
+            select: { id: true }
+        });
+
+        if (products.length > 0) {
+            const productIds = products.map(p => p.id);
+
+            // Delete sizes and extras for these products
+            await prisma.size.deleteMany({
+                where: { productId: { in: productIds } }
+            });
+            await prisma.extra.deleteMany({
+                where: { productId: { in: productIds } }
+            });
+
+            // Delete common product relations that might block deletion
+            // Reviews have onDelete: Cascade in schema so they are handled
+
+            // Delete the products
+            await prisma.product.deleteMany({
+                where: { id: { in: productIds } }
+            });
+        }
 
         await prisma.category.delete({
             where: { id }

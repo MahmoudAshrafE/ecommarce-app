@@ -36,21 +36,29 @@ export async function POST(req: NextRequest) {
         }
 
         const body = await req.json();
-        const { name, description, image, basePrice, categoryId, sizes, extras } = body;
+        const { name, nameAr, description, descriptionAr, image, basePrice, categoryId, sizes, extras } = body;
 
         const product = await prisma.product.create({
             data: {
                 name,
+                nameAr,
                 description,
+                descriptionAr,
                 image,
                 basePrice: parseFloat(basePrice),
                 categoryId,
                 order: 0, // Default order
                 sizes: {
-                    create: sizes,
+                    create: sizes?.map((s: any) => ({
+                        name: s.name,
+                        price: parseFloat(s.price)
+                    })) || []
                 },
                 extras: {
-                    create: extras,
+                    create: extras?.map((e: any) => ({
+                        name: e.name,
+                        price: parseFloat(e.price)
+                    })) || []
                 }
             }
         });
