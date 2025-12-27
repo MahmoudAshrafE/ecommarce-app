@@ -88,7 +88,6 @@ const AdminTabs = () => {
                             href={tab.href}
                             className={cn(
                                 "relative flex items-center gap-2.5 px-6 py-3 rounded-xl font-black transition-all duration-500 whitespace-nowrap text-[13px] uppercase tracking-wider group/item",
-                                isRtl && "flex-row-reverse",
                                 tab.active
                                     ? "bg-card text-primary shadow-[0_8px_30px_rgb(0,0,0,0.04)] ring-1 ring-border/50 translate-y-[-2px]"
                                     : "text-muted-foreground hover:text-foreground hover:bg-card/40 hover:translate-y-[-1px]"
@@ -110,5 +109,6 @@ const AdminTabs = () => {
         </div>
     )
 }
+
 
 export default AdminTabs

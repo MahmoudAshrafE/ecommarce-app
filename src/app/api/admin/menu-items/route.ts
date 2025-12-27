@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { UserRole } from "@/generated/prisma/client";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 export async function GET(req: NextRequest) {
     try {
@@ -62,6 +63,10 @@ export async function POST(req: NextRequest) {
                 }
             }
         });
+
+        // Revalidate cache
+        revalidateTag('products');
+        revalidatePath('/', 'layout');
 
         return NextResponse.json(product, { status: 201 });
     } catch (error) {

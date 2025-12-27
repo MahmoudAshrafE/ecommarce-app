@@ -20,6 +20,7 @@ type Tab = 'info' | 'orders' | 'settings';
 
 const ProfilePage = () => {
     const t = useTranslations()
+    const vt = useTranslations('validation')
     const { data: session, status } = useSession()
     const router = useRouter()
     const { locale } = useParams()
@@ -38,6 +39,15 @@ const ProfilePage = () => {
             toast({
                 title: t('messages.error'),
                 description: t('profile.allFieldsRequired'),
+                variant: "destructive"
+            })
+            return
+        }
+
+        if (newPassword.length < 6) {
+            toast({
+                title: t('messages.error'),
+                description: vt('passwordMinLength'),
                 variant: "destructive"
             })
             return

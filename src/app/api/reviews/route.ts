@@ -33,7 +33,7 @@ export async function POST(req: Request) {
         })
         console.log("Review created successfully:", review.id);
 
-        revalidateTag("products")
+
         revalidatePath("/", "layout")
 
         return NextResponse.json(review)
