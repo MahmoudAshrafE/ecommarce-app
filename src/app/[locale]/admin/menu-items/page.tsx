@@ -230,7 +230,7 @@ const MenuItemsPage = () => {
             basePrice: '',
             image: '',
             categoryId: '',
-            sizes: [],
+            sizes: [{ name: 'SMALL', price: '' }],
             extras: []
         })
     }
@@ -396,9 +396,16 @@ const MenuItemsPage = () => {
                                     type="number"
                                     step="0.01"
                                     value={formData.basePrice}
-                                    onChange={(e) => setFormData({ ...formData, basePrice: e.target.value })}
                                     required
                                     className="h-10"
+                                    onChange={(e) => {
+                                        const price = e.target.value
+                                        setFormData(prev => ({
+                                            ...prev,
+                                            basePrice: price,
+                                            sizes: prev.sizes.map(s => s.name === 'SMALL' ? { ...s, price } : s)
+                                        }))
+                                    }}
                                 />
                             </div>
                             <div className="space-y-2">
@@ -459,10 +466,15 @@ const MenuItemsPage = () => {
                                     type="button"
                                     variant="outline"
                                     size="sm"
-                                    onClick={() => setFormData({
-                                        ...formData,
-                                        sizes: [...formData.sizes, { name: PRODUCT_SIZES[0], price: '' }]
-                                    })}
+                                    disabled={formData.sizes.length >= PRODUCT_SIZES.length}
+                                    onClick={() => {
+                                        const availableSizes = PRODUCT_SIZES.filter(s => !formData.sizes.find(sz => sz.name === s))
+                                        if (availableSizes.length === 0) return
+                                        setFormData({
+                                            ...formData,
+                                            sizes: [...formData.sizes, { name: availableSizes[0], price: '' }]
+                                        })
+                                    }}
                                 >
                                     <Plus className="w-4 h-4 mr-2" />
                                     {t('add')}
@@ -485,9 +497,11 @@ const MenuItemsPage = () => {
                                                     <SelectValue />
                                                 </SelectTrigger>
                                                 <SelectContent>
-                                                    {PRODUCT_SIZES.map(s => (
-                                                        <SelectItem key={s} value={s}>{t(s)}</SelectItem>
-                                                    ))}
+                                                    {PRODUCT_SIZES
+                                                        .filter(s => s === size.name || !formData.sizes.find(sz => sz.name === s))
+                                                        .map(s => (
+                                                            <SelectItem key={s} value={s}>{t(s)}</SelectItem>
+                                                        ))}
                                                 </SelectContent>
                                             </Select>
                                         </div>
@@ -502,6 +516,7 @@ const MenuItemsPage = () => {
                                                     newSizes[index].price = e.target.value
                                                     setFormData({ ...formData, sizes: newSizes })
                                                 }}
+                                                disabled={size.name === 'SMALL'}
                                                 className="h-9"
                                                 placeholder="0.00"
                                             />
@@ -533,10 +548,15 @@ const MenuItemsPage = () => {
                                     type="button"
                                     variant="outline"
                                     size="sm"
-                                    onClick={() => setFormData({
-                                        ...formData,
-                                        extras: [...formData.extras, { name: PRODUCT_EXTRAS[0], price: '' }]
-                                    })}
+                                    disabled={formData.extras.length >= PRODUCT_EXTRAS.length}
+                                    onClick={() => {
+                                        const availableExtras = PRODUCT_EXTRAS.filter(e => !formData.extras.find(ex => ex.name === e))
+                                        if (availableExtras.length === 0) return
+                                        setFormData({
+                                            ...formData,
+                                            extras: [...formData.extras, { name: availableExtras[0], price: '' }]
+                                        })
+                                    }}
                                 >
                                     <Plus className="w-4 h-4 mr-2" />
                                     {t('add')}
@@ -559,9 +579,11 @@ const MenuItemsPage = () => {
                                                     <SelectValue />
                                                 </SelectTrigger>
                                                 <SelectContent>
-                                                    {PRODUCT_EXTRAS.map(e => (
-                                                        <SelectItem key={e} value={e}>{t(e)}</SelectItem>
-                                                    ))}
+                                                    {PRODUCT_EXTRAS
+                                                        .filter(e => e === extra.name || !formData.extras.find(ex => ex.name === e))
+                                                        .map(e => (
+                                                            <SelectItem key={e} value={e}>{t(e)}</SelectItem>
+                                                        ))}
                                                 </SelectContent>
                                             </Select>
                                         </div>
