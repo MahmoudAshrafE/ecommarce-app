@@ -54,7 +54,7 @@ export async function POST(req: NextRequest) {
         });
 
         // Revalidate cache
-        revalidateTag('categories');
+        revalidateTag('categories', { expire: 0 });
         revalidatePath('/', 'layout');
 
         return NextResponse.json(category, { status: 201 });

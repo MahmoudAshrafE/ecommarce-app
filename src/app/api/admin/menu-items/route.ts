@@ -65,7 +65,7 @@ export async function POST(req: NextRequest) {
         });
 
         // Revalidate cache
-        revalidateTag('products');
+        revalidateTag('products', { expire: 0 });
         revalidatePath('/', 'layout');
 
         return NextResponse.json(product, { status: 201 });
