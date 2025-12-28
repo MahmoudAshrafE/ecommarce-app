@@ -364,7 +364,7 @@ const MenuItemsPage = () => {
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div className="space-y-2">
                                 <label className="text-sm font-medium">
-                                    {t('admin.menu-items.form.name.label')} (EN)
+                                    {t('admin.menu-items.form.name.label')}
                                 </label>
                                 <Input
                                     value={formData.name}
@@ -375,7 +375,7 @@ const MenuItemsPage = () => {
                             </div>
                             <div className="space-y-2">
                                 <label className="text-sm font-medium">
-                                    {t('admin.menu-items.form.name.label')} (AR)
+                                    {t('admin.menu-items.form.nameAr.label')}
                                 </label>
                                 <Input
                                     value={formData.nameAr}
@@ -433,7 +433,7 @@ const MenuItemsPage = () => {
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div className="space-y-2">
                                 <label className="text-sm font-medium">
-                                    {t('admin.menu-items.form.description.label')} (EN)
+                                    {t('admin.menu-items.form.description.label')}
                                 </label>
                                 <Textarea
                                     value={formData.description}
@@ -444,7 +444,7 @@ const MenuItemsPage = () => {
                             </div>
                             <div className="space-y-2">
                                 <label className="text-sm font-medium">
-                                    {t('admin.menu-items.form.description.label')} (AR)
+                                    {t('admin.menu-items.form.descriptionAr.label')}
                                 </label>
                                 <Textarea
                                     value={formData.descriptionAr}

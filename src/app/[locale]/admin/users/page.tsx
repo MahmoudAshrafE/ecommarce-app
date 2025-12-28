@@ -214,39 +214,39 @@ const UsersPage = () => {
             <div className="md:hidden space-y-3">
                 {filteredUsers.map((user) => (
                     <div key={user.id} className="bg-secondary/30 rounded-lg p-4 border border-border" dir={isRtl ? 'rtl' : 'ltr'}>
-                        <div className={`flex items-start justify-between mb-3 ${isRtl ? 'flex-row-reverse' : ''}`}>
-                            <div className={`flex-1 ${isRtl ? 'text-right' : 'text-left'}`}>
-                                <h3 className="font-semibold text-base mb-1">{user.name}</h3>
-                                <p className={`text-sm text-muted-foreground flex items-center gap-1 ${isRtl ? 'flex-row-reverse' : ''}`}>
-                                    <Mail className="w-3 h-3" />
+                        <div className={`flex flex-col gap-2 mb-3 bg-red-500/0 ${isRtl ? 'items-end' : 'items-start'}`}>
+                            <div className="w-full">
+                                <div className="flex justify-between items-start mb-2">
+                                    <h3 className="font-semibold text-sm">{user.name}</h3>
+                                    <span className={`flex-shrink-0 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${user.role === 'ADMIN'
+                                        ? 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400'
+                                        : 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400'
+                                        }`}>
+                                        {user.role}
+                                    </span>
+                                </div>
+                                <p className={`text-xs text-muted-foreground flex items-center gap-1.5 w-full ${isRtl ? 'flex-row-reverse' : ''}`} style={{ wordBreak: 'break-all' }}>
+                                    <Mail className="w-3 h-3 flex-shrink-0" />
                                     {user.email}
                                 </p>
                             </div>
-                            <span className={`px-2 py-1 rounded-full text-xs font-semibold ${user.role === 'ADMIN'
-                                ? 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400'
-                                : 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400'
-                                }`}>
-                                {user.role}
-                            </span>
                         </div>
-                        <div className={`flex gap-2 pt-3 border-t border-border ${isRtl ? 'flex-row-reverse' : ''}`}>
+                        <div className={`flex gap-2 pt-3 border-t border-border ${isRtl ? 'flex-row-reverse justify-end' : 'justify-end'}`}>
                             <Button
                                 variant="outline"
-                                size="sm"
-                                className="flex-1"
+                                size="icon"
+                                className="h-8 w-8"
                                 onClick={() => openEditDialog(user)}
                             >
-                                <Pencil className={`w-3 h-3 ${isRtl ? 'ml-1' : 'mr-1'}`} />
-                                {t('edit')}
+                                <Pencil className="w-4 h-4" />
                             </Button>
                             <Button
                                 variant="outline"
-                                size="sm"
-                                className="flex-1 text-destructive hover:text-destructive"
+                                size="icon"
+                                className="h-8 w-8 text-destructive hover:text-destructive"
                                 onClick={() => openDeleteDialog(user.id)}
                             >
-                                <Trash2 className={`w-3 h-3 ${isRtl ? 'ml-1' : 'mr-1'}`} />
-                                {t('delete')}
+                                <Trash2 className="w-4 h-4" />
                             </Button>
                         </div>
                     </div>

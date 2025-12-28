@@ -155,47 +155,121 @@ const CategoriesPage = () => {
                 </Button>
             </div>
 
-            <div className="grid gap-3 sm:gap-4">
-                {categories.length === 0 ? (
-                    <p className="text-center text-muted-foreground py-8 text-sm sm:text-base">{t('noCategoriesFound')}</p>
-                ) : (
-                    categories.map((category) => (
-                        <div
-                            key={category.id}
-                            dir={isRtl ? 'rtl' : 'ltr'}
-                            className={`flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 sm:p-4 bg-secondary/20 rounded-lg sm:rounded-xl border border-border gap-3 sm:gap-0 ${isRtl ? 'sm:flex-row-reverse' : ''}`}
-                        >
-                            <div className={`flex-1 w-full sm:w-auto ${isRtl ? 'text-right' : 'text-left'}`}>
-                                <h3 className="font-semibold text-base sm:text-lg">
-                                    {isRtl ? category.nameAr || category.name : category.name}
-                                </h3>
-                                <p className="text-xs sm:text-sm text-muted-foreground">
-                                    {t('admin.categories.productsCount', { count: category._count?.products || 0 })}
-                                </p>
+            <div className="space-y-4">
+                {/* Desktop Table View */}
+                <div className="hidden md:block rounded-xl border border-border bg-card overflow-hidden">
+                    <table className="w-full text-sm">
+                        <thead className="bg-muted/40">
+                            <tr className="border-b border-border">
+                                <th className={`p-4 font-semibold text-muted-foreground ${isRtl ? 'text-right' : 'text-left'}`}>
+                                    {t('category')}
+                                </th>
+                                <th className={`p-4 font-semibold text-muted-foreground ${isRtl ? 'text-right' : 'text-left'}`}>
+                                    {t('admin.dashboard.totalProducts')}
+                                </th>
+                                <th className={`p-4 font-semibold text-muted-foreground ${isRtl ? 'text-left' : 'text-right'}`}>
+                                    {t('actions')}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody className="divide-y divide-border">
+                            {categories.map((category) => (
+                                <tr key={category.id} className="hover:bg-muted/50 transition-colors">
+                                    <td className={`p-4 font-medium ${isRtl ? 'text-right' : 'text-left'}`}>
+                                        <div className="flex flex-col">
+                                            <span className="text-foreground text-base">{isRtl ? category.nameAr || category.name : category.name}</span>
+                                            {category.nameAr && <span className="text-xs text-muted-foreground">{isRtl ? category.name : category.nameAr}</span>}
+                                        </div>
+                                    </td>
+                                    <td className={`p-4 ${isRtl ? 'text-right' : 'text-left'}`}>
+                                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">
+                                            {category._count?.products || 0}
+                                        </span>
+                                    </td>
+                                    <td className={`p-4 ${isRtl ? 'text-left' : 'text-right'}`}>
+                                        <div className={`flex items-center gap-2 ${isRtl ? 'justify-start' : 'justify-end'}`}>
+                                            <Button
+                                                variant="ghost"
+                                                size="icon"
+                                                className="h-8 w-8 hover:text-primary hover:bg-primary/10"
+                                                onClick={() => openEditDialog(category)}
+                                            >
+                                                <Pencil className="w-4 h-4" />
+                                            </Button>
+                                            <Button
+                                                variant="ghost"
+                                                size="icon"
+                                                className="h-8 w-8 text-destructive hover:text-destructive hover:bg-destructive/10"
+                                                onClick={() => openDeleteDialog(category.id)}
+                                            >
+                                                <Trash2 className="w-4 h-4" />
+                                            </Button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))}
+                            {categories.length === 0 && (
+                                <tr>
+                                    <td colSpan={3} className="p-8 text-center text-muted-foreground">
+                                        {t('noCategoriesFound')}
+                                    </td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+
+                {/* Mobile Grid View */}
+                <div className="md:hidden grid grid-cols-1 gap-4">
+                    {categories.length === 0 ? (
+                        <p className="text-center text-muted-foreground py-8">{t('noCategoriesFound')}</p>
+                    ) : (
+                        categories.map((category) => (
+                            <div
+                                key={category.id}
+                                className="bg-card rounded-xl p-4 border border-border shadow-sm active:scale-[0.99] transition-transform"
+                                dir={isRtl ? 'rtl' : 'ltr'}
+                            >
+                                <div className="flex justify-between items-start mb-4">
+                                    <div className="space-y-1">
+                                        <h3 className="font-bold text-lg text-foreground">
+                                            {isRtl ? category.nameAr || category.name : category.name}
+                                        </h3>
+                                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                                            <span className="bg-secondary px-2 py-0.5 rounded-md">
+                                                {isRtl ? category.name : category.nameAr}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-primary/10 text-primary">
+                                        {category._count?.products || 0} {t('admin.dashboard.totalProducts').split(' ')[1]}
+                                    </span>
+                                </div>
+
+                                <div className={`flex gap-3 pt-3 border-t border-border/50 ${isRtl ? 'flex-row-reverse' : ''}`}>
+                                    <Button
+                                        variant="outline"
+                                        size="sm"
+                                        className="flex-1 hover:bg-secondary/50 hover:border-primary/30 transition-colors"
+                                        onClick={() => openEditDialog(category)}
+                                    >
+                                        <Pencil className={`w-3.5 h-3.5 ${isRtl ? 'ml-2' : 'mr-2'}`} />
+                                        {t('edit')}
+                                    </Button>
+                                    <Button
+                                        variant="outline"
+                                        size="sm"
+                                        className="flex-1 text-destructive hover:bg-destructive/10 hover:border-destructive/30 transition-colors"
+                                        onClick={() => openDeleteDialog(category.id)}
+                                    >
+                                        <Trash2 className={`w-3.5 h-3.5 ${isRtl ? 'ml-2' : 'mr-2'}`} />
+                                        {t('delete')}
+                                    </Button>
+                                </div>
                             </div>
-                            <div className={`flex gap-2 w-full sm:w-auto ${isRtl ? 'flex-row-reverse' : ''}`}>
-                                <Button
-                                    variant="outline"
-                                    size="sm"
-                                    className="flex-1 sm:flex-none"
-                                    onClick={() => openEditDialog(category)}
-                                >
-                                    <Pencil className={`w-3 h-3 sm:w-4 sm:h-4 ${isRtl ? 'ml-1' : 'mr-1'}`} />
-                                    <span className="sm:hidden">{t('edit')}</span>
-                                </Button>
-                                <Button
-                                    variant="outline"
-                                    size="sm"
-                                    className="flex-1 sm:flex-none text-destructive hover:text-destructive"
-                                    onClick={() => openDeleteDialog(category.id)}
-                                >
-                                    <Trash2 className={`w-3 h-3 sm:w-4 sm:h-4 ${isRtl ? 'ml-1' : 'mr-1'}`} />
-                                    <span className="sm:hidden">{t('delete')}</span>
-                                </Button>
-                            </div>
-                        </div>
-                    ))
-                )}
+                        ))
+                    )}
+                </div>
             </div>
 
             {/* Edit/Create Dialog */}
@@ -221,12 +295,12 @@ const CategoriesPage = () => {
                         </div>
                         <div className="space-y-2">
                             <label className={`text-sm font-medium block ${isRtl ? 'text-right' : ''}`}>
-                                {t('admin.categories.form.name.label')}
+                                {t('admin.categories.form.nameAr.label')}
                             </label>
                             <Input
                                 value={formData.nameAr}
                                 onChange={(e) => setFormData({ ...formData, nameAr: e.target.value })}
-                                placeholder="الفئة..."
+                                placeholder={t('admin.categories.form.nameAr.placeholder')}
                                 required
                                 dir="rtl"
                                 className="h-10 text-right"

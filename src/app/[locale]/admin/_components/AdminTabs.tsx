@@ -28,23 +28,23 @@ const AdminTabs = () => {
     const activeTab = tabs.find(tab => tab.active)
 
     return (
-        <div className="mb-10 group/tabs">
+        <div className="mb-6 group/tabs">
             {/* Mobile Dropdown/Collapsible */}
-            <div className="lg:hidden relative z-50">
+            <div className="lg:hidden relative z-30">
                 <button
                     onClick={() => setIsOpen(!isOpen)}
-                    className="w-full flex items-center justify-between px-6 py-4 bg-card/80 backdrop-blur-md border border-border/50 rounded-2xl shadow-xl shadow-black/[0.03] active:scale-[0.98] transition-all duration-300"
+                    className="w-full flex items-center justify-between px-4 py-2.5 bg-card/80 backdrop-blur-md border border-border/50 rounded-xl shadow-sm active:scale-[0.98] transition-all duration-200"
                 >
                     <div className="flex items-center gap-3">
-                        <div className="p-2.5 bg-primary/10 rounded-xl text-primary animate-pulse">
-                            <Menu className="w-5 h-5" />
+                        <div className="p-1.5 bg-primary/10 rounded-lg text-primary">
+                            <Menu className="w-4 h-4" />
                         </div>
-                        <span className="font-black text-foreground tracking-tight uppercase text-sm">
+                        <span className="font-bold text-foreground text-sm">
                             {activeTab?.name || t('profile')}
                         </span>
                     </div>
                     <ChevronDown className={cn(
-                        "w-5 h-5 text-muted-foreground transition-transform duration-500",
+                        "w-4 h-4 text-muted-foreground transition-transform duration-300",
                         isOpen && "rotate-180 text-primary"
                     )} />
                 </button>
@@ -52,7 +52,7 @@ const AdminTabs = () => {
                 {isOpen && (
                     <>
                         <div className="fixed inset-0 z-[-1]" onClick={() => setIsOpen(false)} />
-                        <div className="absolute top-full left-0 right-0 mt-3 p-2 bg-card/90 backdrop-blur-2xl border border-border/50 rounded-[2rem] shadow-2xl animate-in fade-in slide-in-from-top-4 duration-500 ease-out z-50">
+                        <div className="absolute top-full left-0 right-0 mt-2 p-1.5 bg-card/90 backdrop-blur-2xl border border-border/50 rounded-xl shadow-xl animate-in fade-in slide-in-from-top-4 duration-300 ease-out z-30">
                             {tabs.map((tab) => {
                                 const Icon = tab.icon;
                                 return (
@@ -61,14 +61,14 @@ const AdminTabs = () => {
                                         href={tab.href}
                                         onClick={() => setIsOpen(false)}
                                         className={cn(
-                                            "flex items-center gap-4 px-5 py-4 rounded-2xl font-bold transition-all duration-300 mb-1 last:mb-0 group",
+                                            "flex items-center gap-3 px-3 py-2.5 rounded-lg font-bold transition-all duration-300 mb-0.5 last:mb-0 group text-sm",
                                             locale === 'ar' && "flex-row-reverse text-right",
                                             tab.active
-                                                ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20 scale-[1.02]"
+                                                ? "bg-primary text-primary-foreground shadow-sm"
                                                 : cn("text-muted-foreground hover:bg-secondary/80 hover:text-foreground", locale === 'ar' ? "hover:-translate-x-1" : "hover:translate-x-1")
                                         )}
                                     >
-                                        <Icon className={cn("w-5 h-5 transition-transform", tab.active ? "scale-110" : "group-hover:scale-110")} />
+                                        <Icon className={cn("w-4 h-4 transition-transform", tab.active ? "scale-105" : "group-hover:scale-110")} />
                                         {tab.name}
                                     </Link>
                                 )
