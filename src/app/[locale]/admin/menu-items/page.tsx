@@ -230,7 +230,7 @@ const MenuItemsPage = () => {
             basePrice: '',
             image: '',
             categoryId: '',
-            sizes: [{ name: 'SMALL', price: '' }],
+            sizes: [{ name: 'SMALL', price: '0' }],
             extras: []
         })
     }
@@ -403,7 +403,6 @@ const MenuItemsPage = () => {
                                         setFormData(prev => ({
                                             ...prev,
                                             basePrice: price,
-                                            sizes: prev.sizes.map(s => s.name === 'SMALL' ? { ...s, price } : s)
                                         }))
                                     }}
                                 />
@@ -470,9 +469,13 @@ const MenuItemsPage = () => {
                                     onClick={() => {
                                         const availableSizes = PRODUCT_SIZES.filter(s => !formData.sizes.find(sz => sz.name === s))
                                         if (availableSizes.length === 0) return
+                                        const newSizeName = availableSizes[0]
                                         setFormData({
                                             ...formData,
-                                            sizes: [...formData.sizes, { name: availableSizes[0], price: '' }]
+                                            sizes: [...formData.sizes, {
+                                                name: newSizeName,
+                                                price: newSizeName === 'SMALL' ? '0' : ''
+                                            }]
                                         })
                                     }}
                                 >
@@ -490,6 +493,9 @@ const MenuItemsPage = () => {
                                                 onValueChange={(val) => {
                                                     const newSizes = [...formData.sizes]
                                                     newSizes[index].name = val
+                                                    if (val === 'SMALL') {
+                                                        newSizes[index].price = '0'
+                                                    }
                                                     setFormData({ ...formData, sizes: newSizes })
                                                 }}
                                             >
