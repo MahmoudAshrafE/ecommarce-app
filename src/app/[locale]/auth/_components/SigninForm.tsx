@@ -3,12 +3,12 @@
 import React, { useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
-import { Pages, Routes } from '@/constants/enums'
+import { Pages, Routes, UserRole } from '@/constants/enums'
 import Link from '@/components/link'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { signIn } from 'next-auth/react'
+import { getSession, signIn } from 'next-auth/react'
 
 const SigninForm = () => {
     const t = useTranslations('auth.login')
@@ -38,7 +38,12 @@ const SigninForm = () => {
             if (result?.error) {
                 setError(result.error)
             } else if (result?.ok) {
-                router.push(`/${locale}`)
+                const session = await getSession()
+                if (session?.user?.role === UserRole.ADMIN) {
+                    router.push(`/${locale}/${Routes.ADMIN}`)
+                } else {
+                    router.push(`/${locale}`)
+                }
                 router.refresh()
             }
         } catch (err) {

@@ -1,11 +1,11 @@
 'use client'
 import { useSession } from 'next-auth/react'
-import { Pages, Routes } from '@/constants/enums'
+import { Pages, Routes, UserRole } from '@/constants/enums'
 import Link from '../link'
 import { Button } from '../ui/button'
 import { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
-import { Menu, XIcon, Home, ShoppingBag, Info, Phone, LogIn, ShoppingCart, Instagram, Facebook, Twitter, ChevronDown } from 'lucide-react'
+import { Menu, XIcon, Home, ShoppingBag, Info, Phone, LogIn, ShoppingCart, Instagram, Facebook, Twitter, ChevronDown, LayoutDashboard } from 'lucide-react'
 import { useParams, usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 
@@ -29,6 +29,12 @@ const Navbar = ({ isScrolled, isHome, isMobileOnly = false }: NavbarProps) => {
         { id: 'menu', title: t('menu'), href: `${locale}/${Routes.MENU}`, icon: ShoppingBag },
         { id: 'about', title: t('about'), href: `${locale}/${Routes.ABOUT}`, icon: Info },
         { id: 'contact', title: t('contact'), href: `${locale}/${Routes.CONTACT}`, icon: Phone },
+        ...(session?.user?.role === UserRole.ADMIN ? [{
+            id: 'admin',
+            title: t('admin'),
+            href: `${locale}/${Routes.ADMIN}`,
+            icon: LayoutDashboard
+        }] : []),
         { id: 'login', title: t('login'), href: `${locale}/${Routes.AUTH}/${Pages.LOGIN}`, auth: false, icon: LogIn },
     ];
 
