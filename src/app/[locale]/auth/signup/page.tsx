@@ -4,10 +4,11 @@ import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { Routes } from "@/constants/enums";
 
-const SignupPage = async () => {
+const SignupPage = async ({ params }: { params: Promise<{ locale: string }> }) => {
+    const { locale } = await params;
     const session = await getServerSession(authOptions);
     if (session) {
-        redirect(`/${Routes.ROOT}`);
+        redirect(`/${locale}`);
     }
 
     return (

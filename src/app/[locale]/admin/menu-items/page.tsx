@@ -227,7 +227,7 @@ const MenuItemsPage = () => {
             nameAr: '',
             description: '',
             descriptionAr: '',
-            basePrice: '',
+            basePrice: '0',
             image: '',
             categoryId: '',
             sizes: [{ name: 'SMALL', price: '0' }],
