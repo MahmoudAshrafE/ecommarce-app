@@ -1,8 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter, useParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
+import { useSession } from 'next-auth/react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -11,6 +12,7 @@ import Link from '@/components/link'
 import { Routes, Pages } from '@/constants/enums'
 
 const ResetPasswordPage = () => {
+    const { status } = useSession()
     const t = useTranslations('auth.resetPassword')
     const gt = useTranslations()
     const { locale, token } = useParams()
@@ -19,6 +21,16 @@ const ResetPasswordPage = () => {
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [loading, setLoading] = useState(false)
+
+    useEffect(() => {
+        if (status === 'authenticated') {
+            router.replace(`/${locale}`)
+        }
+    }, [status, router, locale])
+
+    if (status === 'loading' || status === 'authenticated') {
+        return null
+    }
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
