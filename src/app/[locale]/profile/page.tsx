@@ -81,10 +81,10 @@ const ProfilePage = () => {
                 setNewPassword('')
                 setConfirmPassword('')
             } else {
-                const error = await res.text()
+                const data = await res.json()
                 toast({
                     title: t('messages.error'),
-                    description: error || t('messages.unexpectedError'),
+                    description: data.error || t('messages.unexpectedError'),
                     variant: "destructive"
                 })
             }

@@ -48,11 +48,11 @@ const ResetPasswordPage = () => {
                 })
                 router.push(`/${locale}/${Routes.AUTH}/${Pages.LOGIN}`)
             } else {
-                const error = await res.text()
+                const data = await res.json()
                 toast({
                     variant: 'destructive',
                     title: gt('messages.error'),
-                    description: error || 'Something went wrong',
+                    description: data.error || 'Something went wrong',
                 })
             }
         } catch (error) {

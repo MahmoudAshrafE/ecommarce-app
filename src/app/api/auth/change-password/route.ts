@@ -9,18 +9,22 @@ export async function PUT(req: Request) {
         const session = await getServerSession(authOptions)
 
         if (!session?.user) {
-            return new NextResponse("Unauthorized", { status: 401 })
+            return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
         }
 
         const body = await req.json()
         const { currentPassword, newPassword } = body
 
         if (!currentPassword || !newPassword) {
-            return new NextResponse("Missing required fields", { status: 400 })
+            return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
         }
 
         if (newPassword.length < 6) {
-            return new NextResponse("Password must be at least 6 characters", { status: 400 })
+            return NextResponse.json({ error: "Password must be at least 6 characters" }, { status: 400 })
+        }
+
+        if (currentPassword === newPassword) {
+            return NextResponse.json({ error: "New password must be different from current password" }, { status: 400 })
         }
 
         const user = await prisma.user.findUnique({
@@ -30,13 +34,13 @@ export async function PUT(req: Request) {
         })
 
         if (!user || !user.password) {
-            return new NextResponse("User not found", { status: 404 })
+            return NextResponse.json({ error: "User not found" }, { status: 404 })
         }
 
         const isPasswordValid = await compare(currentPassword, user.password)
 
         if (!isPasswordValid) {
-            return new NextResponse("Invalid current password", { status: 400 })
+            return NextResponse.json({ error: "Invalid current password" }, { status: 400 })
         }
 
         const hashedPassword = await hash(newPassword, 10)
@@ -53,6 +57,6 @@ export async function PUT(req: Request) {
         return NextResponse.json({ message: "Password updated successfully" })
     } catch (error) {
         console.error("CHANGE_PASSWORD_ERROR", error)
-        return new NextResponse("Internal Error", { status: 500 })
+        return NextResponse.json({ error: "Internal Error" }, { status: 500 })
     }
 }
