@@ -10,7 +10,7 @@ const intlMiddleware = createMiddleware({
 });
 
 export default async function proxy(req: NextRequest) {
-    const token = await getToken({ req });
+    const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
     const { pathname } = req.nextUrl;
 
     // Detect current locale
