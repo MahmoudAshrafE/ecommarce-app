@@ -13,18 +13,34 @@ export default async function middleware(req: NextRequest) {
     const token = await getToken({ req });
     const { pathname } = req.nextUrl;
 
+    // Detect current locale
+    const locale = i18n.locales.find(
+        (loc) => pathname.startsWith(`/${loc}/`) || pathname === `/${loc}`
+    ) || i18n.defaultLocale;
+
     // List of routes that should only be accessible to guests
     const isAuthPage = pathname.includes('/auth/signin') ||
         pathname.includes('/auth/signup') ||
-        pathname.includes('/auth/forgot-password');
+        pathname.includes('/auth/forgot-password') ||
+        pathname.includes('/auth/reset-password');
 
+    // Protected routes
+    const isProfilePage = pathname.includes('/profile');
+    const isAdminPage = pathname.includes('/admin');
+    const isOrdersPage = pathname.includes('/orders') && !pathname.includes('/admin');
+
+    // 1. Redirect logged-in users away from auth pages (login/signup)
     if (isAuthPage && token) {
-        // Find the current locale from the pathname or fallback to default
-        const locale = i18n.locales.find(
-            (loc) => pathname.startsWith(`/${loc}/`) || pathname === `/${loc}`
-        ) || i18n.defaultLocale;
+        return NextResponse.redirect(new URL(`/${locale}`, req.url));
+    }
 
-        // Redirect to the home page with the current locale
+    // 2. Redirect guests away from protected pages
+    if ((isProfilePage || isOrdersPage || isAdminPage) && !token) {
+        return NextResponse.redirect(new URL(`/${locale}/auth/signin`, req.url));
+    }
+
+    // 3. Role-based protection for /admin
+    if (isAdminPage && token && token.role !== 'ADMIN') {
         return NextResponse.redirect(new URL(`/${locale}`, req.url));
     }
 
