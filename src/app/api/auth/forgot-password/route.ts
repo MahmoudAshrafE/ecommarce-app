@@ -5,7 +5,7 @@ import nodemailer from "nodemailer";
 
 export async function POST(req: NextRequest) {
     try {
-        const { email } = await req.json();
+        const { email, locale = 'en' } = await req.json();
 
         if (!email) {
             return NextResponse.json({ error: "Email is required" }, { status: 400 });
@@ -31,8 +31,9 @@ export async function POST(req: NextRequest) {
             }
         });
 
-        // Send Email using Nodemailer (Gmail)
-        const resetUrl = `${process.env.NEXTAUTH_URL || 'http://localhost:3000'}/en/auth/reset-password/${resetToken}`;
+        // Construct dynamic reset URL
+        const origin = req.nextUrl.origin;
+        const resetUrl = `${origin}/${locale}/auth/reset-password/${resetToken}`;
 
         const cleanPass = process.env.EMAIL_PASS?.replace(/["']/g, '').replace(/\s+/g, '');
 
