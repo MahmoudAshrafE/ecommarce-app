@@ -9,7 +9,7 @@ const intlMiddleware = createMiddleware({
     localePrefix: 'always'
 });
 
-export default async function middleware(req: NextRequest) {
+export default async function proxy(req: NextRequest) {
     const token = await getToken({ req });
     const { pathname } = req.nextUrl;
 
