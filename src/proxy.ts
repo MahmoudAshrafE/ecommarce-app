@@ -12,12 +12,15 @@ const intlMiddleware = createMiddleware({
 export default async function middleware(req: NextRequest) {
     const { pathname } = req.nextUrl;
 
-    // Enhanced secret handling
+    // Enhanced secret handling with explicit Secure Cookie detection for Vercel
     const secret = process.env.NEXTAUTH_SECRET || "very-secret-key-for-dev";
+    const useSecureCookies = process.env.NODE_ENV === "production" || !!process.env.VERCEL;
 
     const token = await getToken({
         req,
-        secret
+        secret,
+        secureCookie: useSecureCookies,
+        cookieName: useSecureCookies ? "__Secure-next-auth.session-token" : "next-auth.session-token",
     });
 
     // Detect current locale
