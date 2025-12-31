@@ -18,6 +18,7 @@ import {
 } from 'lucide-react'
 import { formatCurrency } from '@/lib/formaters'
 import { cn } from '@/lib/utils'
+import { Loader } from '@/components/ui/loader'
 
 const AdminDashboard = () => {
     const { locale } = useParams()
@@ -78,7 +79,7 @@ const AdminDashboard = () => {
     if (status === 'loading') {
         return (
             <div className="flex flex-col items-center justify-center min-h-[400px] gap-4">
-                <div className="w-12 h-12 border-4 border-primary/20 border-t-primary rounded-full animate-spin" />
+                <Loader size="lg" variant="burger" />
                 <p className="text-muted-foreground font-bold animate-pulse">
                     {t('analyzingMetrics')}
                 </p>

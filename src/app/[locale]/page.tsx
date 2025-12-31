@@ -4,7 +4,8 @@ import Features from "./_components/Features";
 import Testimonials from "./_components/Testimonials";
 import About from "@/components/about";
 import HowItWorks from "./_components/HowItWorks";
-import Stats from "./_components/Stats";
+import { Suspense } from "react";
+import { Loader } from "@/components/ui/loader";
 
 export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -16,23 +17,41 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
 
 
       {/* 3. Features Section - Our Value Props */}
-      <Features locale={locale} />
+      <div className="section-perf">
+        <Features locale={locale} />
+      </div>
 
-      {/* 4. Best Sellers - Direct Product Access */}
-      <div className="bg-secondary/10">
-        <BestSellers locale={locale} />
+      {/* 4. Best Sellers - Direct Product Access (with Suspense) */}
+      <div className="bg-secondary/10 section-perf">
+        <Suspense fallback={
+          <div className="flex justify-center items-center py-20">
+            <Loader size="xl" variant="burger" />
+          </div>
+        }>
+          <BestSellers locale={locale} />
+        </Suspense>
       </div>
 
       {/* 5. How It Works - Practical steps */}
-      <HowItWorks locale={locale} />
+      <div className="section-perf">
+        <HowItWorks locale={locale} />
+      </div>
 
       {/* 6. About Section - Story & Quality */}
-      <div className="bg-secondary/20">
+      <div className="bg-secondary/20 section-perf">
         <About locale={locale} />
       </div>
 
-      {/* 7. Social Proof - Testimonials */}
-      <Testimonials locale={locale} />
+      {/* 7. Social Proof - Testimonials (with Suspense) */}
+      <div className="section-perf">
+        <Suspense fallback={
+          <div className="flex justify-center items-center py-20">
+            <Loader size="lg" variant="burger" />
+          </div>
+        }>
+          <Testimonials locale={locale} />
+        </Suspense>
+      </div>
     </main>
   );
 }

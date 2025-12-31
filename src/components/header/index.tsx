@@ -34,10 +34,10 @@ const Header = () => {
   return (
     <header
       className={`fixed top-0 z-50 w-full transition-all duration-500 ${isScrolled
-        ? "py-3 bg-background/80 backdrop-blur-xl border-b border-border/50 shadow-lg"
+        ? "py-2 bg-background/80 backdrop-blur-xl border-b border-border/50 shadow-lg"
         : isHome
-          ? "py-6 bg-transparent"
-          : "py-6 bg-background border-b border-border/10"
+          ? "py-3 bg-transparent"
+          : "py-3 bg-background border-b border-border/10"
         }`}
     >
       <div className="container flex items-center justify-between gap-1 sm:gap-4 xl:gap-8 px-4">
@@ -46,14 +46,14 @@ const Header = () => {
             href={Routes.ROOT}
             className="group flex items-center gap-1.5 sm:gap-2"
           >
-            <div className="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-primary rounded-xl sm:rounded-2xl flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300 shadow-lg shadow-primary/20">
-              <span className="text-xl sm:text-2xl md:text-3xl">🍔</span>
+            <div className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 bg-primary rounded-xl sm:rounded-2xl flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300 shadow-lg shadow-primary/20">
+              <span className="text-lg sm:text-xl md:text-2xl">🍔</span>
             </div>
             <div className="flex flex-col">
-              <span className={`font-black text-sm sm:text-xl md:text-2xl tracking-tighter transition-colors ${!isScrolled && isHome ? "text-foreground" : "text-foreground"}`}>
+              <span className={`font-black text-xs sm:text-lg md:text-xl tracking-tighter transition-colors ${!isScrolled && isHome ? "text-foreground" : "text-foreground"}`}>
                 {t('logo')}
               </span>
-              <span className="hidden xs:block text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] text-primary -mt-1 opacity-80">Gourmet</span>
+              <span className="hidden xs:block text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.2em] text-primary -mt-0.5 opacity-80">Gourmet</span>
             </div>
           </Link>
 

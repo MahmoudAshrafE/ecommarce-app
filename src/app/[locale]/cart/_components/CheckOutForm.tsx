@@ -10,7 +10,8 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { clearCart, selectCartItems } from "@/redux/features/cart/cartSlice"
 import { getSubTotal } from "@/lib/cart"
 import { toast } from "@/components/ui/use-toast"
-import { Loader2, CreditCard, MapPin, Phone, Lock, ChevronRight, FileText, AlertCircle } from "lucide-react"
+import { CreditCard, MapPin, Phone, Lock, ChevronRight, FileText, AlertCircle } from "lucide-react"
+import { Loader } from "@/components/ui/loader"
 import { useRouter, useParams } from "next/navigation"
 import { formatCurrency } from "@/lib/formaters"
 import { cn } from "@/lib/utils"
@@ -264,10 +265,11 @@ const CheckOutForm = () => {
         <Button
           type="submit"
           className="w-full h-14 md:h-16 rounded-xl md:rounded-[1.5rem] text-lg md:text-xl font-black shadow-2xl shadow-primary/30 hover:scale-[1.01] active:scale-95 transition-all group overflow-hidden relative"
-          disabled={loading || cartItems.length === 0}
+          loading={loading}
+          disabled={cartItems.length === 0}
         >
           <div className="relative z-10 flex items-center justify-center gap-2">
-            {loading ? <Loader2 className="animate-spin" /> : <Lock className="w-5 h-5" />}
+            {!loading && <Lock className="w-5 h-5" />}
             {t('checkout.pay')}
             {!loading && <ChevronRight className={cn("w-4 h-4 md:w-5 md:h-5 transition-transform group-hover:translate-x-1", isRtl ? "rotate-180 group-hover:-translate-x-1" : "")} />}
           </div>

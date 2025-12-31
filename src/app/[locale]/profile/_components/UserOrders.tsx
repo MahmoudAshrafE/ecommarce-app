@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from 'react'
 import { formatCurrency } from "@/lib/formaters"
-import { Loader2, Package, ChevronRight } from "lucide-react"
+import { Package, ChevronRight } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
+import { Loader } from "@/components/ui/loader"
 
 interface Order {
     id: string
@@ -56,7 +57,11 @@ const UserOrders = () => {
         }
     }
 
-    if (loading) return <div className="flex justify-center p-8"><Loader2 className="animate-spin text-primary" /></div>
+    if (loading) return (
+        <div className="flex justify-center p-8">
+            <Loader size="lg" variant="burger" />
+        </div>
+    )
 
     if (orders.length === 0) return (
         <div className="text-center py-12 bg-secondary/20 rounded-2xl border border-dashed border-border mt-8">

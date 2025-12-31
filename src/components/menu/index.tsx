@@ -6,7 +6,7 @@ const Menu = async ({ items, locale }: { items: ProductWithRelations[], locale: 
     const t = await getTranslations({ locale })
 
     return items.length > 0 ? (
-        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 animate-in fade-in slide-in-from-bottom-8 duration-500">
             {items.map(item => (
                 <MenuItem key={item.id} item={item} locale={locale} />
             ))}

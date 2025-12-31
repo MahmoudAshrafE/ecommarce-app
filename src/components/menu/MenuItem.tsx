@@ -7,7 +7,7 @@ import Link from "next/link"
 import { Star } from "lucide-react"
 import UserAvatar from "../ui/user-avatar"
 
-const MenuItem = ({ item, locale }: { item: ProductWithRelations, locale: string }) => {
+const MenuItem = ({ item, locale, priority = false }: { item: ProductWithRelations, locale: string, priority?: boolean }) => {
     const t = useTranslations();
     const isRtl = locale === 'ar';
 
@@ -26,8 +26,7 @@ const MenuItem = ({ item, locale }: { item: ProductWithRelations, locale: string
                             className='object-contain p-4 group-hover:scale-110 transition-transform duration-700 ease-out'
                             fill
                             sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-                            loading='eager'
-                            priority
+                            priority={priority}
                         />
                     ) : (
                         <div className="flex items-center justify-center h-full w-full bg-secondary/10">

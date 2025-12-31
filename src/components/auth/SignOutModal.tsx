@@ -78,16 +78,10 @@ const SignOutModal = ({ children, className }: SignOutButtonProps) => {
                         variant="destructive"
                         onClick={handleSignOut}
                         className="rounded-xl h-12 font-bold shadow-lg shadow-destructive/20 flex-1"
-                        disabled={loading}
+                        loading={loading}
                     >
-                        {loading ? (
-                            <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                        ) : (
-                            <>
-                                <LogOut className="mr-2 w-4 h-4" />
-                                {t('navbar.signOut')}
-                            </>
-                        )}
+                        <LogOut className="mr-2 w-4 h-4" />
+                        {t('navbar.signOut')}
                     </Button>
                 </DialogFooter>
             </DialogContent>

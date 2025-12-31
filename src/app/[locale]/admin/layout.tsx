@@ -20,7 +20,7 @@ const AdminLayout = async ({ children, params }: { children: React.ReactNode, pa
     }
 
     return (
-        <main className='min-h-screen bg-[#f8fafc] dark:bg-background/95 pt-20'>
+        <main className='min-h-screen bg-[#f8fafc] dark:bg-background/95 pt-16'>
             <div className="container mx-auto pt-8 pb-8 px-4">
                 <Breadcrumbs />
                 <div className={cn("mt-4 mb-8", locale === 'ar' && "text-right")}>

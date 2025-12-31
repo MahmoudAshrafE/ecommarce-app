@@ -71,25 +71,25 @@ const Navbar = ({ isScrolled, isHome, isMobileOnly = false }: NavbarProps) => {
                 <Button
                     variant='ghost'
                     size='icon'
-                    className={`absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-[100] rounded-full w-10 h-10 sm:w-12 sm:h-12 transition-all duration-300 shadow-xl ${!isScrolled && isHome
+                    className={`absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-[100] rounded-full w-10 h-10 sm:w-12 sm:h-12 shadow-xl ${!isScrolled && isHome
                         ? "text-foreground bg-background/20 hover:bg-background/40 border border-white/10 backdrop-blur-md"
                         : "text-foreground bg-background/80 backdrop-blur-xl hover:bg-background border border-border/50"
                         }`}
                     onClick={() => setOpen(true)}
                 >
-                    <ChevronDown className='w-6 h-6 animate-bounce' />
+                    <ChevronDown className='w-6 h-6' />
                 </Button>
 
                 {open && createPortal(
                     <div className="fixed inset-0 z-[999] xl:hidden">
                         {/* Backdrop with blur */}
                         <div
-                            className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-in fade-in duration-500"
+                            className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200"
                             onClick={() => setOpen(false)}
                         />
 
                         {/* Drawer Content */}
-                        <div className="absolute top-0 left-0 right-0 max-h-[85vh] bg-background/95 backdrop-blur-xl rounded-b-[2rem] border-b border-white/10 p-5 flex flex-col shadow-2xl animate-in slide-in-from-top duration-500 ease-out overflow-y-auto ring-1 ring-white/5">
+                        <div className="absolute top-0 left-0 right-0 max-h-[85vh] bg-background/95 backdrop-blur-xl rounded-b-[2rem] border-b border-white/10 p-5 flex flex-col shadow-2xl animate-in slide-in-from-top duration-200 ease-out overflow-y-auto ring-1 ring-white/5">
 
                             {/* Drawer Handle/Indicator */}
                             <div className="mx-auto w-12 h-1 bg-muted-foreground/20 rounded-full mb-4" />
@@ -120,32 +120,27 @@ const Navbar = ({ isScrolled, isHome, isMobileOnly = false }: NavbarProps) => {
                                             key={link.id}
                                             href={`/${link.href}`}
                                             onClick={() => setOpen(false)}
-                                            className={`group flex items-center justify-between p-3 rounded-xl transition-all duration-300 ${isLogin
-                                                ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20 mt-2 active:scale-95"
+                                            className={`group flex items-center justify-between p-3 rounded-xl ${isLogin
+                                                ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20 mt-2"
                                                 : active
                                                     ? "bg-secondary text-primary scheme-light"
-                                                    : "hover:bg-secondary/50 text-foreground/80 hover:text-foreground active:bg-secondary/80"
+                                                    : "text-foreground/80 hover:text-foreground"
                                                 }`}
-                                            style={{
-                                                animation: `slideDown 0.5s ease-out forwards ${index * 0.08}s`,
-                                                opacity: 0,
-                                                transform: 'translateY(-20px)'
-                                            }}
                                         >
                                             <div className="flex items-center gap-4">
-                                                <div className={`p-2 rounded-lg transition-colors ${isLogin
+                                                <div className={`p-2 rounded-lg ${isLogin
                                                     ? "bg-white/20"
                                                     : active
                                                         ? "bg-background shadow-sm"
-                                                        : "bg-secondary group-hover:bg-background"
+                                                        : "bg-secondary"
                                                     }`}>
-                                                    {link.icon && <link.icon className={`w-5 h-5 ${isLogin ? "text-white" : active ? "text-primary" : "text-muted-foreground group-hover:text-foreground"}`} />}
+                                                    {link.icon && <link.icon className={`w-5 h-5 ${isLogin ? "text-white" : active ? "text-primary" : "text-muted-foreground"}`} />}
                                                 </div>
                                                 <span className="text-base font-bold tracking-wide">{link.title}</span>
                                             </div>
 
                                             {/* Interactive Arrow */}
-                                            <div className={`transition-transform duration-300 ${isLogin || active ? "translate-x-0 opacity-100" : "-translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100"}`}>
+                                            <div className={`${isLogin || active ? "opacity-100" : "opacity-0"}`}>
                                                 {isLogin ? <LogIn className="w-5 h-5" /> : <div className="w-1.5 h-1.5 rounded-full bg-current" />}
                                             </div>
                                         </Link>
@@ -162,7 +157,7 @@ const Navbar = ({ isScrolled, isHome, isMobileOnly = false }: NavbarProps) => {
                                         onClick={() => setOpen(false)}
                                         className="flex-1 me-3 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 p-3 rounded-xl flex items-center justify-center gap-2.5 transition-colors group"
                                     >
-                                        <ShoppingCart className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                                        <ShoppingCart className="w-4 h-4" />
                                         <span className="font-bold text-sm">{t('cart')}</span>
                                     </Link>
 
@@ -181,12 +176,7 @@ const Navbar = ({ isScrolled, isHome, isMobileOnly = false }: NavbarProps) => {
                             </div>
                         </div>
 
-                        <style jsx global>{`
-              @keyframes slideDown {
-                from { opacity: 0; transform: translateY(-20px); }
-                to { opacity: 1; transform: translateY(0); }
-              }
-            `}</style>
+
                     </div>,
                     document.body
                 )}

@@ -129,9 +129,9 @@ const ResetPasswordPage = () => {
                     <Button
                         type="submit"
                         className="w-full h-12 text-lg font-bold rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98]"
-                        disabled={loading}
+                        loading={loading}
                     >
-                        {loading ? gt('loading') : t('submit')}
+                        {t('submit')}
                     </Button>
                 </form>
             </div>

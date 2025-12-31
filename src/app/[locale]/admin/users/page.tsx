@@ -3,7 +3,8 @@
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { Users, Search, Trash2, Pencil, Mail, Calendar, Loader2 } from 'lucide-react'
+import { Users, Search, Trash2, Pencil, Mail, Calendar } from 'lucide-react'
+import { Loader } from "@/components/ui/loader"
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import {
@@ -145,7 +146,7 @@ const UsersPage = () => {
     )
 
     if (loading) {
-        return <div className="flex justify-center p-8"><Loader2 className="animate-spin" /></div>
+        return <div className="flex justify-center p-8"><Loader size="lg" variant="burger" /></div>
     }
 
     return (
@@ -295,8 +296,8 @@ const UsersPage = () => {
                             <DialogClose asChild>
                                 <Button type="button" variant="outline">{t('cancel')}</Button>
                             </DialogClose>
-                            <Button type="submit" disabled={submitting}>
-                                {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : t('save')}
+                            <Button type="submit" loading={submitting}>
+                                {t('save')}
                             </Button>
                         </DialogFooter>
                     </form>

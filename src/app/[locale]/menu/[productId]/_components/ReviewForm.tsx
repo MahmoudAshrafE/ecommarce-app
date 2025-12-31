@@ -87,8 +87,8 @@ const ReviewForm = ({ productId }: { productId: string }) => {
                 />
             </div>
 
-            <Button disabled={isSubmitting} type="submit" size="lg" className="w-full md:w-auto font-bold">
-                {isSubmitting ? t('reviews.submitting') : t('reviews.submit')}
+            <Button loading={isSubmitting} type="submit" size="lg" className="w-full md:w-auto font-bold">
+                {t('reviews.submit')}
             </Button>
         </form>
     )

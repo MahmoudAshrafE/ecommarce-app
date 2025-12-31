@@ -177,4 +177,18 @@ html[dir="rtl"] .container {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
+  /* Performance Optimizations */
+  .section-perf {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 500px;
+  }
+
+  .animate-float {
+    will-change: transform;
+  }
+
+  .animate-bounce-slow {
+    will-change: transform;
+  }
 }

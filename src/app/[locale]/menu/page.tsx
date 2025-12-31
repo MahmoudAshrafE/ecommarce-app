@@ -1,12 +1,11 @@
 import { getProductsByCategory } from "@/server/db/product";
 import { getTranslations } from "next-intl/server";
-import { Utensils } from "lucide-react";
-import PageHero from "@/components/PageHero";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import MenuInterface from "@/components/menu/MenuInterface";
+import { Suspense } from "react";
+import { Loader } from "@/components/ui/loader";
 
-async function MenuPage({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
+async function MenuContent({ locale }: { locale: string }) {
   const t = await getTranslations({ locale });
   const categorites = await getProductsByCategory();
 
@@ -18,7 +17,22 @@ async function MenuPage({ params }: { params: Promise<{ locale: string }> }) {
   }
 
   return (
-    <main className="bg-[#f8fafc] dark:bg-background/95 min-h-screen pt-20">
+    <div className="container py-12">
+      <MenuInterface
+        categories={categorites}
+        locale={locale}
+        labels={labels}
+      />
+    </div>
+  );
+}
+
+async function MenuPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale });
+
+  return (
+    <main className="bg-[#f8fafc] dark:bg-background/95 min-h-screen pt-16">
       {/* Unified Header */}
       <div className="container mx-auto pt-8 pb-8 px-4">
         <Breadcrumbs />
@@ -28,14 +42,14 @@ async function MenuPage({ params }: { params: Promise<{ locale: string }> }) {
         </div>
       </div>
 
-      {/* Menu Interface */}
-      <div className="container py-12">
-        <MenuInterface
-          categories={categorites}
-          locale={locale}
-          labels={labels}
-        />
-      </div>
+      {/* Menu Interface with Suspense */}
+      <Suspense fallback={
+        <div className="flex justify-center items-center py-20 min-h-[400px]">
+          <Loader size="xl" variant="burger" />
+        </div>
+      }>
+        <MenuContent locale={locale} />
+      </Suspense>
     </main>
   );
 }

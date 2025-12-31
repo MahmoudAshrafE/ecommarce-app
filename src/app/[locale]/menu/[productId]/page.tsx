@@ -41,7 +41,7 @@ export default async function ProductPage({ params }: { params: Promise<{ produc
         : '0.0'
 
     return (
-        <main className="min-h-screen pt-20 pb-20 overflow-hidden bg-[#f8fafc] dark:bg-background">
+        <main className="min-h-screen pt-16 pb-20 overflow-hidden bg-[#f8fafc] dark:bg-background">
             <div className="container py-8">
                 <Breadcrumbs labels={{ [productId]: isRtl ? product.nameAr || product.name : product.name }} />
                 <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 mb-24 ${isRtl ? 'rtl' : ''}`}>

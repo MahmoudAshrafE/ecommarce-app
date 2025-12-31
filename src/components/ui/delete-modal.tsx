@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/alert-dialog"
 import { useTranslations } from 'next-intl';
 import { useParams } from 'next/navigation';
-import { Loader2 } from 'lucide-react';
+
 
 interface DeleteModalProps {
     open: boolean;
@@ -46,16 +46,10 @@ const DeleteModal = ({ open, onClose, onConfirm, loading }: DeleteModalProps) =>
                             onConfirm();
                         }}
                         disabled={loading}
+                        loading={loading}
                         className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
                     >
-                        {loading ? (
-                            <div className="flex items-center gap-2">
-                                <Loader2 className="h-4 w-4 animate-spin" />
-                                {t('deleting') || 'Deleting...'}
-                            </div>
-                        ) : (
-                            t('delete') || 'Delete'
-                        )}
+                        {t('delete') || 'Delete'}
                     </AlertDialogAction>
                 </AlertDialogFooter>
             </AlertDialogContent>

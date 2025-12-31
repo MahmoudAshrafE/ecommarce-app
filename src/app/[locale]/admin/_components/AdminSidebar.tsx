@@ -171,7 +171,7 @@ const AdminSidebar = () => {
         <>
             {/* Mobile Nav Toggle */}
             <div className={cn(
-                "lg:hidden fixed top-24 z-[100] transition-all duration-300",
+                "lg:hidden fixed top-20 z-[100] transition-all duration-300",
                 isRtl ? "right-4" : "left-4"
             )}>
                 <Button
@@ -195,7 +195,7 @@ const AdminSidebar = () => {
 
             {/* Sidebar Element */}
             <aside className={cn(
-                "fixed top-0 bottom-0 z-[90] transition-all duration-500 ease-in-out border-border/50 bg-card h-screen pt-20 lg:pt-0",
+                "fixed top-0 bottom-0 z-[90] transition-all duration-500 ease-in-out border-border/50 bg-card h-screen pt-16 lg:pt-0",
                 isRtl ? "right-0 border-l" : "left-0 border-r",
                 // Mobile state
                 isMobileOpen

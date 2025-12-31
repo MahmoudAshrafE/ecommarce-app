@@ -3,8 +3,9 @@
 import { useSession } from 'next-auth/react'
 import { useRouter, useParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { User, Mail, Calendar, ShoppingBag, Settings, LogOut, Lock, Camera, Loader2 } from 'lucide-react'
+import { User, Mail, Calendar, ShoppingBag, Settings, LogOut, Lock, Camera } from 'lucide-react'
 import { useTranslations } from 'next-intl'
+import { Loader } from '@/components/ui/loader'
 import UserOrders from './_components/UserOrders'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -158,7 +159,7 @@ const ProfilePage = () => {
     if (status === 'loading') {
         return (
             <main className="min-h-screen flex items-center justify-center">
-                <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+                <Loader size="xl" variant="burger" />
             </main>
         )
     }
@@ -265,9 +266,9 @@ const ProfilePage = () => {
                                 <Button
                                     className="w-full rounded-xl font-bold h-10"
                                     onClick={handleChangePassword}
-                                    disabled={loading}
+                                    loading={loading}
                                 >
-                                    {loading ? t('profile.updating') : t('profile.updatePassword')}
+                                    {t('profile.updatePassword')}
                                 </Button>
                             </div>
                         </div>
@@ -279,7 +280,7 @@ const ProfilePage = () => {
     }
 
     return (
-        <main className="min-h-screen bg-[#f8fafc] dark:bg-background/95 pt-20">
+        <main className="min-h-screen bg-[#f8fafc] dark:bg-background/95 pt-16">
             <div className="container mx-auto px-4 mt-8">
                 <Breadcrumbs />
             </div>
@@ -289,7 +290,7 @@ const ProfilePage = () => {
 
                     {/* Sidebar */}
                     <aside className="lg:col-span-3">
-                        <div className="bg-card/50 backdrop-blur-xl border border-border/50 rounded-[2rem] p-6 sticky top-28 space-y-8">
+                        <div className="bg-card/50 backdrop-blur-xl border border-border/50 rounded-[2rem] p-6 sticky top-24 space-y-8">
                             <div className="flex flex-col items-center text-center space-y-4">
                                 <div className="relative group cursor-pointer">
                                     <div className="absolute inset-0 bg-primary/20 rounded-full blur-xl group-hover:blur-2xl transition-all opacity-0 group-hover:opacity-100 duration-500" />
@@ -297,7 +298,7 @@ const ProfilePage = () => {
                                         <div className="w-full h-full rounded-full bg-card flex items-center justify-center overflow-hidden relative">
                                             {uploading ? (
                                                 <div className="absolute inset-0 bg-black/40 flex items-center justify-center z-20">
-                                                    <Loader2 className="w-8 h-8 text-white animate-spin" />
+                                                    <Loader size="md" variant="spinner" className="text-white" />
                                                 </div>
                                             ) : null}
 

@@ -10,7 +10,7 @@ const Cart = async ({ params }: { params: Promise<{ locale: string }> }) => {
   const t = await getTranslations({ locale })
 
   return (
-    <main className="min-h-screen bg-background pt-20 pb-20">
+    <main className="min-h-screen bg-background pt-16 pb-20">
       <div className="container mx-auto py-8 px-4">
         <Breadcrumbs />
         <div className="mb-8 mt-4">
@@ -29,7 +29,7 @@ const Cart = async ({ params }: { params: Promise<{ locale: string }> }) => {
             </div>
 
             {/* Checkout Sidebar - Full width on mobile, sticky on desktop */}
-            <div className="lg:col-span-5 xl:col-span-4 animate-in fade-in slide-in-from-right-8 duration-700 delay-100 lg:sticky lg:top-28">
+            <div className="lg:col-span-5 xl:col-span-4 animate-in fade-in slide-in-from-right-8 duration-700 delay-100 lg:sticky lg:top-24">
               <CheckOutForm />
             </div>
           </div>

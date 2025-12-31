@@ -54,9 +54,9 @@ const Features = async ({ locale }: { locale: string }) => {
                     {features.map((feature, index) => (
                         <div
                             key={index}
-                            className={`group bg-background/50 backdrop-blur-sm rounded-3xl p-8 border border-border/50 hover:border-primary/30 transition-all duration-500 hover:shadow-2xl ${feature.glow} hover:-translate-y-2`}
+                            className={`group bg-background/50 backdrop-blur-sm rounded-3xl p-8 border border-border/50 hover:border-primary/30 transition-all duration-300 hover:shadow-2xl ${feature.glow} hover:-translate-y-2`}
                         >
-                            <div className={`w-16 h-16 rounded-2xl ${feature.color} flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-sm`}>
+                            <div className={`w-16 h-16 rounded-2xl ${feature.color} flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-sm`}>
                                 <feature.icon className="w-8 h-8" />
                             </div>
                             <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">{feature.title}</h3>

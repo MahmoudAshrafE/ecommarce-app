@@ -25,7 +25,8 @@ import {
     DialogTitle,
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
-import { Eye, Loader2, CheckCircle, XCircle, Search, Filter, ShoppingBag, Clock, DollarSign, Package, TrendingUp, FileText, Trash2 } from "lucide-react"
+import { Eye, CheckCircle, XCircle, Search, ShoppingBag, Clock, DollarSign, Package, FileText, Trash2 } from "lucide-react"
+import { Loader } from "@/components/ui/loader"
 import {
     AlertDialog,
     AlertDialogAction,
@@ -223,7 +224,7 @@ const OrdersPage = () => {
     }
 
     if (loading) {
-        return <div className="flex justify-center p-8"><Loader2 className="animate-spin" /></div>
+        return <div className="flex justify-center p-8"><Loader size="lg" variant="burger" /></div>
     }
 
     return (

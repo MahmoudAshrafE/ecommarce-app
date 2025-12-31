@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Plus, Pencil, Trash2, Loader2, Image as ImageIcon, ExternalLink, Camera, X } from 'lucide-react'
+import { Plus, Pencil, Trash2, Image as ImageIcon, ExternalLink, Camera, X } from 'lucide-react'
+import { Loader } from "@/components/ui/loader"
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -257,7 +258,7 @@ const MenuItemsPage = () => {
     }
 
     if (loading) {
-        return <div className="flex justify-center p-8"><Loader2 className="animate-spin" /></div>
+        return <div className="flex justify-center p-8"><Loader size="lg" variant="burger" /></div>
     }
 
     return (
@@ -686,8 +687,8 @@ const MenuItemsPage = () => {
                             <DialogClose asChild>
                                 <Button type="button" variant="outline" className="w-full sm:w-auto">{t('cancel')}</Button>
                             </DialogClose>
-                            <Button type="submit" disabled={submitting} className="w-full sm:w-auto">
-                                {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : t('save')}
+                            <Button type="submit" loading={submitting} className="w-full sm:w-auto">
+                                {t('save')}
                             </Button>
                         </DialogFooter>
                     </form>

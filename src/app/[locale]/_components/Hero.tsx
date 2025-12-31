@@ -64,12 +64,12 @@ const Hero = async ({ locale }: { locale: string }) => {
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-16 items-center">
           <div className="text-center xl:text-start">
             {/* Trendy pill badge */}
-            <div className="inline-flex items-center gap-2 bg-secondary/30 backdrop-blur-md px-4 py-2 rounded-full border border-border/50 mb-8 animate-in fade-in slide-in-from-top-4 duration-700">
+            <div className="inline-flex items-center gap-2 bg-secondary/30 backdrop-blur-md px-4 py-2 rounded-full border border-border/50 mb-8 animate-in fade-in slide-in-from-top-4 duration-300">
               <Star className="w-4 h-4 text-primary fill-primary" />
               <span className="text-sm font-semibold tracking-wide uppercase text-foreground/80">{t('badge')}</span>
             </div>
 
-            <h1 className="text-5xl md:text-7xl xl:text-8xl font-black leading-[0.9] tracking-tight mb-8 animate-in fade-in slide-in-from-left-8 duration-700 delay-100">
+            <h1 className="text-5xl md:text-7xl xl:text-8xl font-black leading-[0.9] tracking-tight mb-8 animate-in fade-in slide-in-from-left-8 duration-300 delay-100">
               {t('title').split(' ').map((word, i) => (
                 <span key={i} className={i === 1 ? 'text-primary' : 'text-foreground'}>
                   {word}{' '}
@@ -77,11 +77,11 @@ const Hero = async ({ locale }: { locale: string }) => {
               ))}
             </h1>
 
-            <p className="text-muted-foreground text-lg md:text-xl max-w-xl mx-auto xl:mx-0 mb-10 leading-relaxed animate-in fade-in slide-in-from-left-8 duration-700 delay-200">
+            <p className="text-muted-foreground text-lg md:text-xl max-w-xl mx-auto xl:mx-0 mb-10 leading-relaxed animate-in fade-in slide-in-from-left-8 duration-300 delay-200">
               {t('description')}
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center xl:justify-start gap-6 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-300">
+            <div className="flex flex-col sm:flex-row items-center justify-center xl:justify-start gap-6 animate-in fade-in slide-in-from-bottom-8 duration-300 delay-300">
               <Link
                 href={`/${locale}/${Routes.MENU}`}
                 className={`${buttonVariants({
@@ -100,7 +100,7 @@ const Hero = async ({ locale }: { locale: string }) => {
             </div>
 
             {/* Feature mini-list */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 mt-16 pt-8 border-t border-border/10 animate-in fade-in duration-1000 delay-500">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 mt-16 pt-8 border-t border-border/10 animate-in fade-in duration-500 delay-500">
               <div className="flex items-center gap-3 text-muted-foreground">
                 <Clock className="w-5 h-5 text-primary" />
                 <span className="text-sm font-medium">{t('features.delivery')}</span>
@@ -116,7 +116,7 @@ const Hero = async ({ locale }: { locale: string }) => {
             </div>
           </div>
 
-          <div className="relative h-[450px] md:h-[600px] xl:h-[700px] animate-in fade-in zoom-in duration-1000 delay-200 hidden xl:block">
+          <div className="relative h-[450px] md:h-[600px] xl:h-[700px] animate-in fade-in zoom-in duration-500 delay-200 hidden xl:block">
             {/* Main Burger Image */}
             <div className="relative w-full h-full flex items-center justify-center">
               <div className="absolute w-[80%] h-[80%] bg-primary/20 rounded-full blur-[80px] animate-pulse" />

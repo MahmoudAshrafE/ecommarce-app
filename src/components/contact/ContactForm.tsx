@@ -73,8 +73,8 @@ const ContactForm = () => {
                     required
                 />
             </div>
-            <Button type="submit" className="w-full text-lg font-medium" disabled={loading}>
-                {loading ? t("sending") : t("send")}
+            <Button type="submit" className="w-full text-lg font-medium" loading={loading}>
+                {t("send")}
             </Button>
         </form>
     );

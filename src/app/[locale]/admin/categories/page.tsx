@@ -1,7 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Plus, Pencil, Trash2, Loader2 } from 'lucide-react'
+import { Plus, Pencil, Trash2 } from 'lucide-react'
+import { Loader } from "@/components/ui/loader"
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import {
@@ -142,7 +143,7 @@ const CategoriesPage = () => {
     }
 
     if (loading) {
-        return <div className="flex justify-center p-8"><Loader2 className="animate-spin" /></div>
+        return <div className="flex justify-center p-8"><Loader size="lg" variant="burger" /></div>
     }
 
     return (
@@ -310,8 +311,8 @@ const CategoriesPage = () => {
                             <DialogClose asChild>
                                 <Button type="button" variant="outline" className="w-full sm:w-auto">{t('cancel')}</Button>
                             </DialogClose>
-                            <Button type="submit" disabled={submitting} className="w-full sm:w-auto">
-                                {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : t('save')}
+                            <Button type="submit" loading={submitting} className="w-full sm:w-auto">
+                                {t('save')}
                             </Button>
                         </DialogFooter>
                     </form>

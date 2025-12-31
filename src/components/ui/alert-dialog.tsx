@@ -5,6 +5,7 @@ import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog"
 
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
+import { Loader } from "./loader"
 
 const AlertDialog = AlertDialogPrimitive.Root
 
@@ -100,13 +101,23 @@ AlertDialogDescription.displayName =
 
 const AlertDialogAction = React.forwardRef<
     React.ElementRef<typeof AlertDialogPrimitive.Action>,
-    React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Action>
->(({ className, ...props }, ref) => (
+    React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Action> & { loading?: boolean }
+>(({ className, loading, children, ...props }, ref) => (
     <AlertDialogPrimitive.Action
         ref={ref}
         className={cn(buttonVariants(), className)}
+        disabled={props.disabled || loading}
         {...props}
-    />
+    >
+        {props.asChild ? (
+            children
+        ) : (
+            <>
+                {loading && <Loader variant="spinner" size="sm" className="mr-2 text-current" />}
+                {children}
+            </>
+        )}
+    </AlertDialogPrimitive.Action>
 ))
 AlertDialogAction.displayName = AlertDialogPrimitive.Action.displayName
 

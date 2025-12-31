@@ -2,7 +2,7 @@
 'use client'
 
 import { Review, User } from '@/generated/prisma/client'
-import { Star, Trash2, User as UserIcon, Loader2 } from 'lucide-react'
+import { Star, Trash2, User as UserIcon } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/alert-dialog"
 
 import UserAvatar from '@/components/ui/user-avatar'
+import { Loader } from '@/components/ui/loader'
 
 type ReviewWithUser = Review & {
     user: User
@@ -89,7 +90,7 @@ const ReviewItem = ({ review }: { review: ReviewWithUser }) => {
                         >
                             {isDeleting ? (
                                 <div className="flex items-center gap-2">
-                                    <Loader2 className="h-4 w-4 animate-spin" />
+                                    <Loader variant="spinner" size="sm" />
                                     {t('deleting') || 'Deleting...'}
                                 </div>
                             ) : (
