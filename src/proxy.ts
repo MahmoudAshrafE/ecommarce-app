@@ -9,8 +9,13 @@ const intlMiddleware = createMiddleware({
     localePrefix: 'always'
 });
 
-export default async function proxy(req: NextRequest) {
-    const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+export default async function middleware(req: NextRequest) {
+    // Enhanced secret handling with fallback to match lib/auth.ts
+    const token = await getToken({
+        req,
+        secret: process.env.NEXTAUTH_SECRET || "very-secret-key-for-dev"
+    });
+
     const { pathname } = req.nextUrl;
 
     // Detect current locale
@@ -18,18 +23,17 @@ export default async function proxy(req: NextRequest) {
         (loc) => pathname.startsWith(`/${loc}/`) || pathname === `/${loc}`
     ) || i18n.defaultLocale;
 
-    // List of routes that should only be accessible to guests
+    // Auth and Protected route definitions
     const isAuthPage = pathname.includes('/auth/signin') ||
         pathname.includes('/auth/signup') ||
         pathname.includes('/auth/forgot-password') ||
         pathname.includes('/auth/reset-password');
 
-    // Protected routes
     const isProfilePage = pathname.includes('/profile');
     const isAdminPage = pathname.includes('/admin');
     const isOrdersPage = pathname.includes('/orders') && !pathname.includes('/admin');
 
-    // 1. Redirect logged-in users away from auth pages (login/signup)
+    // 1. Redirect logged-in users away from auth pages
     if (isAuthPage && token) {
         return NextResponse.redirect(new URL(`/${locale}`, req.url));
     }
@@ -39,7 +43,7 @@ export default async function proxy(req: NextRequest) {
         return NextResponse.redirect(new URL(`/${locale}/auth/signin`, req.url));
     }
 
-    // 3. Role-based protection for /admin
+    // 3. Admin role protection
     if (isAdminPage && token && token.role !== 'ADMIN') {
         return NextResponse.redirect(new URL(`/${locale}`, req.url));
     }
@@ -48,6 +52,5 @@ export default async function proxy(req: NextRequest) {
 }
 
 export const config = {
-    // Matcher ignoring api, _next, and static files
     matcher: ['/((?!api|_next|_vercel|.*\\..*).*)']
 };

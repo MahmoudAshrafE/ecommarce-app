@@ -54,9 +54,9 @@ const AdminDashboard = () => {
 
     useEffect(() => {
         if (status === 'unauthenticated') {
-            router.push('/auth/signin')
+            router.push(`/${locale}/auth/signin`)
         }
-    }, [status, router])
+    }, [status, router, locale])
 
     useEffect(() => {
         const fetchStats = async () => {

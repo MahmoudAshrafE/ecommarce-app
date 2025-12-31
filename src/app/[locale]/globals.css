@@ -90,6 +90,18 @@ html[dir="rtl"] .container {
     }
   }
 
+  @keyframes loading-progress {
+    0% {
+      transform: translateX(-100%);
+    }
+
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  --animate-loading-bar: loading-progress 1.5s infinite ease-in-out;
+
   --breakpoint-xs: 425px;
 }
 

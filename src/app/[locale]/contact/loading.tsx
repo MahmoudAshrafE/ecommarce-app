@@ -7,7 +7,7 @@ export default function Loading() {
                 <Loader size="xl" variant="burger" />
                 <div className="flex flex-col items-center gap-2">
                     <p className="animate-pulse text-lg font-black uppercase tracking-widest text-primary">
-                        Loading...
+                        Connecting with us...
                     </p>
                     <div className="h-1 w-24 overflow-hidden rounded-full bg-secondary">
                         <div className="h-full w-full animate-loading-bar bg-primary"></div>

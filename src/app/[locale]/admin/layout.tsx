@@ -16,7 +16,7 @@ const AdminLayout = async ({ children, params }: { children: React.ReactNode, pa
     const t = await getTranslations({ locale, namespace: 'admin' });
 
     if (!session || session.user.role !== UserRole.ADMIN) {
-        redirect(`/${Routes.AUTH}/${Pages.LOGIN}`);
+        redirect(`/${locale}/${Routes.AUTH}/${Pages.LOGIN}`);
     }
 
     return (
