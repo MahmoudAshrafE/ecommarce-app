@@ -15,7 +15,11 @@ const AdminLayout = async ({ children, params }: { children: React.ReactNode, pa
     const session = await getServerSession(authOptions);
     const t = await getTranslations({ locale, namespace: 'admin' });
 
-    if (!session || session.user.role !== UserRole.ADMIN) {
+    const userRole = (session?.user?.role as string)?.toUpperCase();
+    const isAdmin = userRole === 'ADMIN';
+
+    if (!session || !isAdmin) {
+        console.log(`[AdminLayout] Access Denied: Session? ${!!session}, Role: ${userRole}`);
         redirect(`/${locale}/${Routes.AUTH}/${Pages.LOGIN}`);
     }
 

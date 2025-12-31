@@ -10,28 +10,26 @@ const intlMiddleware = createMiddleware({
 });
 
 export default async function middleware(req: NextRequest) {
-    // Enhanced secret handling with fallback to match lib/auth.ts
+    const { pathname } = req.nextUrl;
+
+    // Enhanced secret handling
+    const secret = process.env.NEXTAUTH_SECRET || "very-secret-key-for-dev";
+
     const token = await getToken({
         req,
-        secret: process.env.NEXTAUTH_SECRET || "very-secret-key-for-dev"
+        secret
     });
-
-    const { pathname } = req.nextUrl;
 
     // Detect current locale
     const locale = i18n.locales.find(
         (loc) => pathname.startsWith(`/${loc}/`) || pathname === `/${loc}`
     ) || i18n.defaultLocale;
 
-    // Auth and Protected route definitions
-    const isAuthPage = pathname.includes('/auth/signin') ||
-        pathname.includes('/auth/signup') ||
-        pathname.includes('/auth/forgot-password') ||
-        pathname.includes('/auth/reset-password');
-
-    const isProfilePage = pathname.includes('/profile');
-    const isAdminPage = pathname.includes('/admin');
-    const isOrdersPage = pathname.includes('/orders') && !pathname.includes('/admin');
+    // Define segments more precisely
+    const isAuthPage = pathname.includes(`/${locale}/auth/`) || pathname.includes('/auth/');
+    const isProfilePage = pathname.includes(`/${locale}/profile`) || pathname.includes('/profile');
+    const isAdminPage = pathname.includes(`/${locale}/admin`) || pathname.includes('/admin');
+    const isOrdersPage = pathname.includes(`/${locale}/orders`) || pathname.includes('/orders');
 
     // 1. Redirect logged-in users away from auth pages
     if (isAuthPage && token) {
@@ -40,12 +38,19 @@ export default async function middleware(req: NextRequest) {
 
     // 2. Redirect guests away from protected pages
     if ((isProfilePage || isOrdersPage || isAdminPage) && !token) {
+        const hasSessionCookie = req.cookies.get('next-auth.session-token') || req.cookies.get('__Secure-next-auth.session-token');
+        console.log(`[Middleware] Access Denied: No token. Cookie present? ${!!hasSessionCookie}. Path: ${pathname}`);
         return NextResponse.redirect(new URL(`/${locale}/auth/signin`, req.url));
     }
 
     // 3. Admin role protection
-    if (isAdminPage && token && token.role !== 'ADMIN') {
-        return NextResponse.redirect(new URL(`/${locale}`, req.url));
+    if (isAdminPage && token) {
+        const userRole = (token.role as string)?.toUpperCase();
+        console.log(`[Middleware] Admin Check - Path: ${pathname}, Role: ${userRole}`);
+        if (userRole !== 'ADMIN') {
+            console.log(`[Middleware] Forbidden: Role ${userRole} is not ADMIN.`);
+            return NextResponse.redirect(new URL(`/${locale}`, req.url));
+        }
     }
 
     return intlMiddleware(req);
