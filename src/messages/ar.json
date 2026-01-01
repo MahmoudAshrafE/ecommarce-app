@@ -385,7 +385,13 @@
       "activeNow": "متصل الآن",
       "pendingAttention": "كل شيء يبدو رائعاً اليوم. لديك {count} طلبات معلقة تتطلب اهتمامك.",
       "proceedNow": "المتابعة الآن",
-      "analyzingMetrics": "جاري تحليل البيانات..."
+      "analyzingMetrics": "جاري تحليل البيانات...",
+      "realTimeInsights": "رؤى فورية للنظام",
+      "revenueStats": "الإيرادات والطلبات",
+      "userGrowth": "نمو المستخدمين",
+      "revenue": "الإيرادات",
+      "orders": "الطلبات",
+      "users": "المستخدمون"
     },
     "reviews": {
       "title": "إدارة التقييمات",

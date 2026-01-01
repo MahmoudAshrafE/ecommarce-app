@@ -53,6 +53,59 @@ export async function GET(req: NextRequest) {
             prisma.order.count({ where: { status: 'PENDING' } }),
         ]);
 
+        // Fetch daily data for charts (last 15 days)
+        const fifteenDaysAgo = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 14);
+
+        const [dailyOrders, dailyUsers] = await Promise.all([
+            prisma.order.findMany({
+                where: { createdAt: { gte: fifteenDaysAgo } },
+                select: { createdAt: true, totalPrice: true },
+                orderBy: { createdAt: 'asc' }
+            }),
+            prisma.user.findMany({
+                where: { createdAt: { gte: fifteenDaysAgo } },
+                select: { createdAt: true },
+                orderBy: { createdAt: 'asc' }
+            })
+        ]);
+
+        // Helper to format date as YYYY-MM-DD (Local Time)
+        const formatDate = (date: Date) => {
+            const y = date.getFullYear();
+            const m = String(date.getMonth() + 1).padStart(2, '0');
+            const d = String(date.getDate()).padStart(2, '0');
+            return `${y}-${m}-${d}`;
+        };
+
+        // Initialize chart data with last 15 days (using local time days)
+        const chartDataMap = new Map();
+        for (let i = 0; i < 15; i++) {
+            const date = new Date(now.getFullYear(), now.getMonth(), now.getDate() - i);
+            const dateStr = formatDate(date);
+            chartDataMap.set(dateStr, { date: dateStr, revenue: 0, orders: 0, users: 0 });
+        }
+
+        // Aggregate order data
+        dailyOrders.forEach(order => {
+            const dateStr = formatDate(order.createdAt);
+            if (chartDataMap.has(dateStr)) {
+                const data = chartDataMap.get(dateStr);
+                data.revenue += order.totalPrice;
+                data.orders += 1;
+            }
+        });
+
+        // Aggregate user data
+        dailyUsers.forEach(user => {
+            const dateStr = formatDate(user.createdAt);
+            if (chartDataMap.has(dateStr)) {
+                const data = chartDataMap.get(dateStr);
+                data.users += 1;
+            }
+        });
+
+        const chartData = Array.from(chartDataMap.values()).reverse();
+
         const totalRevenue = allOrders.reduce((sum, order) => sum + order.totalPrice, 0);
 
         const revenueCurrentPeriod = ordersCurrentPeriod.reduce((sum, order) => sum + order.totalPrice, 0);
@@ -80,7 +133,8 @@ export async function GET(req: NextRequest) {
                 products: calculateTrend(productsCurrentPeriod, productsPreviousPeriod),
                 orders: calculateTrend(ordersCurrentPeriod.length, ordersPreviousPeriod.length),
                 revenue: calculateTrend(revenueCurrentPeriod, revenuePreviousPeriod),
-            }
+            },
+            chartData
         });
     } catch (error) {
         console.error("Stats error:", error);

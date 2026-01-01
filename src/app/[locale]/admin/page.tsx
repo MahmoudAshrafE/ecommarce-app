@@ -18,7 +18,17 @@ import {
 } from 'lucide-react'
 import { formatCurrency } from '@/lib/formaters'
 import { cn } from '@/lib/utils'
+import dynamic from 'next/dynamic'
 import { Loader } from '@/components/ui/loader'
+
+const AdminCharts = dynamic(() => import('./_components/AdminCharts').then(mod => mod.AdminCharts), {
+    ssr: false,
+    loading: () => (
+        <div className="h-[350px] w-full bg-card/50 rounded-[2rem] border border-dashed border-border flex flex-col items-center justify-center gap-4">
+            <Loader size="md" variant="burger" />
+        </div>
+    )
+})
 
 const AdminDashboard = () => {
     const { locale } = useParams()
@@ -40,7 +50,8 @@ const AdminDashboard = () => {
             products: 0,
             orders: 0,
             revenue: 0
-        }
+        },
+        chartData: [] as any[]
     })
 
     const [greeting, setGreeting] = useState('')
@@ -210,6 +221,24 @@ const AdminDashboard = () => {
                 })}
             </div>
 
+            {/* Real-time Insights Section */}
+            <div className="space-y-6">
+                <div className="flex items-center gap-3 px-4">
+                    <div className="h-8 w-1.5 bg-primary rounded-full" />
+                    <h2 className="text-2xl font-black tracking-tight uppercase">{t('realTimeInsights') || 'Real-time Insights'}</h2>
+                </div>
+                {stats.chartData && stats.chartData.length > 0 ? (
+                    <AdminCharts data={stats.chartData} />
+                ) : (
+                    <div className="h-[350px] w-full bg-card/50 rounded-[2rem] border border-dashed border-border flex flex-col items-center justify-center gap-4">
+                        <Loader size="md" variant="burger" />
+                        <p className="text-muted-foreground font-bold animate-pulse">
+                            {t('analyzingMetrics')}
+                        </p>
+                    </div>
+                )}
+            </div>
+
             {/* Quick Actions & Activity Section */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
                 {/* Modern Quick Actions */}
@@ -221,7 +250,7 @@ const AdminDashboard = () => {
                             <ArrowRight className={cn("text-muted-foreground w-6 h-6 transition-transform cursor-pointer", isRtl ? "rotate-180 hover:-translate-x-2" : "hover:translate-x-2")} />
                         </div>
 
-                        <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-4 xs:gap-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 xs:gap-6">
                             {[
                                 {
                                     label: t('manageUsers'),

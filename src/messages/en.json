@@ -384,7 +384,13 @@
       "activeNow": "Active Now",
       "pendingAttention": "Everything is looking great today. You have {count} pending orders that require your attention.",
       "proceedNow": "Proceed Now",
-      "analyzingMetrics": "Analyzing metrics..."
+      "analyzingMetrics": "Analyzing metrics...",
+      "realTimeInsights": "Real-time Insights",
+      "revenueStats": "Revenue & Orders",
+      "userGrowth": "User Growth",
+      "revenue": "Revenue",
+      "orders": "Orders",
+      "users": "Users"
     },
     "reviews": {
       "title": "Manage Reviews",
