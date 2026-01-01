@@ -5,9 +5,11 @@ import Link from '../link'
 import { Button } from '../ui/button'
 import { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
-import { Menu, XIcon, Home, ShoppingBag, Info, Phone, LogIn, ShoppingCart, Instagram, Facebook, Twitter, ChevronDown, LayoutDashboard } from 'lucide-react'
+import { Menu, XIcon, Home, ShoppingBag, Info, Phone, LogIn, ShoppingCart, Instagram, Facebook, Twitter, ChevronDown, LayoutDashboard, User, Settings, LogOut } from 'lucide-react'
 import { useParams, usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
+import BaseAvatar from '../ui/user-avatar'
+import { signOut } from 'next-auth/react'
 
 interface NavbarProps {
     isScrolled: boolean;
@@ -108,6 +110,48 @@ const Navbar = ({ isScrolled, isHome, isMobileOnly = false }: NavbarProps) => {
                                     <XIcon className='w-5 h-5' />
                                 </Button>
                             </div>
+
+                            {/* User Profile Section (Mobile Only) */}
+                            {session?.user && (
+                                <div className="mb-6 p-4 bg-secondary/30 rounded-3xl border border-white/5 space-y-4">
+                                    <div className="flex items-center gap-3">
+                                        <BaseAvatar
+                                            image={session.user.image}
+                                            name={session.user.name}
+                                            size="md"
+                                        />
+                                        <div className="flex flex-col min-w-0">
+                                            <span className="font-black text-sm truncate">{session.user.name}</span>
+                                            <span className="text-[10px] text-muted-foreground truncate font-bold uppercase tracking-wider">{session.user.email}</span>
+                                        </div>
+                                    </div>
+                                    <div className="grid grid-cols-2 gap-2">
+                                        <Link
+                                            href={`/${locale}/${Routes.PROFILE}`}
+                                            onClick={() => setOpen(false)}
+                                            className="flex items-center gap-2 p-2.5 bg-background/50 hover:bg-primary/10 hover:text-primary rounded-xl text-xs font-bold transition-all group"
+                                        >
+                                            <User className="w-3.5 h-3.5 text-muted-foreground group-hover:text-primary" />
+                                            {t('profile')}
+                                        </Link>
+                                        <Link
+                                            href={`/${locale}/${Routes.PROFILE}?tab=orders`}
+                                            onClick={() => setOpen(false)}
+                                            className="flex items-center gap-2 p-2.5 bg-background/50 hover:bg-primary/10 hover:text-primary rounded-xl text-xs font-bold transition-all group"
+                                        >
+                                            <ShoppingBag className="w-3.5 h-3.5 text-muted-foreground group-hover:text-primary" />
+                                            {t('orders') || "Orders"}
+                                        </Link>
+                                    </div>
+                                    <button
+                                        onClick={() => signOut()}
+                                        className="w-full flex items-center justify-center gap-2 p-2.5 bg-destructive/5 hover:bg-destructive hover:text-white rounded-xl text-xs font-black text-destructive transition-all"
+                                    >
+                                        <LogOut className="w-3.5 h-3.5" />
+                                        {t('signOut')}
+                                    </button>
+                                </div>
+                            )}
 
                             {/* Links List */}
                             <nav className="flex flex-col gap-1.5 pb-6">
