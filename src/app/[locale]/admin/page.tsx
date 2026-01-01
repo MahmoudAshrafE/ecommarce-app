@@ -24,7 +24,7 @@ import { Loader } from '@/components/ui/loader'
 const AdminCharts = dynamic(() => import('./_components/AdminCharts').then(mod => mod.AdminCharts), {
     ssr: false,
     loading: () => (
-        <div className="h-[350px] w-full bg-card/50 rounded-[2rem] border border-dashed border-border flex flex-col items-center justify-center gap-4">
+        <div className="h-[350px] w-full bg-card/50 rounded-4xl border border-dashed border-border flex flex-col items-center justify-center gap-4">
             <Loader size="md" variant="burger" />
         </div>
     )
@@ -143,8 +143,8 @@ const AdminDashboard = () => {
         <div className="space-y-8 animate-in fade-in duration-1000">
             {/* Welcome Section */}
             <div className="relative group">
-                <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-[2.5rem] blur opacity-25 group-hover:opacity-50 transition duration-1000" />
-                <div className="relative flex flex-col md:flex-row items-center justify-between p-5 xs:p-8 md:p-10 bg-card rounded-[2rem] border border-border/50 shadow-sm overflow-hidden">
+                <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-4xl blur opacity-25 group-hover:opacity-50 transition duration-1000" />
+                <div className="relative flex flex-col md:flex-row items-center justify-between p-5 xs:p-8 md:p-10 bg-card rounded-4xl border border-border/50 shadow-sm overflow-hidden">
                     <div className="absolute top-0 right-0 p-4 opacity-5">
                         <Waves className="w-32 h-32" />
                     </div>
@@ -187,7 +187,7 @@ const AdminDashboard = () => {
                         <div
                             key={index}
                             className={cn(
-                                "group relative overflow-hidden bg-card p-6 rounded-[2rem] border transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-black/5",
+                                "group relative overflow-hidden bg-card p-6 rounded-4xl border transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-black/5",
                                 stat.border
                             )}
                             style={{ transitionDelay: `${index * 100}ms` }}
@@ -230,7 +230,7 @@ const AdminDashboard = () => {
                 {stats.chartData && stats.chartData.length > 0 ? (
                     <AdminCharts data={stats.chartData} />
                 ) : (
-                    <div className="h-[350px] w-full bg-card/50 rounded-[2rem] border border-dashed border-border flex flex-col items-center justify-center gap-4">
+                    <div className="h-[350px] w-full bg-card/50 rounded-4xl border border-dashed border-border flex flex-col items-center justify-center gap-4">
                         <Loader size="md" variant="burger" />
                         <p className="text-muted-foreground font-bold animate-pulse">
                             {t('analyzingMetrics')}
@@ -243,7 +243,7 @@ const AdminDashboard = () => {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
                 {/* Modern Quick Actions */}
                 <div className="lg:col-span-12">
-                    <div className="bg-card/50 backdrop-blur-xl rounded-[2.5rem] p-5 xs:p-8 md:p-10 border border-border/50">
+                    <div className="bg-card/60 backdrop-blur-xl rounded-4xl border border-border/50 p-6 md:p-8 shadow-2xl relative overflow-hidden group transition-all duration-500 hover:shadow-primary/5">
                         <div className="flex items-center justify-between mb-6 xs:mb-10">
                             <h2 className="text-xl md:text-2xl font-black tracking-tight uppercase">{t('quickActions')}</h2>
                             <div className="h-px flex-1 mx-8 bg-border/50 hidden md:block" />

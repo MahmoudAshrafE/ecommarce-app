@@ -300,11 +300,11 @@ const ProfilePage = () => {
 
                     {/* Sidebar */}
                     <aside className="lg:col-span-3">
-                        <div className="bg-card/50 backdrop-blur-xl border border-border/50 rounded-[2rem] p-6 sticky top-24 space-y-8">
+                        <div className="bg-card/50 backdrop-blur-xl border border-border/50 rounded-4xl p-6 sticky top-24 space-y-8">
                             <div className="flex flex-col items-center text-center space-y-4">
                                 <div className="relative group cursor-pointer">
                                     <div className="absolute inset-0 bg-primary/20 rounded-full blur-xl group-hover:blur-2xl transition-all opacity-0 group-hover:opacity-100 duration-500" />
-                                    <div className="w-28 h-28 rounded-full bg-gradient-to-br from-primary to-primary/60 p-1 relative z-10 transition-transform duration-500 group-hover:scale-105">
+                                    <div className="w-28 h-28 rounded-full bg-linear-to-br from-primary to-primary/60 p-1 relative z-10 transition-transform duration-500 group-hover:scale-105">
                                         <div className="w-full h-full rounded-full bg-card flex items-center justify-center overflow-hidden relative">
                                             {uploading ? (
                                                 <div className="absolute inset-0 bg-black/40 flex items-center justify-center z-20">

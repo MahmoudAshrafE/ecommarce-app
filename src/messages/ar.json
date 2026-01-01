@@ -180,52 +180,6 @@
     "checkout": "الدفع",
     "tagline": "© 2025 سوبريم برجر. طهي بشغف."
   },
-  "auth": {
-    "login": {
-      "title": "مرحبًا بعودتك",
-      "name": {
-        "label": "الاسم",
-        "placeholder": "أدخل اسمك"
-      },
-      "email": {
-        "label": "البريد الإلكتروني",
-        "placeholder": "أدخل بريدك الإلكتروني"
-      },
-      "password": {
-        "label": "كلمة المرور",
-        "placeholder": "أدخل كلمة المرور"
-      },
-      "submit": "تسجيل الدخول",
-      "authPrompt": {
-        "message": "ليس لديك حساب؟ ",
-        "signUpLinkText": "سجل الآن"
-      }
-    },
-    "register": {
-      "title": "إنشاء حساب",
-      "name": {
-        "label": "الاسم",
-        "placeholder": "أدخل اسمك"
-      },
-      "email": {
-        "label": "البريد الإلكتروني",
-        "placeholder": "أدخل بريدك الإلكتروني"
-      },
-      "password": {
-        "label": "كلمة المرور",
-        "placeholder": "أدخل كلمة المرور"
-      },
-      "confirmPassword": {
-        "label": "تأكيد كلمة المرور",
-        "placeholder": "أعد إدخال كلمة المرور"
-      },
-      "submit": "إنشاء حساب",
-      "authPrompt": {
-        "message": "هل لديك حساب؟ ",
-        "loginLinkText": "تسجيل الدخول"
-      }
-    }
-  },
   "validation": {
     "nameRequired": "الاسم مطلوب",
     "validEmail": "يجب أن يكون بريد إلكتروني صالح",

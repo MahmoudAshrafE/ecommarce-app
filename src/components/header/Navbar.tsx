@@ -73,7 +73,7 @@ const Navbar = ({ isScrolled, isHome, isMobileOnly = false }: NavbarProps) => {
                 <Button
                     variant='ghost'
                     size='icon'
-                    className={`absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-[100] rounded-full w-10 h-10 sm:w-12 sm:h-12 shadow-xl ${!isScrolled && isHome
+                    className={`absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-100 rounded-full w-10 h-10 sm:w-12 sm:h-12 shadow-xl ${!isScrolled && isHome
                         ? "text-foreground bg-background/20 hover:bg-background/40 border border-white/10 backdrop-blur-md"
                         : "text-foreground bg-background/80 backdrop-blur-xl hover:bg-background border border-border/50"
                         }`}
@@ -83,7 +83,7 @@ const Navbar = ({ isScrolled, isHome, isMobileOnly = false }: NavbarProps) => {
                 </Button>
 
                 {open && createPortal(
-                    <div className="fixed inset-0 z-[999] xl:hidden">
+                    <div className="fixed inset-0 z-999 xl:hidden">
                         {/* Backdrop with blur */}
                         <div
                             className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200"
@@ -91,14 +91,14 @@ const Navbar = ({ isScrolled, isHome, isMobileOnly = false }: NavbarProps) => {
                         />
 
                         {/* Drawer Content */}
-                        <div className="absolute top-0 left-0 right-0 max-h-[85vh] bg-background/95 backdrop-blur-xl rounded-b-[2rem] border-b border-white/10 p-5 flex flex-col shadow-2xl animate-in slide-in-from-top duration-200 ease-out overflow-y-auto ring-1 ring-white/5">
+                        <div className="absolute top-0 left-0 right-0 max-h-[85vh] bg-background/95 backdrop-blur-xl rounded-b-4xl border-b border-white/10 p-5 flex flex-col shadow-2xl animate-in slide-in-from-top duration-200 ease-out overflow-y-auto ring-1 ring-white/5">
 
                             {/* Drawer Handle/Indicator */}
                             <div className="mx-auto w-12 h-1 bg-muted-foreground/20 rounded-full mb-4" />
 
                             {/* Header */}
                             <div className="flex items-center justify-between mb-6 px-1">
-                                <span className="text-xl font-black tracking-tight bg-gradient-to-r from-foreground to-foreground/60 bg-clip-text text-transparent">
+                                <span className="text-xl font-black tracking-tight bg-linear-to-r from-foreground to-foreground/60 bg-clip-text text-transparent">
                                     {t('menu')}
                                 </span>
                                 <Button
@@ -111,47 +111,6 @@ const Navbar = ({ isScrolled, isHome, isMobileOnly = false }: NavbarProps) => {
                                 </Button>
                             </div>
 
-                            {/* User Profile Section (Mobile Only) */}
-                            {session?.user && (
-                                <div className="mb-6 p-4 bg-secondary/30 rounded-3xl border border-white/5 space-y-4">
-                                    <div className="flex items-center gap-3">
-                                        <BaseAvatar
-                                            image={session.user.image}
-                                            name={session.user.name}
-                                            size="md"
-                                        />
-                                        <div className="flex flex-col min-w-0">
-                                            <span className="font-black text-sm truncate">{session.user.name}</span>
-                                            <span className="text-[10px] text-muted-foreground truncate font-bold uppercase tracking-wider">{session.user.email}</span>
-                                        </div>
-                                    </div>
-                                    <div className="grid grid-cols-2 gap-2">
-                                        <Link
-                                            href={`/${locale}/${Routes.PROFILE}`}
-                                            onClick={() => setOpen(false)}
-                                            className="flex items-center gap-2 p-2.5 bg-background/50 hover:bg-primary/10 hover:text-primary rounded-xl text-xs font-bold transition-all group"
-                                        >
-                                            <User className="w-3.5 h-3.5 text-muted-foreground group-hover:text-primary" />
-                                            {t('profile')}
-                                        </Link>
-                                        <Link
-                                            href={`/${locale}/${Routes.PROFILE}?tab=orders`}
-                                            onClick={() => setOpen(false)}
-                                            className="flex items-center gap-2 p-2.5 bg-background/50 hover:bg-primary/10 hover:text-primary rounded-xl text-xs font-bold transition-all group"
-                                        >
-                                            <ShoppingBag className="w-3.5 h-3.5 text-muted-foreground group-hover:text-primary" />
-                                            {t('orders') || "Orders"}
-                                        </Link>
-                                    </div>
-                                    <button
-                                        onClick={() => signOut()}
-                                        className="w-full flex items-center justify-center gap-2 p-2.5 bg-destructive/5 hover:bg-destructive hover:text-white rounded-xl text-xs font-black text-destructive transition-all"
-                                    >
-                                        <LogOut className="w-3.5 h-3.5" />
-                                        {t('signOut')}
-                                    </button>
-                                </div>
-                            )}
 
                             {/* Links List */}
                             <nav className="flex flex-col gap-1.5 pb-6">

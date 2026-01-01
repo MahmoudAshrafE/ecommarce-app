@@ -56,7 +56,7 @@ const UserAvatar = () => {
             {/* Dropdown Menu */}
             <div
                 dir={locale === 'ar' ? 'rtl' : 'ltr'}
-                className={`absolute end-0 mt-3 w-56 bg-gradient-to-br from-card to-background border border-border/50 rounded-2xl shadow-2xl transition-all duration-300 z-[9999] overflow-hidden backdrop-blur-3xl 
+                className={`absolute end-0 mt-3 w-56 bg-linear-to-br from-card to-background border border-border/50 rounded-2xl shadow-2xl transition-all duration-300 z-9999 overflow-hidden backdrop-blur-3xl 
                 origin-top-right ${isOpen ? 'opacity-100 visible translate-y-0 scale-100' : 'opacity-0 invisible -translate-y-2 scale-95'}
                 `}
             >

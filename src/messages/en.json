@@ -180,52 +180,6 @@
     "checkout": "Checkout",
     "tagline": "© 2025 SUPREME BURGER. COOKED WITH PASSION."
   },
-  "auth": {
-    "login": {
-      "title": "Welcome Back",
-      "name": {
-        "label": "Name",
-        "placeholder": "Enter your name"
-      },
-      "email": {
-        "label": "Email",
-        "placeholder": "Enter your email"
-      },
-      "password": {
-        "label": "Password",
-        "placeholder": "Enter your password"
-      },
-      "submit": "Login",
-      "authPrompt": {
-        "message": "Don't have an account? ",
-        "signUpLinkText": "Sign Up"
-      }
-    },
-    "register": {
-      "title": "Register",
-      "name": {
-        "label": "Name",
-        "placeholder": "Enter your name"
-      },
-      "email": {
-        "label": "Email",
-        "placeholder": "Enter your email"
-      },
-      "password": {
-        "label": "Password",
-        "placeholder": "Enter your password"
-      },
-      "confirmPassword": {
-        "label": "Confirm Password",
-        "placeholder": "Re-enter your password"
-      },
-      "submit": "Register",
-      "authPrompt": {
-        "message": "Already have an account? ",
-        "loginLinkText": "Login"
-      }
-    }
-  },
   "validation": {
     "nameRequired": "Name is required",
     "validEmail": "Must be a valid email",
