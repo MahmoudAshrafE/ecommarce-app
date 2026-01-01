@@ -1,7 +1,7 @@
 'use client'
 
 import { useSession } from 'next-auth/react'
-import { useRouter, useParams } from 'next/navigation'
+import { useRouter, useParams, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { User, Mail, Calendar, ShoppingBag, Settings, LogOut, Lock, Camera } from 'lucide-react'
 import { useTranslations } from 'next-intl'
@@ -14,7 +14,6 @@ import SignOutModal from '@/components/auth/SignOutModal'
 import { useToast } from '@/components/ui/use-toast'
 import UserAvatar from '@/components/ui/user-avatar'
 import Breadcrumbs from '@/components/Breadcrumbs'
-import PageHero from '@/components/PageHero'
 import { cn } from '@/lib/utils'
 
 type Tab = 'info' | 'orders' | 'settings';
@@ -25,7 +24,18 @@ const ProfilePage = () => {
     const { data: session, status } = useSession()
     const router = useRouter()
     const { locale } = useParams()
-    const [activeTab, setActiveTab] = useState<Tab>('info')
+    const searchParams = useSearchParams()
+    const tabParam = searchParams.get('tab') as Tab
+
+    const [activeTab, setActiveTab] = useState<Tab>(
+        (tabParam && ['info', 'orders', 'settings'].includes(tabParam)) ? tabParam : 'info'
+    )
+
+    useEffect(() => {
+        if (tabParam && ['info', 'orders', 'settings'].includes(tabParam)) {
+            setActiveTab(tabParam)
+        }
+    }, [tabParam])
     const [currentPassword, setCurrentPassword] = useState('')
     const [newPassword, setNewPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')

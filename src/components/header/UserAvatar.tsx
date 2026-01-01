@@ -74,7 +74,7 @@ const UserAvatar = () => {
                         {t('profile')}
                     </Link>
                     <Link
-                        href={`/${locale}/${Routes.PROFILE}`}
+                        href={`/${locale}/${Routes.PROFILE}?tab=orders`}
                         onClick={() => setIsOpen(false)}
                         className="flex items-center gap-3 px-3 py-2.5 text-sm font-medium hover:bg-primary/10 hover:text-primary rounded-xl transition-all duration-200 group"
                     >
@@ -82,7 +82,7 @@ const UserAvatar = () => {
                         {t('orders') || "Orders"}
                     </Link>
                     <Link
-                        href={`/${locale}/${Routes.PROFILE}`}
+                        href={`/${locale}/${Routes.PROFILE}?tab=settings`}
                         onClick={() => setIsOpen(false)}
                         className="flex items-center gap-3 px-3 py-2.5 text-sm font-medium hover:bg-primary/10 hover:text-primary rounded-xl transition-all duration-200 group"
                     >

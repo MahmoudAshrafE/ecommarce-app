@@ -351,7 +351,21 @@
     "signOutConfirm": "Are you sure you want to leave? We'll miss you! 🍔",
     "changeImage": "Change Photo",
     "uploadImage": "Add Image",
-    "uploadingImage": "Uploading..."
+    "uploadingImage": "Uploading...",
+    "orderDetails": "Order Details",
+    "deliveryInformation": "Delivery Information",
+    "orderSummary": "Order Summary",
+    "items": "Items",
+    "subTotal": "Subtotal",
+    "deliveryFee": "Delivery Fee",
+    "total": "Total",
+    "phone": "Phone",
+    "address": "Address",
+    "notes": "Notes",
+    "noNotes": "No notes provided",
+    "paid": "Paid",
+    "unpaid": "Unpaid",
+    "quantity": "Quantity"
   },
   "admin": {
     "admin": "Admin Dashboard",
