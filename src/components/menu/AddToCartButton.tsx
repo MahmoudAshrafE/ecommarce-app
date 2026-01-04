@@ -23,12 +23,14 @@ import {
 } from "@/redux/features/cart/cartSlice";
 import { Extra, Size } from "@/generated/prisma/client";
 import { getItemQuantity } from "@/lib/cart";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Check, Minus, Plus, ShoppingCart, Trash2, Sparkles } from "lucide-react";
 
 
 const AddToCartButton = ({ item }: { item: ProductWithRelations }) => {
   const t = useTranslations()
+  const locale = useLocale();
+  const isRtl = locale === 'ar';
   const cart = useAppSelector(selectCartItems);
   const dispatch = useAppDispatch();
 
@@ -85,95 +87,74 @@ const AddToCartButton = ({ item }: { item: ProductWithRelations }) => {
           <span>{t('menuItem.addToCart')}</span>
         </Button>
       </DialogTrigger>
-      <DialogContent className="w-[95vw] sm:max-w-[550px] max-h-[92vh] md:max-h-[95vh] p-0 gap-0 bg-background/80 backdrop-blur-3xl border border-white/10 rounded-4xl md:rounded-5xl animate-in fade-in zoom-in duration-300 flex flex-col [&>button]:text-foreground hover:[&>button]:text-primary overflow-hidden">
-        {/* Header Image Section */}
-        <div className="relative w-full h-44 md:h-56 bg-linear-to-br from-primary/10 to-orange-500/5 flex items-center justify-center p-6 md:p-8 overflow-hidden shrink-0">
-          {/* Animated Background Elements */}
-          <div className="absolute top-0 right-0 w-40 h-40 bg-primary/20 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-0 left-0 w-32 h-32 bg-orange-500/20 rounded-full blur-2xl animate-pulse delay-75" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.1),rgba(255,255,255,0))]" />
+      <DialogContent className="w-[95vw] sm:max-w-md max-h-[90vh] p-0 overflow-hidden bg-background rounded-2xl border border-border shadow-lg flex flex-col">
+        <DialogHeader className="p-6 pb-4 border-b shrink-0 px-14 text-left rtl:text-right" dir={isRtl ? 'rtl' : 'ltr'}>
+          <div className="flex items-center gap-4">
+            {/* Small Product Image */}
+            <div className="relative w-16 h-16 rounded-xl overflow-hidden bg-secondary/30 shrink-0 border border-border">
+              <Image
+                alt={isRtl ? item.nameAr || item.name : item.name}
+                src={item.image}
+                fill
+                className="object-contain p-1"
+              />
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="flex flex-col">
+                <DialogTitle className="text-lg font-bold truncate leading-tight">
+                  {isRtl ? item.nameAr || item.name : item.name}
+                </DialogTitle>
+                <span className="text-xl font-black text-primary mt-0.5">{formatCurrency(totalPrice)}</span>
+              </div>
+              <DialogDescription className="text-[10px] text-muted-foreground line-clamp-2 mt-1 uppercase tracking-wider font-medium">
+                {isRtl ? item.descriptionAr || item.description : item.description}
+              </DialogDescription>
+            </div>
+          </div>
+        </DialogHeader>
 
-          {/* Premium Badge */}
-
-
-          <Image
-            alt={item.name}
-            src={item.image}
-            width={180}
-            height={180}
-            className="object-contain drop-shadow-2xl z-10 transition-all hover:scale-110 hover:rotate-3 duration-500 animate-in zoom-in w-32 md:w-44"
-          />
-        </div>
-
-        {/* Scrollable Content Area */}
-        <div className="flex-1 overflow-y-auto p-5 md:p-8 space-y-6 md:space-y-8 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:bg-foreground/20 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-foreground/40">
-          <DialogHeader className="space-y-4">
-            <div className="flex items-start justify-between gap-4">
-              <DialogTitle className="text-2xl md:text-3xl font-black tracking-tight bg-linear-to-r from-foreground to-foreground/70 bg-clip-text text-transparent animate-in slide-in-from-left duration-500">{item.name}</DialogTitle>
-              <div className="flex flex-col items-end gap-1 animate-in slide-in-from-right duration-500">
-                <span className="bg-linear-to-r from-primary to-orange-500 text-black px-3 md:px-4 py-1.5 md:py-2 rounded-xl md:rounded-2xl text-lg md:text-xl font-black whitespace-nowrap">{formatCurrency(totalPrice)}</span>
-                {selectedExtras.length > 0 && (
-                  <span className="text-xs text-muted-foreground font-medium">+{selectedExtras.length} extras</span>
-                )}
+        {/* Scrollable Content */}
+        <div className="flex-1 overflow-y-auto p-6 space-y-8">
+          {/* Sizes Section */}
+          {item.sizes.length > 0 && (
+            <div className="space-y-4">
+              <Label className="text-sm font-bold uppercase tracking-widest text-muted-foreground">{t('sizes')}</Label>
+              <div className="grid grid-cols-2 xs:grid-cols-3 gap-3">
+                <PickSize
+                  sizes={item.sizes}
+                  selectedSize={selectedSize}
+                  setSelectedSize={setSelectedSize}
+                  t={t}
+                />
               </div>
             </div>
-            <DialogDescription className="text-muted-foreground leading-relaxed text-base animate-in fade-in duration-700">
-              {item.description}
-            </DialogDescription>
-          </DialogHeader>
+          )}
 
-          <div className="space-y-8">
-            {/* Sizes Section */}
-            {item.sizes.length > 0 && (
-              <div className="space-y-4 animate-in slide-in-from-bottom duration-500 delay-100">
-                <div className="flex items-center gap-2">
-                  <div className="w-1 h-6 bg-linear-to-b from-primary to-orange-500 rounded-full" />
-                  <Label className="text-lg font-black uppercase tracking-widest text-foreground">{t('sizes')}</Label>
-                </div>
-                <div className="grid grid-cols-2 xs:grid-cols-3 gap-3">
-                  <PickSize
-                    sizes={item.sizes}
-                    selectedSize={selectedSize}
-                    setSelectedSize={setSelectedSize}
-                    t={t}
-                  />
-                </div>
-
+          {/* Extras Section */}
+          {item.extras.length > 0 && (
+            <div className="space-y-4">
+              <Label className="text-sm font-bold uppercase tracking-widest text-muted-foreground">{t('extrasIngredients')}</Label>
+              <div className="flex flex-col gap-3">
+                <Extras
+                  extras={item.extras}
+                  selectedExtras={selectedExtras}
+                  setSelectedExtras={setSelectedExtras}
+                  t={t}
+                />
               </div>
-            )}
-
-            {/* Extras Section */}
-            {item.extras.length > 0 && (
-              <div className="space-y-4 animate-in slide-in-from-bottom duration-500 delay-200">
-                <div className="flex items-center gap-2">
-                  <div className="w-1 h-6 bg-linear-to-b from-orange-500 to-primary rounded-full" />
-                  <Label className="text-lg font-black uppercase tracking-widest text-foreground flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-primary" />
-                    {t('extrasIngredients')}
-                  </Label>
-                </div>
-                <div className="flex flex-col gap-3">
-                  <Extras
-                    extras={item.extras}
-                    selectedExtras={selectedExtras}
-                    setSelectedExtras={setSelectedExtras}
-                    t={t}
-                  />
-                </div>
-              </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
 
-        {/* Footer with Glassmorphism */}
-        <DialogFooter className="p-4 md:p-6 bg-secondary/20 border-t border-white/5 backdrop-blur-xl shrink-0 animate-in slide-in-from-bottom duration-500 delay-300">
+        {/* Simplified Footer */}
+        <DialogFooter className="p-4 border-t bg-secondary/5 mb-0 shrink-0">
           {quantity === 0 ? (
             <Button
               type='submit'
               onClick={handleAddToCart}
-              className='w-full h-14 md:h-16 text-base font-bold rounded-xl md:rounded-2xl hover:scale-[1.02] active:scale-95 transition-all bg-linear-to-r from-primary via-primary to-orange-500 uppercase tracking-wide border border-primary/20'
+              className='w-full h-12 text-sm font-bold rounded-xl transition-all hover:scale-[1.01] active:scale-95 bg-primary text-primary-foreground uppercase tracking-wide'
             >
-              <ShoppingCart className="mr-3 w-5 h-5 md:w-6 md:h-6" />
+              <ShoppingCart className="mr-2 w-4 h-4" />
               {t('menuItem.addToCart')}
             </Button>
           ) : (
