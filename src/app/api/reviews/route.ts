@@ -52,7 +52,6 @@ export async function POST(req: Request) {
 
         // Trigger cache revalidation
         try {
-            revalidateTag("products")
             revalidatePath("/", "layout")
         } catch (revalidateError) {
             console.error("[REVIEWS_API] Revalidation error (non-fatal):", revalidateError);
