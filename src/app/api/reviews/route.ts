@@ -1,30 +1,34 @@
-
 import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 import { getServerSession } from "next-auth/next"
 import { revalidatePath, revalidateTag } from "next/cache"
 import { NextResponse } from "next/server"
-import fs from 'fs'
-import path from 'path'
 
 export async function POST(req: Request) {
-    const logFile = path.join(process.cwd(), 'review-api-log.txt');
     try {
         const session = await getServerSession(authOptions)
-        fs.appendFileSync(logFile, `\n[${new Date().toISOString()}] REVIEW_POST: Session user: ${JSON.stringify(session?.user)}\n`);
 
         if (!session?.user) {
-            fs.appendFileSync(logFile, `[${new Date().toISOString()}] REVIEW_POST: Unauthorized\n`);
-            return new NextResponse("Unauthorized", { status: 401 })
+            console.error("[REVIEWS_API] Unauthorized: No session found on Vercel");
+            return NextResponse.json(
+                { error: "You must be signed in to leave a review." },
+                { status: 401 }
+            )
         }
 
-        const body = await req.json()
-        fs.appendFileSync(logFile, `[${new Date().toISOString()}] REVIEW_POST: Body: ${JSON.stringify(body)}\n`);
+        const body = await req.json().catch(() => null)
+        if (!body) {
+            return NextResponse.json({ error: "Invalid request body." }, { status: 400 })
+        }
+
         const { productId, rating, comment } = body
 
         if (!productId || rating === undefined || !comment) {
-            fs.appendFileSync(logFile, `[${new Date().toISOString()}] REVIEW_POST: Missing fields: ${JSON.stringify({ productId, rating, comment })}\n`);
-            return new NextResponse("Missing required fields", { status: 400 })
+            console.error("[REVIEWS_API] Missing fields:", { productId, rating, comment });
+            return NextResponse.json(
+                { error: "Missing required fields: Product ID, Rating, and Comment are all required." },
+                { status: 400 }
+            )
         }
 
         const review = await prisma.review.create({
@@ -35,19 +39,31 @@ export async function POST(req: Request) {
                 comment,
             },
             include: {
-                user: true
+                user: {
+                    select: {
+                        name: true,
+                        image: true
+                    }
+                }
             }
         })
-        fs.appendFileSync(logFile, `[${new Date().toISOString()}] REVIEW_POST: Review created successfully: ${review.id}\n`);
 
-        revalidatePath("/", "layout")
+        console.log(`[REVIEWS_API] Success: Review ${review.id} added for product ${productId}`);
+
+        // Trigger cache revalidation
+        try {
+            revalidateTag("products")
+            revalidatePath("/", "layout")
+        } catch (revalidateError) {
+            console.error("[REVIEWS_API] Revalidation error (non-fatal):", revalidateError);
+        }
 
         return NextResponse.json(review)
     } catch (error: any) {
-        fs.appendFileSync(logFile, `[${new Date().toISOString()}] REVIEW_POST_ERROR: ${error.message}\n${error.stack}\n`);
-        return new NextResponse(JSON.stringify({ error: error.message }), {
-            status: 500,
-            headers: { 'Content-Type': 'application/json' }
-        })
+        console.error("[REVIEWS_API_ERROR]", error);
+        return NextResponse.json(
+            { error: "Something went wrong on our end. Please try again later." },
+            { status: 500 }
+        )
     }
 }
