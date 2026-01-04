@@ -37,19 +37,24 @@ const ReviewForm = ({ productId }: { productId: string }) => {
                 setComment('')
                 setRating(5)
                 router.refresh()
+                toast({
+                    title: t('messages.success') || 'Success',
+                    description: 'Review submitted successfully'
+                })
             } else {
+                const data = await res.json().catch(() => ({}));
                 toast({
                     variant: 'destructive',
                     title: t('messages.error') || 'Error',
-                    description: 'Failed to submit review'
+                    description: data.error || 'Failed to submit review'
                 })
             }
-        } catch (error) {
+        } catch (error: any) {
             console.error(error)
             toast({
                 variant: 'destructive',
                 title: t('messages.error') || 'Error',
-                description: 'Failed to submit review'
+                description: error.message || 'Failed to submit review'
             })
         } finally {
             setIsSubmitting(false)
