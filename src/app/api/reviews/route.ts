@@ -61,7 +61,7 @@ export async function POST(req: Request) {
     } catch (error: any) {
         console.error("[REVIEWS_API_ERROR]", error);
         return NextResponse.json(
-            { error: "Something went wrong on our end. Please try again later." },
+            { error: `Server Error: ${error.message}` },
             { status: 500 }
         )
     }
