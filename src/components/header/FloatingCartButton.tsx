@@ -15,6 +15,7 @@ const FloatingCartButton = () => {
     const [mounted, setMounted] = useState(false)
 
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setMounted(true)
     }, [])
 
@@ -23,12 +24,13 @@ const FloatingCartButton = () => {
     return (
         <Link
             href={`/${locale}/${Routes.CART}`}
-            className="md:hidden fixed bottom-6 right-5 rtl:right-auto rtl:left-5 z-50 w-12 h-12 rounded-full bg-gradient-to-br from-primary via-primary to-orange-500 dark:from-secondary dark:via-secondary dark:to-secondary shadow-2xl shadow-primary/40 dark:shadow-none flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 group animate-in zoom-in duration-500"
+            className="md:hidden fixed bottom-6 right-5 rtl:right-auto rtl:left-5 z-50 w-12 h-12 rounded-full bg-linear-to-br from-primary via-primary to-orange-500 dark:from-secondary dark:via-secondary dark:to-secondary shadow-2xl shadow-primary/40 dark:shadow-none flex items-center justify-center transition-all duration-500 hover:scale-110 active:scale-95 group animate-in zoom-in"
         >
+
             <ShoppingCart className="w-5 h-5 text-white transition-transform group-hover:scale-110" />
 
             {quantity > 0 && (
-                <span className="absolute -top-1 -right-1 rtl:-right-auto rtl:-left-1 min-w-[20px] h-[20px] px-1.5 bg-gradient-to-r from-orange-500 to-red-500 text-white text-[10px] font-black rounded-full flex items-center justify-center border-2 border-background shadow-xl animate-in zoom-in duration-300 group-hover:scale-110 transition-transform">
+                <span className="absolute -top-1 -right-1 rtl:-right-auto rtl:-left-1 min-w-[20px] h-[20px] px-1.5 bg-linear-to-r from-orange-500 to-red-500 text-white text-[10px] font-black rounded-full flex items-center justify-center border-2 border-background shadow-xl animate-in zoom-in duration-300 group-hover:scale-110 transition-transform">
                     {quantity}
                 </span>
             )}

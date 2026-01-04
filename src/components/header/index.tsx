@@ -7,9 +7,8 @@ import CartButton from "./CartButton"
 import UserAvatar from "./UserAvatar"
 import LoginButton from "./LoginButton"
 import LanguageSwitcher from "./LanguageSwitcher"
-import { Button } from "../ui/button"
-import { ChevronDown } from "lucide-react"
 import { useTranslations } from "next-intl"
+
 import { useState, useEffect } from "react"
 import { usePathname } from "next/navigation"
 import { ThemeToggle } from "../ThemeToggle"
@@ -17,7 +16,7 @@ import { ThemeToggle } from "../ThemeToggle"
 const Header = () => {
   const t = useTranslations()
   const [isScrolled, setIsScrolled] = useState(false)
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
   const pathname = usePathname()
 
   // Check if we are on the homepage to apply transparent style

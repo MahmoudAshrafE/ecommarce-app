@@ -10,8 +10,10 @@ export function ThemeToggle() {
     const [mounted, setMounted] = React.useState(false)
 
     React.useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setMounted(true)
     }, [])
+
 
     if (!mounted) {
         return <div className="w-10 h-10" />

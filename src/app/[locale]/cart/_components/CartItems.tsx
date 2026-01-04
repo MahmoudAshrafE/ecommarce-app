@@ -17,8 +17,7 @@ const CartItems = () => {
   const dispatch = useAppDispatch()
   const router = useRouter()
 
-  const subTotal = getSubTotal(cart)
-  const DeliverFee = 5
+
 
   return (
     <div className="space-y-6 md:space-y-10">
@@ -80,9 +79,10 @@ const CartItems = () => {
                   )}
                   {item.extras && item.extras.length > 0 && (
                     <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-widest bg-secondary px-2 md:px-3 py-1 rounded-full text-muted-foreground line-clamp-1">
-                      {t('cart.extras')}: {item.extras.map((e: any) => t(e.name)).join(", ")}
+                      {t('cart.extras')}: {item.extras.map((e: { name: string }) => t(e.name)).join(", ")}
                     </span>
                   )}
+
                 </div>
 
                 <div className={`flex items-center justify-between pt-2 md:pt-4 gap-3`}>

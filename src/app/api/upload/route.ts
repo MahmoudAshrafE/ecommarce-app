@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
         const buffer = Buffer.from(bytes);
 
         // Upload to Cloudinary using a Promise to handle the stream
-        const result = await new Promise((resolve, reject) => {
+        const result = await new Promise<{ secure_url: string }>((resolve, reject) => {
             const uploadStream = cloudinary.uploader.upload_stream(
                 {
                     folder: "ecommerce-app",
@@ -45,23 +45,28 @@ export async function POST(req: NextRequest) {
                     }
                     else {
                         console.log("Cloudinary upload success");
-                        resolve(result);
+                        resolve(result as { secure_url: string });
                     }
                 }
             );
             uploadStream.end(buffer);
         });
 
-        // @ts-ignore
         const imageUrl = result.secure_url;
         console.log("File uploaded successfully to:", imageUrl);
 
         return NextResponse.json({ url: imageUrl });
-    } catch (error: any) {
-        console.error("Upload API route error:", error);
-        const errorMessage = error.message || (typeof error === 'string' ? error : JSON.stringify(error)) || "Unknown error";
+    } catch (error) {
+        if (error instanceof Error) {
+            console.error("Upload API route error:", error);
+            const errorMessage = error.message;
+            return NextResponse.json({
+                error: "Upload failed: " + errorMessage
+            }, { status: 500 });
+        }
         return NextResponse.json({
-            error: "Upload failed: " + errorMessage
+            error: "Upload failed: Unknown error"
         }, { status: 500 });
     }
+
 }

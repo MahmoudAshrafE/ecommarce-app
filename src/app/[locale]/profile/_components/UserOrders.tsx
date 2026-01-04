@@ -28,7 +28,8 @@ interface Order {
         quantity: number
         product: {
             name: string
-            image?: string
+            nameAr?: string
+            image: string
             basePrice: number
         }
         size?: {
@@ -42,12 +43,15 @@ interface Order {
     }[]
 }
 
+
 import { useTranslations } from 'next-intl'
 
 const UserOrders = () => {
     const t = useTranslations('profile')
+    const tRoot = useTranslations()
     const tStatus = useTranslations('statuses')
     const tPayment = useTranslations('paymentStatuses')
+
     const { locale } = useParams()
     const isRtl = locale === 'ar'
     const [orders, setOrders] = useState<Order[]>([])
@@ -189,16 +193,18 @@ const UserOrders = () => {
                                             <div key={item.id} className="bg-secondary/20 p-4 rounded-2xl border border-border/50 group hover:bg-secondary/40 transition-colors">
                                                 <div className="flex justify-between items-start gap-4">
                                                     <div className="space-y-1">
-                                                        <p className="font-black text-foreground uppercase tracking-tight">{item.product.name}</p>
+                                                        <p className="font-black text-foreground uppercase tracking-tight">
+                                                            {isRtl ? item.product.nameAr || item.product.name : item.product.name}
+                                                        </p>
                                                         <div className="flex flex-wrap gap-2">
                                                             {item.size && (
                                                                 <span className="text-[10px] font-bold bg-primary/10 text-primary px-2 py-0.5 rounded-md uppercase">
-                                                                    {item.size.name}
+                                                                    {tRoot(item.size.name)}
                                                                 </span>
                                                             )}
                                                             {item.extras?.map((extra, idx) => (
                                                                 <span key={idx} className="text-[10px] font-bold bg-secondary text-muted-foreground px-2 py-0.5 rounded-md uppercase">
-                                                                    + {extra.name}
+                                                                    + {tRoot(extra.name)}
                                                                 </span>
                                                             ))}
                                                         </div>
@@ -212,6 +218,7 @@ const UserOrders = () => {
                                                 </div>
                                             </div>
                                         ))}
+
                                     </div>
                                 </div>
 

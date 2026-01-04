@@ -149,17 +149,19 @@ const CheckOutForm = () => {
         const data = await response.json()
         throw new Error(data.error || "Failed to place order")
       }
-    } catch (error: any) {
-      toast({
-        variant: "destructive",
-        description: error.message
-      })
+    } catch (error) {
+      if (error instanceof Error) {
+        toast({
+          variant: "destructive",
+          description: error.message
+        })
+      }
     } finally {
       setLoading(false)
     }
   }
 
-  const renderInput = (id: string, label: string, icon: any, placeholder: string, type = "text") => {
+  const renderInput = (id: string, label: string, Icon: React.ComponentType<{ className?: string }> | null, placeholder: string, type = "text") => {
     const hasError = touched[id] && errors[id]
     return (
       <div className="space-y-2 relative">
@@ -167,9 +169,10 @@ const CheckOutForm = () => {
           "flex items-center gap-2 font-bold mb-1 transition-colors",
           hasError ? "text-destructive" : "text-foreground/70"
         )}>
-          {icon && <icon.type {...icon.props} className={cn("w-4 h-4", hasError ? "text-destructive" : "text-primary")} />}
+          {Icon && <Icon className={cn("w-4 h-4", hasError ? "text-destructive" : "text-primary")} />}
           {label}
         </Label>
+
         <div className="relative group">
           <Input
             id={id}
@@ -204,11 +207,11 @@ const CheckOutForm = () => {
 
   return (
     <div className="space-y-6" dir={isRtl ? 'rtl' : 'ltr'}>
-      <form onSubmit={handleSubmit} className="bg-card p-5 md:p-8 rounded-[2rem] md:rounded-[3rem] border border-border/50 shadow-xl space-y-6 md:space-y-8 relative overflow-hidden group">
+      <form onSubmit={handleSubmit} className="bg-card p-5 md:p-8 rounded-4xl md:rounded-[3rem] border border-border/50 shadow-xl space-y-6 md:space-y-8 relative overflow-hidden group">
         <div className={cn("absolute top-0 w-2 h-full bg-primary", isRtl ? "right-0" : "left-0")} />
 
         <div className={cn("flex items-center gap-4", isRtl ? "text-right" : "text-left")}>
-          <div className="w-10 h-10 md:w-12 md:h-12 bg-secondary rounded-xl md:rounded-2xl flex items-center justify-center text-primary group-hover:scale-110 transition-transform flex-shrink-0">
+          <div className="w-10 h-10 md:w-12 md:h-12 bg-secondary rounded-xl md:rounded-2xl flex items-center justify-center text-primary group-hover:scale-110 transition-transform shrink-0">
             <CreditCard className="w-5 h-5 md:w-6 md:h-6" />
           </div>
           <div className={isRtl ? "text-right" : "text-left"}>
@@ -218,8 +221,8 @@ const CheckOutForm = () => {
         </div>
 
         <div className="space-y-4 md:space-y-6">
-          {renderInput("phone", t('checkout.phone'), <Phone />, "+123 456 7890", "tel")}
-          {renderInput("streetAddress", t('checkout.streetAddress'), <MapPin />, "123 Main St")}
+          {renderInput("phone", t('checkout.phone'), Phone, "+123 456 7890", "tel")}
+          {renderInput("streetAddress", t('checkout.streetAddress'), MapPin, "123 Main St")}
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {renderInput("postalCode", t('checkout.postalCode'), null, "12345")}
@@ -247,7 +250,7 @@ const CheckOutForm = () => {
         </div>
 
         {/* Order Summary inside form */}
-        <div className="bg-secondary p-5 md:p-6 rounded-2xl md:rounded-[2rem] space-y-3 md:space-y-4 shadow-inner border border-border/50">
+        <div className="bg-secondary p-5 md:p-6 rounded-2xl md:rounded-4xl space-y-3 md:space-y-4 shadow-inner border border-border/50">
           <div className="flex justify-between font-bold text-muted-foreground">
             <span className="text-[10px] md:text-sm uppercase tracking-widest">{t('cart.subtotal')}</span>
             <span className="text-sm md:text-base">{formatCurrency(subTotal, locale as string)}</span>
@@ -264,7 +267,7 @@ const CheckOutForm = () => {
 
         <Button
           type="submit"
-          className="w-full h-14 md:h-16 rounded-xl md:rounded-[1.5rem] text-lg md:text-xl font-black shadow-2xl shadow-primary/30 hover:scale-[1.01] active:scale-95 transition-all group overflow-hidden relative"
+          className="w-full h-14 md:h-16 rounded-xl md:rounded-3xl text-lg md:text-xl font-black shadow-2xl shadow-primary/30 hover:scale-[1.01] active:scale-95 transition-all group overflow-hidden relative"
           loading={loading}
           disabled={cartItems.length === 0}
         >
@@ -285,5 +288,6 @@ const CheckOutForm = () => {
     </div>
   )
 }
+
 
 export default CheckOutForm

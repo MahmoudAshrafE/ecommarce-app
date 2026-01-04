@@ -384,6 +384,7 @@
       "anonymous": "Anonymous"
     },
     "menu-items": {
+      "searchPlaceholder": "Search menu items (name or description)...",
       "createNewMenuItem": "Create new menu item",
       "addItemSize": "Add item size",
       "addExtraItem": "Add extra item",

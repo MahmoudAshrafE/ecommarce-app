@@ -5,9 +5,10 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma/client"
 }
+
 
 datasource db {
   provider = "postgresql"
@@ -54,6 +55,7 @@ model Product {
   extras        Extra[]
   category      Category?      @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   categoryId    String?
+  onOffer       Boolean        @default(false)
   orders        OrderProduct[]
   reviews       Review[]
 }

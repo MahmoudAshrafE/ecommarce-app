@@ -385,6 +385,7 @@
       "anonymous": "مجهول"
     },
     "menu-items": {
+      "searchPlaceholder": "البحث عن العناصر (الاسم أو الوصف)...",
       "createNewMenuItem": "إنشاء عنصر قائمة جديد",
       "addItemSize": "إضافة حجم العنصر",
       "addExtraItem": "إضافة عنصر إضافي",

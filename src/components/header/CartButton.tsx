@@ -20,14 +20,17 @@ const CartButton = ({ onClose }: CartButtonProps) => {
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true)
   }, [])
+
 
   if (!mounted) return null;
   return (
     <Link
       href={`/${locale}/${Routes.CART}`}
-      className="flex items-center justify-center w-12 h-12 rounded-2xl bg-secondary/50 dark:bg-white/5 border border-transparent dark:border-white/10 hover:bg-gradient-to-br hover:from-primary hover:to-orange-500 transition-all duration-300 group relative shadow-inner dark:shadow-none"
+      className="flex items-center justify-center w-12 h-12 rounded-2xl bg-secondary/50 dark:bg-white/5 border border-transparent dark:border-white/10 hover:bg-linear-to-br hover:from-primary hover:to-orange-500 transition-all duration-300 group relative shadow-inner dark:shadow-none"
+
       onClick={onClose}
     >
       <ShoppingBag className="w-5 h-5 text-foreground group-hover:text-white transition-colors" />

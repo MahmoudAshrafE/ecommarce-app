@@ -48,7 +48,7 @@ export default async function ProductPage({ params }: { params: Promise<{ produc
                     {/* Product Image Section */}
                     <div className="relative group">
                         <div className="absolute inset-0 bg-primary/5 rounded-[3rem] -rotate-3 scale-95 transition-transform group-hover:rotate-0 group-hover:scale-100 duration-700" />
-                        <div className="relative aspect-square rounded-[2rem] md:rounded-[3rem] bg-white dark:bg-card border border-border/50 shadow-2xl flex items-center justify-center p-4 md:p-8 overflow-hidden">
+                        <div className="relative aspect-square rounded-4xl md:rounded-[3rem] bg-white dark:bg-card border border-border/50 shadow-2xl flex items-center justify-center p-4 md:p-8 overflow-hidden">
                             <Image
                                 src={product.image}
                                 alt={isRtl ? product.nameAr || product.name : product.name}
@@ -107,7 +107,8 @@ export default async function ProductPage({ params }: { params: Promise<{ produc
                                 </div>
                             </div>
 
-                            <div className="bg-secondary/30 p-4 sm:p-8 rounded-[1.5rem] md:rounded-[2rem] border border-border/50 backdrop-blur-sm relative overflow-hidden group">
+                            <div className="bg-secondary/30 p-4 sm:p-8 rounded-3xl md:rounded-4xl border border-border/50 backdrop-blur-sm relative overflow-hidden group">
+
                                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl -mr-16 -mt-16 group-hover:bg-primary/10 transition-colors" />
                                 <AddToCartButton item={product} />
                             </div>
@@ -131,13 +132,14 @@ export default async function ProductPage({ params }: { params: Promise<{ produc
                     <div className="space-y-16">
                         {/* Write Review Form */}
                         {session?.user ? (
-                            <div className="bg-card p-4 sm:p-10 rounded-[2rem] md:rounded-[3rem] border border-border/50 shadow-xl relative overflow-hidden">
+                            <div className="bg-card p-4 sm:p-10 rounded-4xl md:rounded-[3rem] border border-border/50 shadow-xl relative overflow-hidden">
                                 <div className="absolute top-0 left-0 w-2 h-full bg-primary" />
                                 <h3 className="text-xl sm:text-2xl font-black mb-4 sm:mb-8 uppercase tracking-tight">{t('reviews.writeReview')}</h3>
                                 <ReviewForm productId={product.id} />
                             </div>
                         ) : (
-                            <div className="bg-secondary/50 p-6 sm:p-12 rounded-[2rem] md:rounded-[3rem] text-center border-2 border-dashed border-border/50">
+                            <div className="bg-secondary/50 p-6 sm:p-12 rounded-4xl md:rounded-[3rem] text-center border-2 border-dashed border-border/50">
+
                                 <Utensils className="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-4 sm:mb-6 text-muted-foreground opacity-30" />
                                 <p className="text-muted-foreground text-base sm:text-lg mb-4 sm:mb-6">{t('menu.product.loginReview')}</p>
                                 <Link href={`/${locale}/${Routes.AUTH}/${Pages.LOGIN}`} className="inline-flex h-12 sm:h-14 items-center justify-center rounded-full bg-primary px-6 sm:px-10 text-sm font-black text-primary-foreground shadow-lg shadow-primary/20 hover:scale-105 transition-transform">
@@ -148,7 +150,8 @@ export default async function ProductPage({ params }: { params: Promise<{ produc
 
                         {/* Reviews List */}
                         <div className="pt-10">
-                            <ReviewList reviews={product.reviews as any} />
+                            <ReviewList reviews={product.reviews} />
+
                         </div>
                     </div>
                 </div>

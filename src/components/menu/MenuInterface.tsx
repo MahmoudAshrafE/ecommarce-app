@@ -2,7 +2,8 @@
 
 import { useState, useMemo } from 'react'
 import { ProductWithRelations } from '@/types/product'
-import { Search, X, ChefHat, Filter, SlidersHorizontal, UtensilsCrossed } from 'lucide-react'
+import { Search, X, Filter, UtensilsCrossed } from 'lucide-react'
+
 import MenuItem from './MenuItem'
 import { Button } from '../ui/button'
 
@@ -28,6 +29,16 @@ const MenuInterface = ({ categories, locale, labels }: MenuInterfaceProps) => {
     const [searchQuery, setSearchQuery] = useState('')
     const [activeCategory, setActiveCategory] = useState<string>('all')
 
+    const matchProduct = (product: ProductWithRelations, query: string) => {
+        if (!query) return true
+        return (
+            product.name.toLowerCase().includes(query) ||
+            (product.nameAr && product.nameAr.toLowerCase().includes(query)) ||
+            product.description.toLowerCase().includes(query) ||
+            (product.descriptionAr && product.descriptionAr.toLowerCase().includes(query))
+        )
+    }
+
     // Filter Logic
     const filteredCategories = useMemo(() => {
         const query = searchQuery.toLowerCase().trim()
@@ -44,23 +55,14 @@ const MenuInterface = ({ categories, locale, labels }: MenuInterfaceProps) => {
             if (products.length === 0) return null
 
             return { ...category, products }
-        }).filter(Boolean) as CategoryWithProducts[]
+        }).filter((item): item is CategoryWithProducts => item !== null)
     }, [categories, searchQuery, activeCategory])
-
-    function matchProduct(product: ProductWithRelations, query: string) {
-        if (!query) return true
-        return (
-            product.name.toLowerCase().includes(query) ||
-            (product.nameAr && product.nameAr.toLowerCase().includes(query)) ||
-            product.description.toLowerCase().includes(query) ||
-            (product.descriptionAr && product.descriptionAr.toLowerCase().includes(query))
-        )
-    }
 
     const clearSearch = () => {
         setSearchQuery('')
         setActiveCategory('all')
     }
+
 
     const hasResults = filteredCategories.length > 0
 
@@ -150,8 +152,9 @@ const MenuInterface = ({ categories, locale, labels }: MenuInterfaceProps) => {
                         </div>
                         <h3 className="text-2xl font-black">{labels.noResults}</h3>
                         <p className="text-muted-foreground mt-2 max-w-sm mx-auto">
-                            Try adjusting your search or filters to find what you're craving.
+                            Try adjusting your search or filters to find what you&apos;re craving.
                         </p>
+
                         <Button
                             variant="outline"
                             className="mt-8"

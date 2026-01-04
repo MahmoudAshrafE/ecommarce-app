@@ -4,11 +4,13 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Plus, Pencil, Trash2, Image as ImageIcon, ExternalLink, Camera, X } from 'lucide-react'
+import { Plus, Pencil, Trash2, Image as ImageIcon, ExternalLink, Camera, X, Search, Sparkles } from 'lucide-react'
 import { Loader } from "@/components/ui/loader"
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Label } from '@/components/ui/label'
 import {
     Dialog,
     DialogContent,
@@ -54,6 +56,7 @@ interface Product {
     basePrice: number
     image: string
     categoryId: string | null
+    onOffer: boolean
     category?: Category
     sizes: { id: string; name: string; price: number }[]
     extras: { id: string; name: string; price: number }[]
@@ -75,6 +78,7 @@ const MenuItemsPage = () => {
     const [deletingProductId, setDeletingProductId] = useState<string | null>(null)
     const [submitting, setSubmitting] = useState(false)
     const [uploading, setUploading] = useState(false)
+    const [searchQuery, setSearchQuery] = useState('')
 
     // Form State
     const [formData, setFormData] = useState({
@@ -85,6 +89,7 @@ const MenuItemsPage = () => {
         basePrice: '',
         image: '',
         categoryId: '',
+        onOffer: false,
         sizes: [] as { name: string; price: string }[],
         extras: [] as { name: string; price: string }[]
     })
@@ -231,6 +236,7 @@ const MenuItemsPage = () => {
             basePrice: '0',
             image: '',
             categoryId: '',
+            onOffer: false,
             sizes: [{ name: 'SMALL', price: '0' }],
             extras: []
         })
@@ -246,6 +252,7 @@ const MenuItemsPage = () => {
             basePrice: product.basePrice.toString(),
             image: product.image,
             categoryId: product.categoryId || '',
+            onOffer: product.onOffer || false,
             sizes: product.sizes?.map(s => ({ name: s.name, price: s.price.toString() })) || [],
             extras: product.extras?.map(e => ({ name: e.name, price: e.price.toString() })) || []
         })
@@ -263,7 +270,25 @@ const MenuItemsPage = () => {
 
     return (
         <div className="bg-card rounded-xl sm:rounded-2xl border border-border shadow-sm p-4 sm:p-6">
-            <div className={`flex flex-col sm:flex-row ${isRtl ? 'justify-start' : 'justify-end'} items-start sm:items-center gap-3 sm:gap-0 mb-4 sm:mb-6`}>
+            <div className={`flex flex-col sm:flex-row gap-4 mb-6`}>
+                <div className="relative flex-1 group">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-muted-foreground group-focus-within:text-primary transition-colors">
+                        <Search className="w-4 h-4" />
+                    </div>
+                    <Input
+                        type="search"
+                        placeholder={t('admin.menu-items.searchPlaceholder')}
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className={`pl-10 h-10 bg-secondary/20 border-border focus-visible:ring-primary ${isRtl ? 'pr-10 pl-3 text-right' : 'pl-10 pr-3 text-left'}`}
+                        dir={isRtl ? 'rtl' : 'ltr'}
+                    />
+                    {isRtl && (
+                        <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-muted-foreground group-focus-within:text-primary transition-colors">
+                            <Search className="w-4 h-4" />
+                        </div>
+                    )}
+                </div>
                 <Button onClick={openAddDialog} className="w-full sm:w-auto" size="sm">
                     <Plus className={`w-4 h-4 ${isRtl ? 'ml-2' : 'mr-2'}`} />
                     <span className="hidden sm:inline">{t('admin.menu-items.createNewMenuItem')}</span>
@@ -272,12 +297,27 @@ const MenuItemsPage = () => {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                {products.length === 0 ? (
-                    <div className="col-span-full text-center text-muted-foreground py-8 text-sm sm:text-base">
-                        {t('noProductsFound')}
-                    </div>
-                ) : (
-                    products.map((product: Product) => (
+                {(() => {
+                    const filteredProducts = products.filter(product => {
+                        if (!searchQuery) return true;
+                        const query = searchQuery.toLowerCase();
+                        return (
+                            product.name.toLowerCase().includes(query) ||
+                            (product.nameAr && product.nameAr.toLowerCase().includes(query)) ||
+                            product.description.toLowerCase().includes(query) ||
+                            (product.descriptionAr && product.descriptionAr.toLowerCase().includes(query))
+                        );
+                    });
+
+                    if (filteredProducts.length === 0) {
+                        return (
+                            <div className="col-span-full text-center text-muted-foreground py-8 text-sm sm:text-base">
+                                {t('noProductsFound')}
+                            </div>
+                        );
+                    }
+
+                    return filteredProducts.map((product: Product) => (
                         <div
                             key={product.id}
                             dir={isRtl ? 'rtl' : 'ltr'}
@@ -304,6 +344,14 @@ const MenuItemsPage = () => {
                                         <ExternalLink className="w-8 h-8 text-white" />
                                     </div>
                                 </Link>
+                                {product.onOffer && (
+                                    <div className="absolute top-2 start-2 z-10">
+                                        <div className="bg-linear-to-r from-primary to-orange-500 text-black text-[10px] font-black px-2 py-1 rounded-lg flex items-center gap-1 shadow-lg animate-pulse">
+                                            <Sparkles className="w-3 h-3" />
+                                            {isRtl ? 'عرض' : 'OFFER'}
+                                        </div>
+                                    </div>
+                                )}
                                 <div className="absolute top-2 end-2 flex gap-1 sm:gap-2 z-10">
                                     <Button
                                         variant="secondary"
@@ -350,8 +398,8 @@ const MenuItemsPage = () => {
                                 )}
                             </div>
                         </div>
-                    ))
-                )}
+                    ));
+                })()}
             </div>
 
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
@@ -623,6 +671,22 @@ const MenuItemsPage = () => {
                                         </Button>
                                     </div>
                                 ))}
+                            </div>
+                        </div>
+
+                        <div className="flex items-center space-x-2 bg-secondary/20 p-4 rounded-xl border border-border/50">
+                            <Checkbox
+                                id="onOffer"
+                                checked={formData.onOffer}
+                                onCheckedChange={(checked) => setFormData({ ...formData, onOffer: !!checked })}
+                            />
+                            <div className="grid gap-1.5 leading-none">
+                                <Label htmlFor="onOffer" className="text-sm font-bold uppercase tracking-wider cursor-pointer">
+                                    {isRtl ? 'عرض خاص' : 'Special Offer'}
+                                </Label>
+                                <p className="text-xs text-muted-foreground">
+                                    {isRtl ? 'هل تريد تمييز هذا المنتج كعرض خاص؟' : 'Mark this product as a special offer'}
+                                </p>
                             </div>
                         </div>
 

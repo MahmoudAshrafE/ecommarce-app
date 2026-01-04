@@ -138,7 +138,7 @@ const AdminSidebar = () => {
 
                             {isCollapsed && (
                                 <div className={cn(
-                                    "absolute z-[100] px-3 py-1.5 rounded-lg bg-foreground text-background text-xs font-black opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none whitespace-nowrap shadow-2xl",
+                                    "absolute z-100 px-3 py-1.5 rounded-lg bg-foreground text-background text-xs font-black opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none whitespace-nowrap shadow-2xl",
                                     isRtl ? "right-[calc(100%+12px)]" : "left-[calc(100%+12px)]"
                                 )}>
                                     {tab.name}
@@ -171,7 +171,7 @@ const AdminSidebar = () => {
         <>
             {/* Mobile Nav Toggle */}
             <div className={cn(
-                "lg:hidden fixed top-20 z-[100] transition-all duration-300",
+                "lg:hidden fixed top-20 z-100 transition-all duration-300",
                 isRtl ? "right-4" : "left-4"
             )}>
                 <Button
@@ -188,14 +188,14 @@ const AdminSidebar = () => {
             {isMobileOpen && (
                 <div
                     role="none"
-                    className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[80] lg:hidden animate-in fade-in duration-300"
+                    className="fixed inset-0 bg-black/40 backdrop-blur-sm z-80 lg:hidden animate-in fade-in duration-300"
                     onClick={() => setIsMobileOpen(false)}
                 />
             )}
 
             {/* Sidebar Element */}
             <aside className={cn(
-                "fixed top-0 bottom-0 z-[90] transition-all duration-500 ease-in-out border-border/50 bg-card h-screen pt-16 lg:pt-0",
+                "fixed top-0 bottom-0 z-90 transition-all duration-500 ease-in-out border-border/50 bg-card h-screen pt-16 lg:pt-0",
                 isRtl ? "right-0 border-l" : "left-0 border-r",
                 // Mobile state
                 isMobileOpen

@@ -4,6 +4,17 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { UserRole } from "@/generated/prisma/client";
 
+interface SizeInput {
+    name: string;
+    price: string | number;
+}
+
+interface ExtraInput {
+    name: string;
+    price: string | number;
+}
+
+
 export async function PUT(
     req: NextRequest,
     { params }: { params: Promise<{ id: string }> }
@@ -17,7 +28,7 @@ export async function PUT(
 
         const { id } = await params;
         const body = await req.json();
-        const { name, nameAr, description, descriptionAr, image, basePrice, categoryId, sizes, extras } = body;
+        const { name, nameAr, description, descriptionAr, image, basePrice, categoryId, onOffer, sizes, extras } = body;
 
         const product = await prisma.product.update({
             where: { id },
@@ -29,19 +40,22 @@ export async function PUT(
                 image,
                 basePrice: parseFloat(basePrice),
                 categoryId,
+                onOffer,
                 sizes: {
                     deleteMany: {},
-                    create: sizes?.map((s: any) => ({
+                    create: sizes?.map((s: SizeInput) => ({
                         name: s.name,
-                        price: parseFloat(s.price)
+                        price: parseFloat(s.price.toString())
                     })) || []
+
                 },
                 extras: {
                     deleteMany: {},
-                    create: extras?.map((e: any) => ({
+                    create: extras?.map((e: ExtraInput) => ({
                         name: e.name,
-                        price: parseFloat(e.price)
+                        price: parseFloat(e.price.toString())
                     })) || []
+
                 }
             }
         });

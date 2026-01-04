@@ -8,8 +8,8 @@ import { createPortal } from 'react-dom'
 import { Menu, XIcon, Home, ShoppingBag, Info, Phone, LogIn, ShoppingCart, Instagram, Facebook, Twitter, ChevronDown, LayoutDashboard, User, Settings, LogOut } from 'lucide-react'
 import { useParams, usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
-import BaseAvatar from '../ui/user-avatar'
 import { signOut } from 'next-auth/react'
+
 
 interface NavbarProps {
     isScrolled: boolean;
@@ -41,8 +41,10 @@ const Navbar = ({ isScrolled, isHome, isMobileOnly = false }: NavbarProps) => {
     ];
 
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setMounted(true);
     }, []);
+
 
     useEffect(() => {
         if (open) {
@@ -114,8 +116,9 @@ const Navbar = ({ isScrolled, isHome, isMobileOnly = false }: NavbarProps) => {
 
                             {/* Links List */}
                             <nav className="flex flex-col gap-1.5 pb-6">
-                                {Links.filter(link => link.auth === false ? !session : true).map((link, index) => {
+                                {Links.filter(link => link.auth === false ? !session : true).map((link) => {
                                     const active = isActive(link.href);
+
                                     const isLogin = link.id === 'login';
 
                                     return (

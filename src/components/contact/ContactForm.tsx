@@ -19,6 +19,13 @@ const ContactForm = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
+        const formData = new FormData(e.target as HTMLFormElement);
+
+        const data = {
+            name: formData.get("name"),
+            email: formData.get("email"),
+            message: formData.get("message"),
+        };
 
         try {
             const response = await fetch('/api/contact', {
@@ -26,12 +33,9 @@ const ContactForm = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    name: (e.target as any).name.value,
-                    email: (e.target as any).email.value,
-                    message: (e.target as any).message.value,
-                }),
+                body: JSON.stringify(data),
             });
+
 
             if (!response.ok) {
                 throw new Error('Failed to send message');

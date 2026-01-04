@@ -40,7 +40,8 @@ export async function GET(req: NextRequest) {
         }
 
         // Helper to get random item from array
-        const getRandom = (arr: any[]) => arr[Math.floor(Math.random() * arr.length)];
+        const getRandom = <T,>(arr: T[]): T => arr[Math.floor(Math.random() * arr.length)];
+
 
         // 3. Generate 50 Products
         const burgerImages = [
